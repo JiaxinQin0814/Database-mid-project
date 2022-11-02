@@ -12,3 +12,9 @@ the tables:
 * SC表  触发器 自动更新课程表
 * 教室课程表【教师编号，课程时间，容量】
 
+
+学习资源  
+【【代码过程】Python Django 实现简易学生选课管理系统代码编写过程展示】 https://www.bilibili.com/video/BV1mU4y1a7zk/?p=5&share_source=copy_web&vd_source=50ffbf94a9b64ea6240227792894623e
+
+
+【Django实现学生选课管理系统】 https://www.bilibili.com/video/BV16d4y1N7uV/?share_source=copy_web&vd_source=50ffbf94a9b64ea6240227792894623e
