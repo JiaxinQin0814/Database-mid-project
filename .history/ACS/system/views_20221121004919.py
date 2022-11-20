@@ -71,10 +71,10 @@ def registerview(request):
                 return JsonResponse({"code": 402, "message":"验证失败","data":{"username": "","password1":"","password2":"", "email": "您输入的邮箱已存在！"}})
             MyUser.objects.create_user(username=username,password=password,email=email,kind=kind)
             print("创建成功")
-            info = MyUser.objects.values("identifier").filter(username=username)[0]
-            print("您的职工号为:", info)
-            return render(request, 'register.html', info)
-            # return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
+            info = models.StuInfo.objects.values('id', 'stuname', 'stuphone', 'stuaddress', 'stucollege', 'stumajor').filter(id=id)[0]
+            print("info=", info)
+            return render(request, 'select.html', info)
+            return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
         else:
             return JsonResponse({"code":403,"message":"验证失败","data":{"username":form.errors.get("username"),"password1":form.errors.get("password1"),"password2":form.errors.get("password2"),"email":form.errors.get("email")}})
        

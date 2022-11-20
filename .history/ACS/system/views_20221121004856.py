@@ -37,7 +37,7 @@ def loginView(request):
                 request.session.set_expiry(None) # 设置session过期时间，None表示使用系统默认的过期时间 
                 # else:
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
-
+        
                 return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
             elif user and not user.is_active:
                 return JsonResponse({"code": 404, "message": "用户未激活", "data": {"error": "该用户还没有激活，请<a href='#'>激活</a>"}})
@@ -71,10 +71,7 @@ def registerview(request):
                 return JsonResponse({"code": 402, "message":"验证失败","data":{"username": "","password1":"","password2":"", "email": "您输入的邮箱已存在！"}})
             MyUser.objects.create_user(username=username,password=password,email=email,kind=kind)
             print("创建成功")
-            info = MyUser.objects.values("identifier").filter(username=username)[0]
-            print("您的职工号为:", info)
-            return render(request, 'register.html', info)
-            # return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
+            return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
         else:
             return JsonResponse({"code":403,"message":"验证失败","data":{"username":form.errors.get("username"),"password1":form.errors.get("password1"),"password2":form.errors.get("password2"),"email":form.errors.get("email")}})
        

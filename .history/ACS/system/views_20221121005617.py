@@ -73,7 +73,7 @@ def registerview(request):
             print("创建成功")
             info = MyUser.objects.values("identifier").filter(username=username)[0]
             print("您的职工号为:", info)
-            return render(request, 'register.html', info)
+            return render(request, '.html', info)
             # return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
         else:
             return JsonResponse({"code":403,"message":"验证失败","data":{"username":form.errors.get("username"),"password1":form.errors.get("password1"),"password2":form.errors.get("password2"),"email":form.errors.get("email")}})

@@ -44,12 +44,14 @@
        <button type="reset"style="width: 70px;height: 30px;font-size: 15px;color: palevioletred" >重置</button>&nbsp
        <button type="submit"style="width: 70px;height: 30px;font-size: 15px;color: palevioletred" >注册</button>
    </div>
-<p style="color: brown; padding-left: 70px">{{msg}}</p>
-</form>
-
+   <p style="color: brown; padding-left: 70px">{{msg}}</p>
 <table border="1" align="center"style="border-collapse: collapse; width: 1000px">
-    <th>{{"您的职工号为:"}}{{info.identifier }}</th>
+    <th>注册成功</th>
+    {% for s in info %}
+   <td> {{ info.identifier }}  </td>
+   {% endfor %}
 </table>
+</form>
 </div>
 </body>
 </html>
