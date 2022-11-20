@@ -62,7 +62,7 @@ class MyUser(AbstractUser):
     kind = models.CharField(max_length=10,choices=attribute,default="教师",verbose_name="用户类别")
     
     USERNAME_FIELD = 'identifier' # 使用authenticate验证时使用的验证字段，可以换成其他字段，但验证字段必须是唯一的，即设置了unique=True
-    REQUIRED_FIELDS = ["username",'email'] # 创建用户时必须填写的字段，除了该列表里的字段还包括password字段以及USERNAME_FIELD中的字段
+    REQUIRED_FIELDS = ["username",'email',"kind"] # 创建用户时必须填写的字段，除了该列表里的字段还包括password字段以及USERNAME_FIELD中的字段
     EMAIL_FIELD = 'email' # 发送邮件时使用的字段
     
     def __str__(self):
@@ -147,7 +147,8 @@ def create_extension_user(sender,instance,created,**kwargs):
     """
     if created: 
         # 如果创建对象，ExtensionUser进行绑定
-        Teacher_Info.objects.create(user=instance)
+        if instance.kind=="教师":
+            Teacher_Info.objects.create(user=instance)
     # else:
     #     # 如果不是创建对象，同样将改变进行保存
     #     instance.extension.save()
@@ -171,7 +172,8 @@ def create_extension_user(sender,instance,created,**kwargs):
     """
     if created: 
         # 如果创建对象，ExtensionUser进行绑定
-        Ad_Info.objects.create(user=instance)
+        if instance.kind=="教秘":
+            Ad_Info.objects.create(user=instance)
     # else:
     #     # 如果不是创建对象，同样将改变进行保存
     #     instance.extension.save()

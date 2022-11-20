@@ -1,3 +1,4 @@
+from secrets import choice
 from django.forms import Form
 from django.forms import fields
 from django.core.exceptions import ValidationError
@@ -30,6 +31,7 @@ class RegisterForm(Form):
             "required":"邮箱不可以为空！"
         },
     )
+    kind = fields.CharField(max_length=10,min_length=1,required=True)
     def clean_password2(self):
         if not self.errors.get("password1"):
             if self.cleaned_data["password2"] != self.cleaned_data["password1"]:

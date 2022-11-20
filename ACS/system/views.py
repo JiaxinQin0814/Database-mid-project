@@ -60,6 +60,7 @@ def registerview(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password1"]
             email = form.cleaned_data["email"]
+            kind = form.cleaned_data["kind"]
             username_exists = MyUser.objects.filter(username=username).exists()
             
             if username_exists:
@@ -68,7 +69,7 @@ def registerview(request):
                 ee=MyUser.objects.filter(email=email).exists()
             if ee:
                 return JsonResponse({"code": 402, "message":"验证失败","data":{"username": "","password1":"","password2":"", "email": "您输入的邮箱已存在！"}})
-            MyUser.objects.create_user(username=username,password=password,email=email)
+            MyUser.objects.create_user(username=username,password=password,email=email,kind=kind)
             print("创建成功")
             return JsonResponse({"code": 200,"message":"验证通过", "data":{"username": "","password1":"","password2":"", "email": ""}})
         else:
