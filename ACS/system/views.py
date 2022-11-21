@@ -83,7 +83,9 @@ def registerview(request):
         else:
             return JsonResponse({"code":403,"message":"验证失败","data":{"username":form.errors.get("username"),"password1":form.errors.get("password1"),"password2":form.errors.get("password2"),"email":form.errors.get("email")}})
        
-        
+def feedback(request):
+    if request.method=="GET":
+        return render()
 # # 视图名不能起成logout
 # def logoutView(request):
 #     logout(request) # 调用django自带退出功能，会帮助我们删除相关session

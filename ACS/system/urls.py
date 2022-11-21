@@ -7,6 +7,7 @@ urlpatterns = [
     # path('home/', views.home, name="首页"),
     path("register/",registerview,name="注册"),
     path('login/', loginView, name="登录"),
+    # path("nav/",)
     # path('welcome/', views.welcome, name="系统主界面"),
     # path('add/', views.add, name="添加信息"),
     # path('delete/', views.delete, name="删除信息"),

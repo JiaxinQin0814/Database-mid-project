@@ -1,0 +1,29 @@
+//表格代码
+<div id="demo3">
+<tbody>
+		<tr th:each="item1:${list1}" >
+					<td th:text="${item1.unit}" style="text-align: left"></td>
+					<td th:text="${item1.regin}" style="text-align: left"></td>
+					<td th:text="${item1.linkman}" style="text-align: left"></td>
+					<td th:text="${item1.contactNumber}" style="text-align: left"></td>			
+		</tr>
+        
+	</tbody>
+<div>
+//弹窗div
+<div class="diceng" id='diceng' style="display:none">
+			<div class="tankuang">
+				<div id="header">
+					<span>弹窗标题</span>
+					<!-- //点击关闭按钮 -->
+					<div id="header-right"><input type="button" value="x"/></div> 
+				</div>
+				<div id="tksj">
+				<div id="tkunit"></div>
+				    <div id="tkregin"></div>
+					<div id="tklinkman"></div>
+					<div id="tkcontactNumber"></div>
+					</div>
+			</div>
+		</div>
+
