@@ -1,8 +1,8 @@
 from calendar import FRIDAY, MONDAY, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY
-from socketserver import ThreadingUnixDatagramServer
-from stat import S_IXOTH
-from tabnanny import verbose
-from tkinter.tix import Balloon
+# from socketserver import ThreadingUnixDatagramServer
+# from stat import S_IXOTH
+# from tabnanny import verbose
+# from tkinter.tix import Balloon
 # from time import clock_settime
 from django.db import models
 from django.core.validators import MaxValueValidator,MinValueValidator
