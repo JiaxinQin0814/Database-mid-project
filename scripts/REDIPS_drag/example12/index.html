@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 12: Select and move more elements</title>
+	</head>
+	<body>
+		<center>
+			<!-- drag1 DIV container -->
+			<div id="redips-drag">
+				<table>
+					<colgroup>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td><div id="a" class="redips-drag">A<input type="checkbox"/></div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><div id="b" class="redips-drag">B<input type="checkbox"/></div></td>
+							<td></td>
+							<td><div id="c" class="redips-drag">D<input type="checkbox"/></div></td>
+						</tr>
+					</tbody>
+				</table>
+			
+				<br/>
+				<br/>
+			
+				<table>
+					<colgroup>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><div id="d" class="redips-drag">C<input type="checkbox"/></div></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<br/>
+				<br/>
+			
+				<table>
+					<colgroup>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</center>
+	</body>
+</html>

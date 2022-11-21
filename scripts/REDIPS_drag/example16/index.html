@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style-screen.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="style-print.css" type="text/css" media="print"/>
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-table-row/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 16: AJAX, hover, sticky, dragging</title>
+	</head>
+	<body>
+		<!-- hidden div element needed for hover -->
+		<div id="hover-div" style="visibility:hidden; position:absolute; top:0; left:0;"></div>
+
+		<!-- tables inside this DIV could have draggable content -->
+		<div id="redips-drag">
+			<!-- left container -->
+			<div id="left_container">
+				<!-- this block will become sticky (with a little JavaScript help)-->
+				<div id="left">
+					<table id="table1">
+						<colgroup>
+							<col width="60"/>
+							<col width="60"/>
+							<col width="60"/>
+							<col width="60"/>
+						</colgroup>
+						
+						<tr>
+							<td><div id="ns0.9" class="redips-drag">ns0.9</div></td>
+							<td><div id="ns1.0a" class="redips-drag">ns1.0a</div></td>
+							<td><div id="ns1.1b" class="redips-drag">ns1.1b</div></td>
+							<td><div id="ns1.2" class="redips-drag">ns1.2</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns1.2a" class="redips-drag">ns1.2a</div></td>
+							<td><div id="ns1.3" class="redips-drag">ns1.3</div></td>
+							<td><div id="ns1.3" class="redips-drag">ns1.3a</div></td>
+							<td><div id="ns1.5" class="redips-drag">ns1.5</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns1.6" class="redips-drag">ns1.6</div></td>
+							<td><div id="ns1.8" class="redips-drag">ns1.8</div></td>
+							<td><div id="ns1.8a" class="redips-drag">ns1.8a</div></td>
+							<td><div id="ns1.8b" class="redips-drag">ns1.8b</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns1.9" class="redips-drag">ns1.9</div></td>
+							<td><div id="ns1.9a" class="redips-drag">ns1.9a</div></td>
+							<td><div id="ns1.9b" class="redips-drag">ns1.9b</div></td>
+							<td><div id="ns3.1" class="redips-drag">ns3.1</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns3.1a" class="redips-drag">ns3.1a</div></td>
+							<td><div id="ns3.1b" class="redips-drag">ns3.1b</div></td>
+							<td><div id="ns3.2" class="redips-drag">ns3.2</div></td>
+							<td><div id="ns3.2a" class="redips-drag">ns3.2a</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns3.2b" class="redips-drag">ns3.2b</div></td>
+							<td><div id="ns3.3" class="redips-drag">ns3.3</div></td>
+							<td><div id="ns3.3a" class="redips-drag">ns3.3a</div></td>
+							<td><div id="ns3.3b" class="redips-drag">ns3.3b</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns4.7" class="redips-drag">ns4.7</div></td>
+							<td><div id="ns4.7a" class="redips-drag">ns4.7a</div></td>
+							<td><div id="ns4.8b" class="redips-drag">ns4.8b</div></td>
+							<td><div id="ns4.9" class="redips-drag">ns4.9</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="ns5.4a" class="redips-drag">ns5.4a</div></td>
+							<td><div id="af1.1" class="redips-drag">af1.1</div></td>
+							<td><div id="af1.2" class="redips-drag">af1.2</div></td>
+							<td><div id="af1.2a1" class="redips-drag">af1.2a1</div></td>
+						</tr>
+						<tr>
+							<td><div id="af1.2b" class="redips-drag">af1.2b</div></td>
+							<td><div id="af1.3" class="redips-drag">af1.3</div></td>
+							<td><div id="af1.3a" class="redips-drag">af1.3a</div></td>
+							<td><div id="af1.3b" class="redips-drag">af1.3b</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="af1.5" class="redips-drag">af1.5</div></td>
+							<td><div id="af1.5a" class="redips-drag">af1.5a</div></td>
+							<td><div id="af2.1" class="redips-drag">af2.1</div></td>
+							<td><div id="af2.1a" class="redips-drag">af2.1a</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="af2.1b" class="redips-drag">af2.1b</div></td>
+							<td><div id="af2.2" class="redips-drag">af2.2</div></td>
+							<td><div id="af2.2a" class="redips-drag">af2.2a</div></td>
+							<td><div id="af2.2b" class="redips-drag">af2.2b</div></td>
+							
+						</tr>
+						<tr>
+							<td><div id="mg2.1" class="redips-drag">mg2.1</div></td>
+							<td><div id="mg2.2a" class="redips-drag">mg2.2a</div></td>
+							<td><div id="mg2.3a" class="redips-drag">mg2.3a</div></td>
+							<td></td>
+						</tr>
+					</table>
+					<div class="instructions">
+						Element dropped to the right container can be cloned with shift key.
+						Press shift key and start to drag expanded element.
+						On the other hand, cloned element will be deleted in case of dropping back to the left table.
+						Original and cloned elements have different hover color.
+					</div>
+				</div>
+			</div><!-- left container -->
+
+			<!-- right container -->
+			<div id="right">
+				<div class="page">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+
+				<br/>
+				<input type="button" value="Table" onclick="redips.toggle(this, 'page2')"/>
+				<div id="page2" class="page other">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+
+				<br/>
+				<input type="button" value="Table" onclick="redips.toggle(this, 'page3')"/>
+				<div id="page3" class="page other">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+
+				<br/>
+				<input type="button" value="Table" onclick="redips.toggle(this, 'page4')"/>
+				<div id="page4" class="page other">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+
+				<br/>
+				<input type="button" value="Table" onclick="redips.toggle(this, 'page5')"/>
+				<div id="page5" class="page other">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+
+				<br/>
+				<input type="button" value="Table" onclick="redips.toggle(this, 'page6')"/>
+				<div id="page6" class="page other">
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+					<table cellspacing="0" cellpadding="0">
+						<colgroup><col width="300"/></colgroup>
+						<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

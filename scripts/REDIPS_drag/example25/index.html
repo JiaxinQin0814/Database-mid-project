@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 25: Math 4 Kids</title>
+	</head>
+	<body>
+		<!-- main container -->
+		<div id="main-container">
+			<!-- drag1 DIV container -->
+			<div id="redips-drag">
+				<!-- dropDown mode -->
+				<select id="menuMode" onchange="redips.setMode(this)">
+					<option value="mode1">Mode1</option>
+					<option value="mode2">Mode2</option>
+				</select>
+				<!-- dropDown math operation -->
+				<select id="menuOperation" onchange="redips.setOperation(this)">
+					<option value="addition">Addition</option>
+					<option value="multiplication">Multiplication</option>
+				</select>
+				<!-- Clear all button -->
+				<input id="button1" type="button" value="Clear" onclick="redips.clearAll()"/>
+				<!-- numbers -->
+				<table id="number">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr class="upper">
+							<td class="redips-mark"><div class="redips-drag box redips-clone n1">1</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n2">2</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n3">3</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n4">4</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n5">5</div></td>
+						</tr>
+						<tr class="upper">
+							<td class="redips-mark"><div class="redips-drag box redips-clone n6">6</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n7">7</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n8">8</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n9">9</div></td>
+							<td class="redips-mark"><div class="redips-drag box redips-clone n10">10</div></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- addition table -->
+				<table id="addition">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">1</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">2</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">3</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">4</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">5</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">6</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">7</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">8</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">9</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">+</td>
+							<td class="redips-mark">10</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- multiplication table -->
+				<table id="multiplication" style="display:none">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">1</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">2</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">3</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">4</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">5</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">6</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">7</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">8</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">9</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="redips-mark">x</td>
+							<td class="redips-mark">10</td>
+							<td class="redips-mark">=</td>
+							<td class="redips-mark"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- trash -->
+				<table id="mini">
+					<colgroup>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="redips-trash">Trash</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- instructions -->
+			<div class="instructions">
+				REDIPS.drag library
+				<br/>
+				<br/>
+				Drag and drop JavaScript library based on HTML table.
+				<br/>
+				<br/>
+				Try to drag numbers from top table to the first column in table below.
+				In mode1 after dropping DIV element to the table cell, orange box with "?" will be automatically displayed to the most right column.
+				Mode2 will display result but first number will have "?".
+				User should dblclick on "?" and number will be shown.
+				REDIPS.drag works in "shift" mode so dropping number on top of existing content will shift other elements.
+			</div>
+		</div>
+	</body>
+</html>

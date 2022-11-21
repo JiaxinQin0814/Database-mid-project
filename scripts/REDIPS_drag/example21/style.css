@@ -1,0 +1,92 @@
+/*
+
+Darko Bunic
+http://www.redips.net/
+Oct, 2011.
+
+*/
+
+body {
+	font-family: arial;
+	margin: 0px;
+}
+
+/* make drag container visible */
+div#redips-drag {
+	border: 2px dashed LightBlue;
+	display: table;
+	margin: auto;
+}
+
+/* table */
+div#redips-drag table {
+	background-color: #eee;
+	border-collapse: collapse;
+	margin: 7px;
+}
+
+/* table cells */
+div#redips-drag td {
+	border: 1px solid navy;
+	height: 50px;
+	text-align: center;
+	font-size: 10pt;
+}
+
+/* drag object */
+.redips-drag {
+	margin: auto;
+	text-align: center;
+	width: 87px;
+	height: 35px;
+	line-height: 35px;
+	border: 2px solid SteelBlue;
+	background-color: white;
+	font-size: 10pt; /* needed for cloned object */
+	/* round corners */
+	border-radius: 4px; /* Opera, Chrome */
+	-moz-border-radius: 4px; /* FF */
+}
+
+/* orange elements */
+.orange {
+	border: 2px solid #FF8A58;
+}
+
+/* forbidden cells */
+.redips-mark {
+	background-color: #ccc;
+}
+
+/* trash cell */
+.redips-trash {
+	color: white;
+	background-color: SteelBlue;
+}
+
+/* styles for user defined overflow td */
+td#overflow {
+	padding-bottom: 6px;
+}
+	td#overflow div {
+		float: left;
+		margin-left: 5px;
+		margin-top: 5px;
+	}
+
+/* space between radio/checkbox and text */
+div#redips-drag input {
+	margin-right: 10px;
+}
+
+/* margins for drop down menu */
+#dropDown {
+	margin: 7px 0 0 7px;
+}
+
+/* text style */
+.mycontrols {
+	margin: 5px;
+	color: grey;
+	font-size: 16px;
+}

@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>使用拖放API将商品拖入购物车</title>
+        <style>
+            body {
+                font-size: 12px
+            }
+            .liT {
+                border-bottom: solid 1px #ccc;
+                background-color: #eee;
+                font-weight: bold
+            }
+            .liF {
+                float: left;
+                margin-right: 5px;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0px;
+                height: 106px;
+                width: 330px
+            }
+            ul li {
+                overflow: hidden;
+            }
+            ul li img {
+                width: 68px;
+                height: 96px;
+                border: solid 1px #ccc;
+                padding: 3px
+            }
+            ul li span {
+                float: left;
+                width: 70px;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li class="liF">
+                <img src="image01.png" id="img02" alt="42" title="2006作品" draggable="true">
+            </li>
+            <li class="liF">
+                <img src="image02.png" id="img03" alt="56" title="2008作品" draggable="true">
+            </li>
+            <li class="liF">
+                <img src="image03.png" id="img04" alt="52" title="2010作品" draggable="true">
+            </li>
+        </ul>
+        <ul id="ulCart">
+            <li class="liT">
+                <span>书名</span>
+                <span>定价</span>
+                <span>数量</span>
+                <span>总价</span>
+            </li>
+        </ul>
+        <script type="text/javascript">
+            pageload();
+            function $$(id) {
+               return document.getElementById(id);
+            }
+            //自定义页面加载时调用的函数
+            function pageload() {
+                //获取全部的图书商品
+                var Drag = document.getElementsByTagName("img");
+                //遍历每一个图书商品
+                for (var intI = 0; intI < Drag.length; intI++) {
+                    console.log(Drag[intI]);
+                    //为每一个商品添加被拖放元素的dragstart事件
+                    Drag[intI].addEventListener("dragstart", function(e) {
+                        e.dataTransfer.clearData();
+                        var objDtf = e.dataTransfer;
+                        console.log(objDtf);
+                        objDtf.setData("text/plain", addCart(this.title, this.alt, 1));
+                    },true);
+                }
+                var Cart = $$("ulCart");
+                //添加目标元素的drop事件
+               Cart.addEventListener("drop",function(e) {
+                    var objDtf = e.dataTransfer;
+                    var strHTML = objDtf.getData("text/plain");
+                    var num = top_();
+                    Cart.innerHTML += strHTML;
+                    var lists = document.getElementsByClassName('liC');
+                    for(var i = 0; i < lists.length; i++){
+                        var spans = lists[i].children;
+                        console.log(spans);
+                        spans[2].innerHTML = num;
+                        spans[3].innerHTML = num * spans[1].innerHTML;
+                    }
+                    e.preventDefault();
+                    e.stopPropagation();
+                },false);
+            }
+            //添加页面的dragover事件
+            document.ondragover = function(e) {
+                //阻止默认方法,取消拒绝被拖放
+                e.preventDefault();
+            }
+            //添加页面drop事件
+            document.ondrop = function(e) {
+                //阻止默认方法,取消拒绝被拖放
+                e.preventDefault();
+            }
+            //自定义向购物车中添加记录的函数
+            function addCart(a, b, c) {
+                var strHTML = `<li class = 'liC'>
+                            <span>${a}</span>
+                            <span class="price">${b}</span>
+                            <span class="num">${c}</span>
+                            <span class="sum">${b*c}</span>
+            			</li>`
+                return strHTML;
+            }
+            //提示输入框
+            function top_() {
+                var str = prompt("请输入要购买的数量", 1);
+                return str;
+            }
+        </script>
+    </body>
+</html>

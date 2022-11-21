@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table rows with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-table-row/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 15: Drag and drop table rows</title>
+	</head>
+	<body>
+		<center>
+			<!-- tables inside this DIV could contain drag-able content  -->
+			<div id="redips-drag">
+				<table class="tbl1">
+					<colgroup>
+						<col width="30"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th colspan="6" class="redips-mark">Table 1</th>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td class="cdark"></td>
+							<td></td>
+							<td><div class="redips-drag blue">Drag</div></td>
+							<td></td>
+							<td class="cdark"></td>
+						</tr>
+						<tr class="rd">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td><div class="redips-drag blue">and</div></td>
+							<td class="cdark"></td>
+							<td><div class="redips-drag blue">drop</div></td>
+							<td class="cdark"></td>
+							<td><div class="redips-drag blue">table</div></td>
+						</tr>
+						<tr class="rd">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td><div class="redips-drag blue">rows</div></td>
+							<td class="cdark"></td>
+							<td><div class="redips-drag blue">with</div></td>
+							<td class="cdark"></td>
+							<td><div class="redips-drag blue">REDIPS</div></td>
+						</tr>
+						<tr class="rd">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td class="cdark"></td>
+							<td></td>
+							<td><div class="redips-drag blue">lib</div></td>
+							<td></td>
+							<td class="cdark"></td>
+						</tr>
+						<tr>
+							<td colspan="6" class="redips-mark"><span>Message line</span></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table>
+					<colgroup>
+						<col width="30"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th colspan="6" class="redips-mark">Table 2</th>
+						</tr>
+						<tr class="rd">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td><div class="redips-drag orange">Drag</div></td>
+							<td></td>
+							<td class="cdark"></td>
+							<td></td>
+							<td><div class="redips-drag orange">rows</div></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td class="cdark"></td>
+							<td></td>
+							<td class="cdark"></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td class="cdark"></td>
+							<td><div class="redips-drag orange">and</div></td>
+							<td></td>
+							<td><div class="redips-drag orange">table</div></td>
+							<td class="cdark"></td>
+						</tr>
+						<tr class="rd">
+							<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">drop</div></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="6" class="redips-mark"><span>Message line</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</center>
+	</body>
+</html>

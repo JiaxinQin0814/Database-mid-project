@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content/rows with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-table-content-animation/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script1.js"></script>
+		<title>Example 18: Simple element animation (row)</title>
+	</head>
+	<body>
+		<center>
+			<!-- buttons -->
+			<div id="buttons">
+				<input type="button" value="Move down" class="button" id="btn_move1" onclick="redips.move(1)"/>
+				<input type="button" value="Move up" class="button" id="btn_move2" onclick="redips.move(0)"/>
+			</div>
+			<!-- drag region -->
+			<div id="redips-drag">
+				<table id="table0">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr class="rl">
+							<td><div class="redips-drag orange">Drag</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td><div class="redips-drag orange">and</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">drop</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">table</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">content</div></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">with</div></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag orange">JavaScript</div></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<br/>
+				<br/>
+				
+				<table id="table1">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr class="rl">
+							<td><div class="redips-drag blue">Drag</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td><div class="redips-drag blue">and</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag blue">drop</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag blue">table</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag blue">content</div></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag blue">with</div></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="redips-drag blue">JavaScript</div></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</center>
+	</body>
+</html>

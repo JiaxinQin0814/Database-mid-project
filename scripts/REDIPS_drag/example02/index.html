@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 2: Green and orange elements</title>
+	</head>
+	<body>
+		<!-- tables inside this DIV could have draggable content -->
+		<div id="redips-drag">
+			<table id="table1">
+				<colgroup>
+					<col width="100"/>
+					<col width="50"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tr>
+					<td class="dark"></td>
+					<td class="redips-mark blank"></td>
+					<td class="dark redips-single" title="Single content cell"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="dark redips-single" title="Single content cell"></td>
+				</tr>
+				<tr>
+					<td class="dark"></td>
+					<td class="redips-mark blank"></td>
+					<td></td>
+					<td></td>
+					<td class="redips-mark green_cell redips-single"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<!-- define green clone element (2 cloned elements + last element) -->
+					<td class="dark"><div id="green" class="redips-drag green redips-clone climit1_2">Green</div></td>
+					<td class="redips-mark blank"></td>
+					<td></td>
+					<td class="redips-mark orange_cell redips-single"></td>
+					<td></td>
+					<td class="redips-mark orange_cell redips-single"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="dark"></td>
+					<td class="redips-mark blank"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<!-- define orange clone element (2 cloned elements + last element) -->
+					<td class="dark"><div id="orange" class="redips-drag orange redips-clone climit1_2">Orange</div></td>
+					<td class="redips-mark blank"></td>
+					<td></td>
+					<td class="redips-mark green_cell redips-single"></td>
+					<td></td>
+					<td class="redips-mark green_cell redips-single"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="dark"></td>
+					<td class="redips-mark blank"></td>
+					<td></td>
+					<td></td>
+					<td class="redips-mark orange_cell redips-single"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="dark"></td>
+					<td class="redips-mark blank"></td>
+					<td class="dark redips-single" title="Single content cell"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="dark redips-single" title="Single content cell"></td>
+				</tr>
+				<!-- empty row -->
+				<tr>
+					<td colspan="7" class="redips-mark blank"></td>
+				</tr>
+				<!-- message row -->
+				<tr>
+					<td class="redips-mark blank"></td>
+					<td class="redips-mark blank"></td>
+					<td id="message" colspan="5" class="redips-mark dark2">Set green and orange elements to the green and orange cells, respectively.</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

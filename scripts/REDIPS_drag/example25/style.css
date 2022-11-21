@@ -1,0 +1,121 @@
+/*
+
+Darko Bunic
+http://www.redips.net/
+Dec, 2012.
+
+*/
+
+body {
+	font-family: arial;
+	margin: 0px;
+}
+
+/* main container */
+#main-container {
+	margin: auto;
+	width: 670px;
+}
+
+/* make drag container visible */
+#redips-drag {
+	border: 2px dashed LightBlue;
+	display: table;
+	float: left;
+}
+
+/* tables */
+div#redips-drag table {
+	border-collapse: collapse;
+	margin: 15px;
+	font-size: 20pt;
+	text-align: center;
+}
+
+/* table cells */
+div#redips-drag td {
+	border: 1px solid navy;
+	height: 50px;
+	padding: 2px;
+}
+
+/* BOX class (common styles used for drag and result DIV */
+.box {
+	margin: auto;
+	margin-bottom: 1px;
+	margin-top: 1px;
+	font-size: 20pt;
+	text-align: center;
+	width: 56px;
+	height: 40px;
+	line-height: 40px;
+	background-color: white;
+	/* round corners */
+	border-radius: 4px; /* Opera, Chrome */
+	-moz-border-radius: 4px; /* FF */
+}
+
+/* DIV elements */
+.redips-drag {
+	background-color: #CDE1F2;
+	border: 2px solid SteelBlue;
+}
+
+/* result DIV */
+.result {
+	background-color: #FFE6C4;
+	border: 2px solid #A66C1D;
+	/* cursor */
+	cursor: pointer;
+	cursor: hand;select
+	/* disable text selection (answer is displayed with dblclick and that can cause showing text selection) */
+	/* http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* forbidden cells */
+.redips-mark {
+	background-color: #eee;
+}
+
+
+/* dropDown menu */
+#menuMode {
+	margin: 15px 0 0 15px;
+}
+
+/* first dropDown menu */
+#menuOperation {
+	margin: 15px 0 0 5px;
+}
+
+/* clear button */
+#button1 {
+	margin: 15px 0 0 5px;
+}
+
+/* trash cell */
+.redips-trash {
+	color: white;
+	background-color: SteelBlue;
+	font-size: 15pt;
+}
+
+/* instructions  */
+.instructions {
+	float: left;
+	border: 2px dashed LightBlue;
+	display: table;
+	margin-left: 15px;
+	width: 220px;
+	padding: 15px;
+	color: #555;
+	font-size: 12px;
+	text-align: justify;
+	background-color: #eee;
+}

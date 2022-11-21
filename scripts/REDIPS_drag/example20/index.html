@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table rows with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-table-row/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 20: Clone and delete table rows</title>
+	</head>
+	<body>
+		<!-- tables inside this DIV could contain drag-able content  -->
+		<div id="redips-drag">
+			<table id="tbl1">
+				<colgroup>
+					<col width="30"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th colspan="6" class="redips-mark">Table 1</th>
+					</tr>
+					<tr class="rd">
+						<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="rl">
+						<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+						<td></td>
+						<td></td>
+						<td class="cdark"><div class="redips-drag orange">drop</div></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="rl">
+						<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+						<td></td>
+						<td class="cdark"><div class="redips-drag blue">and</div></td>
+						<td></td>
+						<td class="cdark"><div class="redips-drag blue">table</div></td>
+						<td></td>
+					</tr>
+					<tr class="rl">
+						<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+						<td class="cdark"><div class="redips-drag orange">Drag</div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="cdark"><div class="redips-drag orange">rows</div></td>
+					</tr>
+					<tr class="rd">
+						<td class="redips-rowhandler"><div class="redips-drag redips-row"></div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="6" class="redips-mark"><span id="msg">Message line</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table id="tbl2">
+				<colgroup>
+					<col width="30"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th colspan="6" class="redips-mark">Table 2</th>
+					</tr>
+					<tr class="rd">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table>
+				<colgroup>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="redips-trash">Trash</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br/>
+
+			<!-- rowDropMode options -->
+			<div><input type="radio" name="rowDropMode" class="checkbox" onclick="redips.setRowMode(this)" value="before" title="It has effect only when row is dropped to other table" checked="true"/><span class="messageLine">Before - drop row before highlighted row (when row is dropped to other table)</span></div>
+			<div><input type="radio" name="rowDropMode" class="checkbox" onclick="redips.setRowMode(this)" value="after" title="It has effect only when row is dropped to other table"/><span class="messageLine">After - drop row after highlighted row (when row is dropped to other table)</span></div>
+			<div><input type="radio" name="rowDropMode" class="checkbox" onclick="redips.setRowMode(this)" value="switch" title="Switch source and current row"/><span class="messageLine">Switch - switch source row and highlighted row</span></div>
+			<div><input type="radio" name="rowDropMode" class="checkbox" onclick="redips.setRowMode(this)" value="overwrite" title="Overwrite current row"/><span class="messageLine">Overwrite - highlighted row will be overwritten</span></div>
+		</div>
+		<!-- instructions -->
+		<div class="inst">
+			DIV elements and table rows can be cloned with SHIFT key
+		</div>
+	</body>
+</html>

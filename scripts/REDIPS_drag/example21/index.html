@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-content-shift/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 21: Shift table content</title>
+	</head>
+	<body>
+		<!-- tables inside this DIV could contain drag-able content  -->
+		<div id="redips-drag">
+			<select id="dropDown" onchange="redips.setTable(this)">
+				<option value="table1">Table1 - normal</option>
+				<option value="table2">Table2 - rowspan, colspan</option>
+				<option value="table3">Table2 - marked cells</option>
+			</select>
+
+			<!-- table1 -->
+			<table id="table1">
+				<colgroup>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td><div class="redips-drag">A</div></td>
+						<td><div class="redips-drag">B</div></td>
+						<td><div class="redips-drag">C</div></td>
+						<td><div class="redips-drag">D</div></td>
+						<td><div class="redips-drag">E</div></td>
+						<td><div class="redips-drag">F</div></td>
+					</tr>
+					<tr>
+						<td><div class="redips-drag">G</div></td>
+						<td><div class="redips-drag">H</div></td>
+						<td><div class="redips-drag">I</div></td>
+						<td><div class="redips-drag">J</div></td>
+						<td><div class="redips-drag">K</div></td>
+						<td><div class="redips-drag">L</div></td>
+					</tr>
+					<tr>
+						<td><div class="redips-drag">M</div></td>
+						<td><div class="redips-drag">N</div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><div class="redips-drag">O</div></td>
+						<td><div class="redips-drag">P</div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><div class="redips-drag">Q</div></td>
+						<td><div class="redips-drag">R</div></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- table2 -->
+			<table id="table2" style="display: none">
+				<colgroup>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td><div class="redips-drag">A</div></td>
+						<td><div class="redips-drag">B</div></td>
+						<td><div class="redips-drag">C</div></td>
+						<td><div class="redips-drag">D</div></td>
+						<td><div class="redips-drag">E</div></td>
+						<td><div class="redips-drag">F</div></td>
+					</tr>
+					<tr>
+						<td rowspan="3"></td>
+						<td></td>
+						<td colspan="2"></td>
+						<td></td>
+						<td rowspan="3"></td>
+					</tr>
+					<tr>
+						<td colspan="4"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- table3 -->
+			<table id="table3" style="display: none">
+				<colgroup>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="100"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="redips-mark"></td>
+						<td><div class="redips-drag">A</div></td>
+						<td><div class="redips-drag">B</div></td>
+						<td><div class="redips-drag">C</div></td>
+						<td><div class="redips-drag">D</div></td>
+						<td class="redips-mark"></td>
+					</tr>
+					<tr>
+						<td><div class="redips-drag">E</div></td>
+						<td><div class="redips-drag">F</div></td>
+						<td class="redips-mark"></td>
+						<td class="redips-mark"></td>
+						<td><div class="redips-drag">G</div></td>
+						<td><div class="redips-drag">H</div></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td class="redips-mark"></td>
+						<td class="redips-mark"></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="redips-mark"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="redips-mark"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- table with clone element and trash -->
+			<table id="mini">
+				<colgroup>
+					<col width="100"/>
+					<col width="100"/>
+					<col width="300"/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<!-- clone cell is forbidden for any element -->
+						<td class="redips-mark"><div class="redips-drag redips-clone orange">C</div></td>
+						<!-- trash cell -->
+						<td class="redips-trash">Trash</td>
+						<td id="overflow" class="redips-mark"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="mycontrols">
+				<!-- animation checkbox -->
+				<input type="checkbox" class="checkbox" onclick="redips.shiftAnimation(this)" title="Enable / disable animation" checked="true"/>Animation
+				<br/>
+				<!-- confirm before delete object -->
+				<input type="checkbox" class="checkbox" onclick="redips.toggleConfirm(this)" title="Show confirm delete dialog"/>Show confirm delete dialog
+				<br/>
+				<br/>
+				Shift after options:
+				<br/>
+				<!-- shift table content when DIV element is dropped to the non empty cell -->
+				<input type="radio" name="shift_after" class="checkbox" onclick="redips.shiftAfter(this)" value="default" title="Default" checked="true"/>Default - shift content only if DIV element is dropped to the non empty cell
+				<br/>
+				<!-- shift after element is deleted checkbox -->
+				<input type="radio" name="shift_after" class="checkbox" onclick="redips.shiftAfter(this)" value="delete" title="Enable / disable content shifting after element is deleted"/>Delete - same as "default" + shift content after element is deleted
+				<br/>
+				<!-- always shift table content -->
+				<input type="radio" name="shift_after" class="checkbox" onclick="redips.shiftAfter(this)" value="always" title="Always shit table content"/>Always - always shift table content
+				<br/>
+				<br/>
+				<!-- shift modes -->
+				<span class="text">Shift options:</span>
+				<br/>
+				<input type="radio" name ="shift_mode" onclick="redips.shiftMode(this)" title="Horizontal1" value="horizontal1" checked="true"/>horizontal 1 - element shift can affect more rows<br/>
+				<input type="radio" name ="shift_mode" onclick="redips.shiftMode(this)" title="Horizontal2" value="horizontal2"/>horizontal 2 - each row is treated separately<br/>
+				<input type="radio" name ="shift_mode" onclick="redips.shiftMode(this)" title="Vertical1" value="vertical1"/>vertical 1 - element shift can affect more columns<br/>
+				<input type="radio" name ="shift_mode" onclick="redips.shiftMode(this)" title="Vertical2" value="vertical2"/>vertical 2 - each column is treated separately
+				<br/>
+				<br/>
+				<!-- overflow -->
+				<span class="text">Overflow:</span>
+				<br/>
+				<input type="radio" name ="shift_overflow" onclick="redips.overflow(this)" title="Overflow - bunch" value="bunch"/>bunch - overflowed DIV will stay in last cell (default)<br/>
+				<input type="radio" name ="shift_overflow" onclick="redips.overflow(this)" title="Overflow - delete" value="delete"/>delete - overflow will be deleted<br/>
+				<input type="radio" name ="shift_overflow" onclick="redips.overflow(this)" title="Overflow - source" value="source"/>source - overflow will be moved to the source TD<br/>
+				<input type="radio" name ="shift_overflow" onclick="redips.overflow(this)" title="Overflow - source" value="user" checked="true"/>HTMLElement - overflow will be moved to user defined TD<br/>
+			</div>
+		</div>
+	</body>
+</html>

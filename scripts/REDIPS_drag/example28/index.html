@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 28: Load table content (with AJAX)</title>
+	</head>
+	<body>
+		<!-- main container -->
+		<div id="main-container">
+			<!-- drag1 DIV container -->
+			<div id="redips-drag">
+				<!-- load buttons -->
+				<input class="button" type="button" value="Load1" title="Load content from server via AJAX" onclick="redips.button1()"/>
+				<input class="button" type="button" value="Load2" title="Load content from JSON array as parameter in loadContent method" onclick="redips.button2()"/>
+				<br/>
+				<input class="button" type="button" value="Load3" title="Load content from string in text field below" onclick="redips.button3()"/>
+				<br/>
+				<input class="text" type="text" id="textField" value="[[&quot;d16&quot;, 2, 1, &quot;orange&quot;, &quot;C1&quot;], [&quot;d17&quot;, 3, 3, &quot;orange&quot;, &quot;C2&quot;]]"/>
+				<br/>
+				<input class="button clear" type="button" value="Clear" title="Clear table content" onclick="redips.clearTable()"/>
+
+				<!-- content table -->
+				<table id="myTable">
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- trash -->
+				<table id="mini">
+					<colgroup>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="redips-trash" title="Trash cell - drag DIV element here to delete">Trash</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- instructions -->
+			<div class="instructions">
+				REDIPS.drag library
+				<br/>
+				<br/>
+				Drag and drop JavaScript library based on HTML table.
+				<br/>
+				<br/>
+				<strong>Load1</strong>
+				<br/>
+				With click on this button, JS will load content from server script (db_ajax2.html) and set to the HTML table.
+				In this scenario, server sends non-existing location of DIV element A2 and REDIPS.drag will call error.loadContent() handler.
+				In script.js alert message will be shown but data processing will not be stopped.
+				<br/>
+				<br/>
+				<strong>Load2</strong>
+				<br/>
+				This will set content to the HTML table from JSON array as second parameter.
+				Target table is defined with string ID in first parameter of loadContent() method.
+				Please see <a href="script.js" target="_blank">script.js</a> for more info.
+				<br/>
+				<br/>
+				<strong>Load3</strong>
+				<br/>
+				JSON data is read from text field and place to the HTML table.
+				In case of invalid JSON string, method will assume that string is URL and it will try to load URL.
+			</div>
+		</div>
+	</body>
+</html>

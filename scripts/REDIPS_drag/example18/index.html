@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta name="author" content="Darko Bunic"/>
+		<meta name="description" content="Drag and drop table content/rows with JavaScript"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+		<script type="text/javascript">
+			var redipsURL = '/javascript/drag-and-drop-table-content-animation/';
+		</script>
+		<script type="text/javascript" src="../header.js"></script>
+		<script type="text/javascript" src="../redips-drag-min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Example 18: Simple element animation</title>
+	</head>
+	<body>
+		<center>
+			<!-- buttons -->
+			<div id="buttons">
+					<input type="button" value="Move" class="button" id="btn_move" onclick="redips.move()"/><span></span> <!-- empty span element is needed for applying right margin in CSS -->
+					<input type="checkbox" class="checkbox" onclick="redips.toggleClone(this)" title="Clone DIV element"/><span class="message_line">Clone</span>
+					<input type="checkbox" class="checkbox" onclick="redips.toggleOverwrite(this)" title="Overwrite content"/><span class="message_line">Overwrite</span>
+			</div>
+			<!-- drag region -->
+			<div id="redips-drag">
+				<table>
+					<colgroup>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+						<col width="70"/>
+					</colgroup>
+					<tbody>
+						<tr class="rl">
+							<td><div id="d1" class="redips-drag orange">Hello</div></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rd">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rl">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="instructions">
+				Every click on "Move" button will move DIV element to the random table cell (except the start position).
+				If "Clone" checkbox is set then instead of moving DIV element it will be cloned and moved to the random cell.
+				Cloned DIV element will be appended to the existing cell content unless "Overwrite" checkbox is checked.
+				<br/>
+				<br/>
+				Please see JS code in script.js file and try to replace callback function with the line below.
+				Actually, callback function will start animation again.
+				Once started, animation will not stop until page is refreshed.
+				It's a very attractive effect.
+			</div>
+		</center>
+	</body>
+</html>

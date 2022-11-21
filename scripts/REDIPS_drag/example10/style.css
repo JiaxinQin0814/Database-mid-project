@@ -1,0 +1,77 @@
+/*
+
+Darko Bunic
+http://www.redips.net/
+May, 2011.
+
+*/
+
+body {
+	font-family: arial;
+	margin: 0px;
+}
+
+/* make drag container visible */
+#redips-drag {
+	border: 2px dashed LightBlue;
+	padding: 2px;
+	display: table;
+	width: 650px;
+	margin: auto;
+}
+	/* table */
+	div#redips-drag table {
+		border-collapse: collapse;
+		background-color: #eee;
+	}
+	
+	/* table cells */
+	div#redips-drag td {
+		border: 1px solid navy;
+		height: 50px;
+	}
+	
+/* left container */
+#left {
+	float: left;
+	display: table;
+}
+
+/* container for the right table */
+#right {
+	float: right;
+	display: table;
+	width: 300px;
+}
+	
+	#sticky_table {
+		width: 300px;
+		height: 155px;
+		margin-bottom: 10px;
+	}
+	#sticky_table table {
+		position: fixed;
+	}
+
+	/* scrollable drag container */
+	#scrollable {
+		position: fixed;
+		overflow: auto;
+		width: 220px;
+		height: 300px;
+	}
+
+/* drag object (DIV inside table cell) */
+.redips-drag {
+	margin: auto;
+	text-align: center;
+	width: 87px;
+	height: 35px;
+	font-size: 10pt;
+	line-height: 35px;
+	border: 2px solid SteelBlue;
+	background-color: white;
+}
+
+
+
