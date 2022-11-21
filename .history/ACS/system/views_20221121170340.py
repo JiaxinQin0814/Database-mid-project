@@ -24,25 +24,20 @@ def loginView(request):
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
-            identifier = form.cleaned_data.get("username")
+            username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             # remember = int(request.POST.get("remember"))
-            user = authenticate(request,identifier=identifier,password=password)# 使用authenticate进行登录验证，验证成功会返回一个user对象，失败则返回None
-            print(user.username)
-            print(user.kind)
-            print(user.identifier)
+            user = authenticate(request,username=username,password=password) # 使用authenticate进行登录验证，验证成功会返回一个user对象，失败则返回None
             # 使用authenticate验证时如果is_active为False也会返回None，导致无法判断激活状态，
             # 此时可以在seetings中配置：
             # AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
             if user and user.is_active: # 如果验证成功且用户已激活执行下面代码
                 login(request,user) # 使用自带的login函数进行登录，会自动添加session信息
-                request.session["username"] = user.username # 自定义session，login函数添加的session不满足时可以增加自定义的session信息。
+                request.session["username"] = username # 自定义session，login函数添加的session不满足时可以增加自定义的session信息。
                 request.session.set_expiry(None) # 设置session过期时间，None表示使用系统默认的过期时间 
                 # else:
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
-                info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
-                print(info)
-                return render(request, 'nav.html', info)
+                return render(request, 'register.html', info)
                 # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
             elif user and not user.is_active:
                 return JsonResponse({"code": 404, "message": "用户未激活", "data": {"error": "该用户还没有激活，请<a href='#'>激活</a>"}})

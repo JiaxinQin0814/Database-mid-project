@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+<body>
+<div class="nav">
+    <div class="nav-title">
+        <a href="{% url 'course' kind=info.kind %}">
+        <p class="main-title">学生选课管理系统</p>
+        <p class="sub-title">
+            {% if info.kind == "教师" %}
+                教师端
+            {% elif info.kind == "管理员" %}
+                管理员端
+            {% endif %}</p>
+        </a>
+    </div>
+
+    <div class="log-out">
+        <a href="{% url "logout" %}">退出</a>
+    </div>
+    <div class="name-logo">
+        <div class="user-name">
+
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+
+</div>
+
+
+</body>
+</html>

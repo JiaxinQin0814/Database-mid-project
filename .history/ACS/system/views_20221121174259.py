@@ -41,9 +41,8 @@ def loginView(request):
                 # else:
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
                 info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
-                print(info)
                 return render(request, 'nav.html', info)
-                # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
+                return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
             elif user and not user.is_active:
                 return JsonResponse({"code": 404, "message": "用户未激活", "data": {"error": "该用户还没有激活，请<a href='#'>激活</a>"}})
             else:
