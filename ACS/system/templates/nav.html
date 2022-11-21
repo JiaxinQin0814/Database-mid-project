@@ -10,14 +10,10 @@
 <body>
 <div class="nav">
     <div class="nav-title">
+
         <p class="main-title">学生选课管理系统{{msg}}</p>
         <p class="sub-title">
-            {% if info.kind == "教师" %}
-                教师端
-            {% elif info.kind == "管理员" %}
-                管理员端
-            {% endif %} </p>
-        </a>
+        <p>{{kind }}</p>
     </div>
 
 
@@ -35,3 +31,4 @@
 
 </body>
 </html>
+
