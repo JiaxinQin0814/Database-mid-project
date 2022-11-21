@@ -36,27 +36,41 @@ def loginView(request):
             # AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
             if user and user.is_active: # 如果验证成功且用户已激活执行下面代码
                 login(request,user) # 使用自带的login函数进行登录，会自动添加session信息
-                request.session["username"] = user.username # 自定义session，login函数添加的session不满足时可以增加自定义的session信息。
+                request.session["identifier"] = user.username # 自定义session，login函数添加的session不满足时可以增加自定义的session信息。
                 request.session.set_expiry(None) # 设置session过期时间，None表示使用系统默认的过期时间 
                 # else:
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
                 info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
-                print(info)
+                # print(info)
                 return render(request, 'nav.html', info)
                 # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
+                # return render(request, "welcome.html")
+
+                # return render(request, "login.html", {'msg': '登陆失败,密码错误'})
             elif user and not user.is_active:
-                return JsonResponse({"code": 404, "message": "用户未激活", "data": {"error": "该用户还没有激活，请<a href='#'>激活</a>"}})
+                return render(request, "login.html", {'msg': '登录失败,用户未激活'})
+                # return JsonResponse({"code": 404, "message": "用户未激活", "data": {"error": "该用户还没有激活，请<a href='#'>激活</a>"}})
             else:
-                return JsonResponse({"code": 405, "message": "验证失败", "data": {"error": "用户名或密码错误"}})
+                return render(request, "login.html", {'msg': '登录失败,用户名或密码错误'})
+                # return JsonResponse({"code": 405, "message": "验证失败", "data": {"error": "用户名或密码错误"}})
         else:
-            return JsonResponse({"code":406,"message":"用户名或密码格式错误","data":{"error":"用户名或密码错误"}})
+            return render(request, "login.html", {'msg': '登录失败,用户名或密码错误'})
+            # return JsonResponse({"code":406,"message":"用户名或密码格式错误","data":{"error":"用户名或密码错误"}})
 
 
+def menuview(request):
+    if request.method=="GET":
+        uid = request.session.get('identifier')
+        info = MyUser.objects.values("identifier").filter(identifier=uid)[0]
+        print(info)
+        return render(request,"nav.html",info)
+    
+    # else:
+    #     globals()
 
 def registerview(request):
     if request.method == "GET":
         return render(request,"register.html")
-        print(1)
     
     else:
         form = RegisterForm(request.POST)
@@ -87,6 +101,6 @@ def feedback(request):
     if request.method=="GET":
         return render()
 # # 视图名不能起成logout
-# def logoutView(request):
-#     logout(request) # 调用django自带退出功能，会帮助我们删除相关session
-#     return redirect(request.META["HTTP_REFERER"])
+def logoutView(request):
+    logout(request) # 调用django自带退出功能，会帮助我们删除相关session
+    return redirect(request.META["HTTP_REFERER"])
