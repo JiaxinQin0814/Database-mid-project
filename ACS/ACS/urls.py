@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 
 from system import views,testdb,form,models
+# from system import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('system.urls')),
+    # path('course', include("system.templates.course")),
+    # path('', include('urls.course')),
 ]
 
