@@ -101,8 +101,6 @@ def feedback(request):
         return render()
 
 
-
-
 def TeacherAllCourseView(request):
     if request.method == 'GET': #获得数据库数据
         #QueryString查询
