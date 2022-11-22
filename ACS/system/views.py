@@ -8,7 +8,6 @@ from .form import RegisterForm, LoginForm
 
 User = get_user_model()  # 获取User模型
 
-from django.db.models import Q
 from django.shortcuts import render
 from .form import *
 from django.http import JsonResponse
@@ -17,10 +16,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .models import MyUser
-from .models import Source_class
-from .models import teaching_class
-from django.http import HttpResponse
-from .models import teaching_class_teacher_time_assignment
+import system.models as models
 
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
@@ -104,47 +100,11 @@ def feedback(request):
     if request.method == "GET":
         return render()
 
+
 # # 视图名不能起成logout
 def logoutView(request):
     logout(request)  # 调用django自带退出功能，会帮助我们删除相关session
     return redirect(request.META["HTTP_REFERER"])
-
-
-def TeacherAllCourseView(request):
-    if request.method == 'GET': #获得数据库数据
-        #QueryString查询
-        courses = Source_class.objects.all() #返回QuerySite容器对象 类似数组
-        print(courses)
-        return render(request, "ceshi_course_all.html",locals())
-    elif request.method == 'POST': #用户提交数据 在本视图中不会用到
-        #teacher_id = request.POST('teacher_id')
-        #return render(request, "login.html")
-        pass
-    else:
-        pass
-
-def TeacherCourseView(request):
-    if request.method == 'GET':  # 获得数据库数据
-        # QueryString查询
-        identifier = request.POST('identifier') #教师编号
-        classes_teacher = teaching_class_teacher_time_assignment.objects.filter(teacher_id = identifier)  # 返回QuerySite容器对象 类似数组
-        classes_id = [] #存储该教师所有的教学班id
-        for class_ in classes_teacher:
-            classes_id.append(class_.teaching_class_id_id)
-        classes_id = list(set(classes_id))
-        if not classes_id:#如果列表非空
-            teaching_classes = teaching_class.objects.filter(teaching_class_id = classes_id[0])
-        if len(classes_id)>1:
-            for num,class_id in enumerate(classes_id,1):
-                teaching_classes_ = teaching_class.objects.filter(teaching_class_id = class_id)
-                teaching_classes = teaching_classes.union(teaching_classes_)
-        return render(request, "ceshi_course.html", locals())#ceshi_course.html还没有写 没法测试
-    elif request.method == 'POST':  # 用户提交数据 在本视图中不会用到
-        # teacher_id = request.POST('teacher_id')
-        # return render(request, "login.html")
-        pass
-    else:
-        pass
 
 
 def introduceView(request):
@@ -173,19 +133,49 @@ def course_import(request):
     return render(request, "course_import.html", )
 
 
+# 功能：获得表单，加入到数据库中去
 def info_edit(req):
-    # 判断请求类型
+    #判断请求类型
     user_list = []
     if req.method == "POST":
-        # 获取表单数据,如果获取不到,则为None
-        username = req.POST.get("course_name", None)
-        sex = req.POST.get("sex", None)
-        email = req.POST.get("email", None)
+        form = CourseInsertForm(req.POST)
+        if form.is_valid():  # 检查是否符合数据规定
+            apply = models.Source_class()
 
-        user = {'state': 'success'}
-        # 追加到列表中
-        user_list.append(username)
-        print(user, user_list)
-    # 将列表传给模板index.html
-    return render(req, "course_edit.html", {"user_list": user_list})
+            #获取表单数据,如果获取不到,则为None
+            apply.class_name = req.POST.get("class_name", None)  # 课程名称
+            apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
+            apply.credit = req.POST.get("credit", None)  # 学分
+            apply.using = req.POST.get("using", None)   # 当前是否正在使用
+            apply.school = models.School()
+            apply.school.school_name = req.POST.get("school", None)   # 开课院系
+            apply.character = req.POST.get("character", None)  # 课程性质
 
+            # 将表单数据存到数据库中
+            apply.save()
+
+            # user = {"课程名称":class_name, "课程编号":class_Id, "学分":credit, "当前是否正在使用":using, "开课院系":school, "课程性质":character}
+            # 追加到
+            user = {"success": "list"}
+
+            user_list.append(user)
+            print(user, user_list)
+            # 将列表传给模板index.html
+            return render(req, "course_edit.html", {"user_list": user_list})
+
+        else:
+            # 取出
+            return JsonResponse({"code":403, "message":"导入失败", "data":{"class_name":form.errors.get("class_name")}})
+
+
+
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from .models import Source_class
+
+
+
+def database_show(request):
+    print('1')
+    items = Source_class.objects.all()
+    print(items)
+    return render(request, 'course_list.html', {'items': items})

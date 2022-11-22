@@ -57,3 +57,36 @@ class LoginForm(Form):
         }
     )
 
+
+class CourseInsertForm(Form):
+    class_Id = fields.CharField(
+        required=True,
+        min_length=6,
+        max_length=6,
+        error_messages={
+            "required": "课程号不能为空！",
+            "min_length": "课程号必须为6位！",
+            "max_length": "课程号必须为6位！"
+        }
+    )
+
+    class_name = fields.CharField(
+        required=True,
+        max_length=20,
+        error_messages={
+            "required": "课程名称不能为空！",
+            "max_length": "课程名称不能多于20个字！"
+        }
+    )
+
+    credit = fields.IntegerField(
+        required=True,
+        max_value=6,
+        min_value=1,
+        error_messages={
+            "required": "学分不能为空！",
+            "min_length": "学分最少为1！",
+            "max_length": "学分最多为6！"
+        }
+    )
+

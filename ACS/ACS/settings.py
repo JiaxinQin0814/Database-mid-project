@@ -78,7 +78,7 @@ DATABASES = {
        'ENGINE': 'django.db.backends.mysql',
        'NAME':'asc_data',
        'USER': 'root',
-       'PASSWORD': 'z1317849299',
+       'PASSWORD': '22450438',
        'HOST': '127.0.0.1',
        'POST': '3306'
   }
