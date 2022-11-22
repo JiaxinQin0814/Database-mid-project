@@ -362,7 +362,7 @@ class teaching_class_classroom_time_assignment(TC):
 class teaching_class_teacher_time_assignment(TC):
     relation_id = models.AutoField(primary_key=True,verbose_name="教学班_教师_时间关系")
     teaching_class_id  = models.ForeignKey(teaching_class,on_delete=models.CASCADE,related_name="relation_teachingid2",verbose_name="教学班",blank=False)
-    # time1 = models.ForeignKey(TC,blank=True,on_delete=models.CASCADE,related_name="relation_time2",verbose_name="教学班上课时间")
+    #time1 = models.ForeignKey(TC,blank=True,on_delete=models.CASCADE,related_name="relation_time2",verbose_name="教学班上课时间")
     teacher = models.ForeignKey(Teacher_Info,blank=False,on_delete=models.CASCADE,related_name="teaching_class_teacher_relation",verbose_name="教学班对应老师")
     class Meta:
         verbose_name = "教学班-教师-时间关系"

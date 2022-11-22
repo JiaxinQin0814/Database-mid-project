@@ -8,6 +8,7 @@ from .form import RegisterForm, LoginForm
 
 User = get_user_model()  # 获取User模型
 
+from django.db.models import Q
 from django.shortcuts import render
 from .form import *
 from django.http import JsonResponse
@@ -16,7 +17,10 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .models import MyUser
-
+from .models import Source_class
+from .models import teaching_class
+from django.http import HttpResponse
+from .models import teaching_class_teacher_time_assignment
 
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
@@ -100,11 +104,47 @@ def feedback(request):
     if request.method == "GET":
         return render()
 
-
 # # 视图名不能起成logout
 def logoutView(request):
     logout(request)  # 调用django自带退出功能，会帮助我们删除相关session
     return redirect(request.META["HTTP_REFERER"])
+
+
+def TeacherAllCourseView(request):
+    if request.method == 'GET': #获得数据库数据
+        #QueryString查询
+        courses = Source_class.objects.all() #返回QuerySite容器对象 类似数组
+        print(courses)
+        return render(request, "ceshi_course_all.html",locals())
+    elif request.method == 'POST': #用户提交数据 在本视图中不会用到
+        #teacher_id = request.POST('teacher_id')
+        #return render(request, "login.html")
+        pass
+    else:
+        pass
+
+def TeacherCourseView(request):
+    if request.method == 'GET':  # 获得数据库数据
+        # QueryString查询
+        identifier = request.POST('identifier') #教师编号
+        classes_teacher = teaching_class_teacher_time_assignment.objects.filter(teacher_id = identifier)  # 返回QuerySite容器对象 类似数组
+        classes_id = [] #存储该教师所有的教学班id
+        for class_ in classes_teacher:
+            classes_id.append(class_.teaching_class_id_id)
+        classes_id = list(set(classes_id))
+        if not classes_id:#如果列表非空
+            teaching_classes = teaching_class.objects.filter(teaching_class_id = classes_id[0])
+        if len(classes_id)>1:
+            for num,class_id in enumerate(classes_id,1):
+                teaching_classes_ = teaching_class.objects.filter(teaching_class_id = class_id)
+                teaching_classes = teaching_classes.union(teaching_classes_)
+        return render(request, "ceshi_course.html", locals())#ceshi_course.html还没有写 没法测试
+    elif request.method == 'POST':  # 用户提交数据 在本视图中不会用到
+        # teacher_id = request.POST('teacher_id')
+        # return render(request, "login.html")
+        pass
+    else:
+        pass
 
 
 def introduceView(request):
@@ -148,3 +188,4 @@ def info_edit(req):
         print(user, user_list)
     # 将列表传给模板index.html
     return render(req, "course_edit.html", {"user_list": user_list})
+
