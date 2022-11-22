@@ -15,27 +15,27 @@
 	$(document).ready(function(){
 		/** 新增   **/
 	    $("#addBtn").fancybox({
-	    	'href'  : 'house_edit.html',
+	    	'href'  : '{% url 'system:course_edit' %}',
 	    	'width' : 733,
 	        'height' : 530,
 	        'type' : 'iframe',
 	        'hideOnOverlayClick' : false,
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
-	        	window.location.href = 'house_list.html';
+	        	window.location.href = '{% url 'system:course_list' %}';
 	        }
 	    });
 		
 	    /** 导入  **/
 	    $("#importBtn").fancybox({
-	    	'href'  : '/xngzf/archives/importFangyuan.action',
+	    	'href'  : '{% url 'system:course_import' %}',
 	    	'width' : 633,
 	        'height' : 260,
 	        'type' : 'iframe',
 	        'hideOnOverlayClick' : false,
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
-	        	window.location.href = 'house_list.html';
+	        	window.location.href = '{% url 'system:course_list' %}';
 	        }
 	    });
 		
@@ -59,10 +59,7 @@
 		$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
 	}
 
-	/** 新增   **/
-	function add(){
-		$("#submitForm").attr("action", "/xngzf/archives/luruFangyuan.action").submit();	
-	}
+
 	 
 	/** Excel导出  **/
 	function exportExcel(){
@@ -150,6 +147,7 @@
 </style>
 </head>
 <body>
+
 	<form id="submitForm" name="submitForm" action="" method="post">
 		<input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
 		<input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
@@ -190,6 +188,7 @@
                                 <option value="205">是</option>
 								<option value="206">否</option>
                             </select>
+
 							所属培养方案
 							<select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01">
                                 <option value="">--请选择--</option>
@@ -197,6 +196,7 @@
 								<option value="208">信息学院</option>
 								<option value="209">理科实验班</option>
                             </select>
+
 							课程性质
 							<select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01">
                                 <option value="">--请选择--</option>
