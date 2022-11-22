@@ -13,29 +13,30 @@
 <title>信息管理系统</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+
 		/** 新增   **/
 	    $("#addBtn").fancybox({
-	    	'href'  : 'house_edit.html',
+	    	'href'  : '{% url 'system:course_edit' %}',
 	    	'width' : 733,
 	        'height' : 530,
 	        'type' : 'iframe',
 	        'hideOnOverlayClick' : false,
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
-	        	window.location.href = 'house_list.html';
+	        	window.location.href = '{% url 'system:course_list' %}';
 	        }
 	    });
 		
 	    /** 导入  **/
 	    $("#importBtn").fancybox({
-	    	'href'  : '/xngzf/archives/importFangyuan.action',
+	    	'href'  : '{% url 'system:course_import' %}',
 	    	'width' : 633,
 	        'height' : 260,
 	        'type' : 'iframe',
 	        'hideOnOverlayClick' : false,
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
-	        	window.location.href = 'house_list.html';
+	        	window.location.href = '{% url 'system:course_list' %}';
 	        }
 	    });
 		
@@ -50,19 +51,18 @@
 	        	window.location.href = 'house_list.html';
 	        }
 	    });
+
+
 	});
 	/** 用户角色   **/
 	var userRole = '';
 
 	/** 模糊查询来电用户  **/
 	function search(){
-		$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
+		$("#submitForm").attr("action", "course_list.html").submit();
 	}
 
-	/** 新增   **/
-	function add(){
-		$("#submitForm").attr("action", "/xngzf/archives/luruFangyuan.action").submit();	
-	}
+
 	 
 	/** Excel导出  **/
 	function exportExcel(){
@@ -150,6 +150,7 @@
 </style>
 </head>
 <body>
+
 	<form id="submitForm" name="submitForm" action="" method="post">
 		<input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
 		<input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
@@ -190,6 +191,7 @@
                                 <option value="205">是</option>
 								<option value="206">否</option>
                             </select>
+
 							所属培养方案
 							<select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01">
                                 <option value="">--请选择--</option>
@@ -197,14 +199,16 @@
 								<option value="208">信息学院</option>
 								<option value="209">理科实验班</option>
                             </select>
+
 							课程性质
 							<select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01">
                                 <option value="">--请选择--</option>
                                 <option value="26">专业核心课</option>
                             </select>
 						</div>
+						<a href="{% url 'system:database_show' %}" class='btn btn-lg'>try</a>
 						<div id="box_bottom">
-							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
+							<input type="button" value="查询" class="ui_input_btn01"  />
 							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" /> 
 							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
 							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
@@ -224,26 +228,27 @@
 							<th>学分</th>
 							<th>使用中</th>
 							<th>历史课程</th>
-							<th>授课对象</th>
-							<th>所属培养方案</th>
+							<th>开课院系</th>
 							<th>课程性质</th>
 							<th>操作</th>
 						</tr>
+						{items}
+						{% for item in items %}
 							<tr>
 								<td><input type="checkbox" name="IDCheck" value="14458579642011" class="acb" /></td>
-								<td>数据库系统概论</td>
-								<td>123456</td>
-								<td>123456</td>
-								<td>XXX</td>
-								<td>123456</td>
-								<td>XXX</td>
-								<td>人工智能</td>
-								<td>专业必修课</td>
+								<td>{{item.class_name}}</td>
+								<td>{{item.class_Id}}</td>
+								<td>{{item.credit}}</td>
+								<td>{{item.using}}</td>
+								<td>NULL</td>
+								<td>{{item.school}}</td>
+								<td>{{item.character}}</td>
 								<td>
 									<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a> 
 									<a href="javascript:del('14458579642011');">删除</a>
 								</td>
 							</tr>
+						 {% endfor %}
 					</table>
 				</div>
 				<div class="ui_tb_h30">

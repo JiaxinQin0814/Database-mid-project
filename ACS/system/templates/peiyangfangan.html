@@ -15,14 +15,14 @@
 	$(document).ready(function(){
 		/** 新增   **/
 	    $("#addBtn").fancybox({
-	    	'href'  : 'house_edit.html',
+	    	'href'  : '{% url 'system:course_edit' %}',
 	    	'width' : 733,
 	        'height' : 530,
 	        'type' : 'iframe',
 	        'hideOnOverlayClick' : false,
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
-	        	window.location.href = 'house_list.html';
+	        	window.location.href = '{% url 'system:course_edit' %}';
 	        }
 	    });
 		
@@ -180,7 +180,8 @@
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
-							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" /> 
+							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" />
+
 							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
 							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
 							<input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" />
@@ -274,8 +275,7 @@
 																<td>人工智能</td>
 																<td>专业必修课</td>
 																<td>
-																	<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a> 
-																	<a href="javascript:del('14458579642011');">删除</a>
+
 																</td>
 															</tr>
 													</table>
@@ -320,8 +320,6 @@
 									</div>
 								</td>
 								<td>
-									<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a> 
-									<a href="javascript:del('14458579642011');">删除</a>
 								</td>
 							</tr>
 							<tr>
@@ -331,8 +329,6 @@
 								<td>123456</td>
 								<td>XXX</td>
 								<td>
-									<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a> 
-									<a href="javascript:del('14458579642011');">删除</a>
 								</td>
 							</tr>
 							

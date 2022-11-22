@@ -15,7 +15,9 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .models import MyUser
-
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from .models import Source_class
+import system.models as models
 
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
@@ -104,3 +106,76 @@ def feedback(request):
 def logoutView(request):
     logout(request) # 调用django自带退出功能，会帮助我们删除相关session
     return redirect(request.META["HTTP_REFERER"])
+
+
+
+def introduceView(request):
+    return render(request, "introduce.html", )
+    # else:
+    #     globals()
+
+
+def database_show(request):
+    print('1')
+    items = Source_class.objects.all()
+    print(items)
+    return render(request, 'course_list.html', {'items': items})
+
+
+def peiyangfanganView(request):
+    return render(request, "peiyangfangan.html", )
+
+
+def course_listView(request):
+    return render(request, "course_list.html", )
+
+
+def loupanchartView(request):
+    return render(request, "loupanchart.html", )
+
+
+def course_edit(request):
+    return render(request, "course_edit.html", )
+
+
+def course_import(request):
+    return render(request, "course_import.html", )
+
+
+
+# 功能：获得表单，加入到数据库中去
+def info_edit(req):
+    #判断请求类型
+    user_list = []
+    if req.method == "POST":
+        form = CourseInsertForm(req.POST)
+        if form.is_valid():  # 检查是否符合数据规定
+            apply = models.Source_class()
+
+            #获取表单数据,如果获取不到,则为None
+            apply.class_name = req.POST.get("class_name", None)  # 课程名称
+            apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
+            apply.credit = req.POST.get("credit", None)  # 学分
+            apply.using = req.POST.get("using", None)   # 当前是否正在使用
+            apply.school = models.School()
+            apply.school.school_name = req.POST.get("school", None)   # 开课院系
+            apply.character = req.POST.get("character", None)  # 课程性质
+
+            # 将表单数据存到数据库中
+            apply.save()
+
+            # user = {"课程名称":class_name, "课程编号":class_Id, "学分":credit, "当前是否正在使用":using, "开课院系":school, "课程性质":character}
+            # 追加到
+            user = {"success": "list"}
+
+            user_list.append(user)
+            print(user, user_list)
+            # 将列表传给模板index.html
+            return render(req, "course_edit.html", {"user_list": user_list})
+
+        else:
+            # 取出
+            return JsonResponse({"code":403, "message":"导入失败", "data":{"class_name":form.errors.get("class_name")}})
+
+
+

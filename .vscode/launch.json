@@ -17,7 +17,7 @@
             ],
             "django": true,
             "justMyCode": true,
-            "pythonPath":"/Users/qjx/opt/anaconda3/envs/database/bin/python3.7",
+            "python":"/Users/qjx/opt/anaconda3/envs/database/bin/python3.7",
             "env": {"PYTHONPATH":"/Users/qjx/opt/anaconda3/envs/database/bin/python"}
         }
     ]

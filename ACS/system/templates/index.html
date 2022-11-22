@@ -215,12 +215,12 @@
 				}
 			});*/
             data = [
-            {"accessPath":"peiyangfangan.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":3,"resourceName":"培养方案","resourceOrder":0,"resourceType":""},
-            {"accessPath":"course_list.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":2,"resourceName":"课程库构建","resourceOrder":0,"resourceType":""},
-            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":16,"resourceName":"非学院课程导入","resourceOrder":0,"resourceType":""},
-            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":24,"resourceName":"课程生成教学班","resourceOrder":0,"resourceType":""},
-            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":34,"resourceName":"学院课程排课","resourceOrder":0,"resourceType":""},
-            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":55,"resourceName":"教师意见沟通","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:peiyangfangan' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":3,"resourceName":"培养方案","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:course_list' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":2,"resourceName":"课程库构建","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:loupanchart' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":16,"resourceName":"非学院课程导入","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:loupanchart' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":24,"resourceName":"课程生成教学班","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:loupanchart' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":34,"resourceName":"学院课程排课","resourceOrder":0,"resourceType":""},
+            {"accessPath":"{% url 'system:loupanchart' %}","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":55,"resourceName":"教师意见沟通","resourceOrder":0,"resourceType":""},
             ];
             // 如果返回数据不为空，加载"业务模块"目录
             if(data != null){
@@ -361,7 +361,7 @@
 	 	<span id="here_area">当前位置：系统&nbsp;>&nbsp;系统介绍</span>
 	</div>
     <div id="main">
-      	<iframe name="right" id="rightMain" src="introduce.html" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
+      	<iframe name="right" id="rightMain" src="{% url 'system:introduce' %}" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
     </div>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>

@@ -267,6 +267,16 @@ class Source_class(models.Model):
     school =models.ForeignKey(School,null=True,blank=True,on_delete=models.CASCADE,related_name="school_class_relation",verbose_name="开课院系")
     # 是否要加入老师？ 如果加入老师的话 就可以吧后面的 教学班教师时间表改成教师时间表... 算了先这样吧23333 如果这里你们写的时候觉得很丑就在群里说一下我们统一改
     
+    def as_dict(self):
+        return {
+        "class_name": self.class_name,
+        "class_Id": self.class_Id,
+        "credit": self.credit,
+        "using": self.using,
+        "character": self.character,
+        "school": self.school,
+    }
+    
     class Meta:
         db_table = "Source_class"
         verbose_name = "课程库信息"
