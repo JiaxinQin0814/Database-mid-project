@@ -9,8 +9,9 @@ urlpatterns = [
     path('login/', loginView, name="登录"),
     # path("course/",name="不知道")
     # path("course/", loginView, name="登录"),
-    path("nav/",menuview,name="菜单")
-    
+    path("nav/",menuview,name="菜单"),
+    path("teacher-course/",TeacherCourseView,name="教师课程库"),
+    path("teacher-all-course/",TeacherAllCourseView,name="教师所有课程库")
     # path('welcome/', views.welcome, name="系统主界面"),
     # path('add/', views.add, name="添加信息"),
     # path('delete/', views.delete, name="删除信息"),
