@@ -238,3 +238,92 @@ def info_import(request):
                    "message": message,
                    })
 
+
+def info_update(request):
+    """
+    参照Source_class表，class_ID是不能修改的，其它都可以。
+
+    传入数据：
+    {class_Id: int,  # 要修改的那条记录，必填
+     class_name: str,  # 如果要修改就传值，不修改就不传值
+     using: bool,  # default=True
+     character: int,  # choices
+     school: str,
+    }
+    [[[保证传入数据的数据类型。如果school传入空字符串而不是None，会导致错误。]]]
+    [[[如果前端做不了，后端也可以调整]]]
+
+    传出数据：
+    {code: int,  # 200 or 500
+     message: list,  # list of str
+     data: {class_Id: int,
+            class_name: str,
+            using: bool,
+            character: int,
+            school: str,
+            }  # 修改产生的新记录
+    }
+
+    已经用info_edit测试过，功能正常。
+    """
+    code = 200
+    message = []
+    data = {}
+    if request.method == "POST":
+        class_Id = request.POST.get("class_Id", None)
+        if class_Id == None:
+            code = 500
+            message.append("错误：无法获取课程编号（class_Id）！")
+        else:
+            class_name = request.POST.get("class_name", None)
+            credit = request.POST.get("credit", None)
+            using = request.POST.get("using", None)
+            character = request.POST.get("character", None)
+            school = request.POST.get("school", None)
+
+            # 当前数据类型有误
+            if school == "":
+                school = None
+
+            # traditional update
+            # if class_name is not None:
+            #     Source_class.objects.filter(class_Id=class_Id).update(class_name=class_name)
+            # if credit is not None:
+            #     Source_class.objects.filter(class_Id=class_Id).update(credit=credit)
+            # if using is not None:
+            #     Source_class.objects.filter(class_Id=class_Id).update(using=using)
+            # if character is not None:
+            #     Source_class.objects.filter(class_Id=class_Id).update(character=character)
+            # if school is not None:
+            #     Source_class.objects.filter(class_Id=class_Id).update(school=school)
+
+
+            # create a new record if update...
+            # update old record: using = False
+            course_st = Source_class.objects.filter(class_Id=class_Id)  # primary key. only one record
+            course_st.update(using=False)
+            course = course_st[0]
+            # save new record
+            new_course = Source_class()
+            new_course.class_name = class_name if class_name is not None else course.courseName
+            new_course.credit = credit if credit is not None else course.courseCredit
+            new_course.using = using if using is not None else True  # 考虑业务的话，update的应该都是True
+            new_course.character = character if character is not None else course.character
+            new_school = School()
+            new_school.school_name = school if school is not None else course.school.school_name
+            new_course.school = new_school
+            new_course.save()
+            # relation: old record ----- new record
+            history = ClassHistory()
+            history.old_class_id = course
+            history.new_class_id = new_course
+            history.save()
+
+            data = new_course.as_dict()
+    if len(message) == 0:
+        message.append("成功修改！")
+    return render(request, "course_edit.html",
+                  {"code": code,
+                   "message": message,
+                   "data": data,
+                   })
