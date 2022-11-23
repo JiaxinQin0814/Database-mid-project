@@ -20,6 +20,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Source_class
 import system.models as models
 
+from .models import *
+import xlrd  # for importing excel
+
 
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
@@ -154,10 +157,6 @@ def course_import(request):
     return render(request, "course_import.html", )
 
 
-def info_import(request):
-    return render(request, "course_import.html", )
-
-
 # 功能：获得表单，加入到数据库中去
 def info_edit(req):
     # 判断请求类型
@@ -191,3 +190,51 @@ def info_edit(req):
         else:
             # 取出
             return JsonResponse({"code": 403, "message": "导入失败", "data": {"class_name": form.errors.get("class_name")}})
+
+
+def info_import(request):
+    code = 200
+    message = []
+    if request.method == "POST":
+        # create table object
+        course_list = []
+        # read file
+        # print(request.FILES)  # <MultiValueDict: {}>
+        file = request.FILES.get("ExcelFile")
+        wb = xlrd.open_workbook(filename=None, file_contents=file.read())
+        st = wb.sheets()[0]
+        for row in range(2, st.rows+1):
+            # read
+            course_id = st.cell(row, 1)
+            course_name = st.cell(row, 2)
+            course_credit = st.cell(row, 3)
+            course_inuse = st.cell(row, 4)
+            if course_inuse == "是":
+                course_inuse = True
+            elif course_inuse == "否":
+                course_inuse = False
+            else:
+                code = 500
+                message.append("导入文件中”当前是否正在使用“取值必须为”是“或者”否“！")
+                break
+            course_nature = st.cell(row, 5)
+            course_school = st.cell(row, 6)
+            # store into table
+            course_list.append(Source_class(
+                class_Id=course_id,
+                class_name=course_name,
+                credit=course_credit,
+                using=course_inuse,
+                character=course_nature,
+                school=course_school,
+            ))
+        # save multiple records
+        print(course_list)
+        Source_class.objects.bulk_create(course_list)
+        if code == 200:
+            message.append("成功导入！")
+    return render(request, "course_import.html",
+                  {"code": code,
+                   "message": message,
+                   })
+
