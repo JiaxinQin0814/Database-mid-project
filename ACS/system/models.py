@@ -1,4 +1,6 @@
 from calendar import FRIDAY, MONDAY, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY
+from tabnanny import verbose
+from tkinter import CASCADE
 # from socketserver import ThreadingUnixDatagramServer
 # from stat import S_IXOTH
 # from tabnanny import verbose
@@ -435,3 +437,36 @@ class teaching_class_teacher_time_assignment(TC):
 
     def __str__(self):
         return "教学班%s,时间:%s,教师:" % (self.teaching_class_id, self.time1, self.teacher)
+
+
+
+# 教师意见收集表
+class teacher_message(models.Model):
+    teacher_id = models.ForeignKey(Teacher_Info,blank=False,on_delete=models.CASCADE,
+                                   related_name="teacher_message_connect",verbose_name="反馈信息的教师")
+    feedback_message = models.TextField(verbose_name="反馈的信息",blank=False,max_length=300)
+    feedback_time = models.TimeField(auto_now_add=True,verbose_name="反馈时间")
+    status = models.BooleanField(verbose_name="已处理",default=False)
+    class Meta:
+        verbose_name = "教师信息反馈表"
+        verbose_name_plural = verbose_name
+    def __str__(self):
+        return "编号为%s的教师提交了信息:%s" %(self.teacher_id,self.feedback_message)
+    
+# 当前课程的历史记录对应的表
+class ClassHistory(models.Model):
+    history_id = models.AutoField(primary_key=True, verbose_name="修改记录编号", unique=True)
+    old_class_id = models.ForeignKey(Source_class, null=False, blank=False, on_delete=models.CASCADE,
+                                     related_name="old_class_id", verbose_name="修改前的课程编号")
+    new_class_id = models.ForeignKey(Source_class, null=False, blank=False, on_delete=models.CASCADE,
+                                     related_name="new_class_id", verbose_name="修改后的课程编号")
+
+    class Meta:
+        db_table = "ClassHistory"
+        verbose_name = "课程库修改历史"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "[{}]{}->{}".format(self.history_id, self.old_class_id, self.new_class_id)
+
+

@@ -36,8 +36,8 @@ function myclose(){
 					<td class="ui_text_rt">当前是否正在使用</td>
 					<td class="ui_text_lt">
 						<select name="using" id="4" class="ui_select01">
-                            <option value="">--请选择--</option>
-                            <option value="True" selected="selected">是</option>
+                            <option value="" selected="selected">--请选择--</option>
+                            <option value="True">是</option>
                             <option value="False">否</option>
                         </select>
 					</td>
@@ -53,8 +53,8 @@ function myclose(){
 					<td class="ui_text_rt">课程性质</td>
 					<td class="ui_text_lt">
 						<select name="character" id="7" class="ui_">
-                            <option value="">--请选择--</option>
-                            <option value="40" selected="selected">部类基础</option>
+                            <option value="" selected="selected">--请选择--</option>
+                            <option value="40">部类基础</option>
                             <option value="41">部类共同</option>
 							<option value="42">大学体育</option>
                         </select>
@@ -69,10 +69,21 @@ function myclose(){
 
 </form>
 {#判断列表有数据的情况下#}
-{% if user_list %}
+{% if success == "yes"%}
 <div>数据输入成功</div>
 {% endif %}
 
+{% if class_Id%}
+<div>{{class_Id}}</div>
+{% endif %}
+
+{% if class_name%}
+<div>{{class_name}}</div>
+{% endif %}
+
+{% if credit%}
+<div>{{credit}}</div>
+{% endif %}
 
 
 </body>

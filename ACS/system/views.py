@@ -15,8 +15,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import *
+from .models import MyUser
 import system.models as models
+from django.http import HttpResponse
+import xlwt
+
 
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
@@ -101,44 +104,6 @@ def feedback(request):
         return render()
 
 
-def TeacherAllCourseView(request):
-    if request.method == 'GET': #获得数据库数据
-        #QueryString查询
-        courses = Source_class.objects.all() #返回QuerySite容器对象 类似数组
-        print(courses)
-        return render(request, "ceshi_course_all.html",locals())
-    elif request.method == 'POST': #用户提交数据 在本视图中不会用到
-        #teacher_id = request.POST('teacher_id')
-        #return render(request, "login.html")
-        pass
-    else:
-        pass
-
-def TeacherCourseView(request):
-    if request.method == 'GET':  # 获得数据库数据
-        # QueryString查询
-        identifier = request.POST('identifier') #教师编号
-        classes_teacher = teaching_class_teacher_time_assignment.objects.filter(teacher_id = identifier)  # 返回QuerySite容器对象 类似数组
-        classes_id = [] #存储该教师所有的教学班id
-        for class_ in classes_teacher:
-            classes_id.append(class_.teaching_class_id_id)
-        classes_id = list(set(classes_id))
-        if not classes_id:#如果列表非空
-            teaching_classes = teaching_class.objects.filter(teaching_class_id = classes_id[0])
-        if len(classes_id)>1:
-            for num,class_id in enumerate(classes_id,1):
-                teaching_classes_ = teaching_class.objects.filter(teaching_class_id = class_id)
-                teaching_classes = teaching_classes.union(teaching_classes_)
-        return render(request, "ceshi_course.html", locals())#ceshi_course.html还没有写 没法测试
-    elif request.method == 'POST':  # 用户提交数据 在本视图中不会用到
-        # teacher_id = request.POST('teacher_id')
-        # return render(request, "login.html")
-        pass
-    else:
-        pass
-
-
-
 # # 视图名不能起成logout
 def logoutView(request):
     logout(request)  # 调用django自带退出功能，会帮助我们删除相关session
@@ -173,47 +138,162 @@ def course_import(request):
 
 # 功能：获得表单，加入到数据库中去
 def info_edit(req):
-    #判断请求类型
+    # 判断请求类型
     user_list = []
     if req.method == "POST":
         form = CourseInsertForm(req.POST)
         if form.is_valid():  # 检查是否符合数据规定
             apply = models.Source_class()
 
-            #获取表单数据,如果获取不到,则为None
+            # 获取表单数据,如果获取不到,则为None
             apply.class_name = req.POST.get("class_name", None)  # 课程名称
             apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
             apply.credit = req.POST.get("credit", None)  # 学分
-            apply.using = req.POST.get("using", None)   # 当前是否正在使用
+            apply.using = req.POST.get("using", None)  # 当前是否正在使用
             apply.school = models.School()
-            apply.school.school_name = req.POST.get("school", None)   # 开课院系
+            apply.school.school_name = req.POST.get("school", None)  # 开课院系
             apply.character = req.POST.get("character", None)  # 课程性质
 
             # 将表单数据存到数据库中
             apply.save()
 
-            # user = {"课程名称":class_name, "课程编号":class_Id, "学分":credit, "当前是否正在使用":using, "开课院系":school, "课程性质":character}
-            # 追加到
-            user = {"success": "list"}
-
-            user_list.append(user)
-            print(user, user_list)
             # 将列表传给模板index.html
-            return render(req, "course_edit.html", {"user_list": user_list})
+            user_dict = {"success": "yes"}
+            return render(req, "course_edit.html", user_dict)
 
         else:
-            # 取出
-            return JsonResponse({"code":403, "message":"导入失败", "data":{"class_name":form.errors.get("class_name")}})
+            user_dict = {}
+            user_dict["success"] = "no"
+            for key, value in form.errors.items():
+                user_dict[key] = value[0]
+            return render(req, "course_edit.html", user_dict)
 
 
-
-from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from .models import Source_class
-
+import xlrd
+global key_words
+from io import BytesIO
 
 
 def database_show(request):
-    print('1')
-    items = Source_class.objects.all()
-    print(items)
-    return render(request, 'course_list.html', {'items': items})
+    global key_words
+    if request.method == "POST":
+
+        class_name = request.POST.get("class_name", None)  # 课程名称
+        class_Id = request.POST.get("class_Id", None)  # 课程编号
+
+        credit = request.POST.get("credit", None)  # 学分
+        using = request.POST.get("using", None)  # 当前是否正在使用
+        school_name = request.POST.get("school", None)  # 开课院系
+        character = request.POST.get("character", None)  # 课程性质
+        search = dict()
+        if class_name:
+            search['class_name'] = class_name
+        if class_Id:
+            search['class_Id'] = class_Id
+        if credit:
+            search['credit'] = credit
+        if using:
+            search['using'] = using
+        if school_name:
+            search['school'] = school_name
+        if character:
+            search['character'] = character
+        key_words = search
+    items = Source_class.objects.filter(**key_words).values('class_name', 'class_Id', 'credit', 'using', 'character',
+                                                            'school')
+    paginator = Paginator(items, 3)
+    num_p = request.GET.get('page', 1)
+    page = paginator.page(int(num_p))
+    return render(request, 'course_list.html', locals())
+
+
+def course_export(request):   # 数据导出
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="courses.xls"'
+
+    data = models.Source_class.objects.values_list('class_Id', 'class_name', 'credit', 'using', 'character', 'school')
+    if data:
+        ws = xlwt.Workbook(encoding='utf-8')
+        w = ws.add_sheet("课程")
+        w.write(0, 0, u"课程编号")
+        w.write(0, 1, u"课程名称")
+        w.write(0, 2, u"学分")
+        w.write(0, 3, u"是否正在使用")
+        w.write(0, 4, u"课程性质")
+        w.write(0, 5, u"开课学院")
+
+        # 写入数据
+        excel_row = 1
+        for item in data:
+            print(item[0])
+            class_Id = item[0]
+            class_name = item[1]
+            credit = item[2]
+            using = item[3]
+            character = item[4]
+            school = item[5]
+            w.write(excel_row, 0, class_Id)
+            w.write(excel_row, 1, class_name)
+            w.write(excel_row, 2, credit)
+            w.write(excel_row, 3, using)
+            w.write(excel_row, 4, character)
+            w.write(excel_row, 5, school)
+            excel_row += 1
+        # 写出到IO
+        output = BytesIO()
+        ws.save(output)
+        output.seek(0)
+        response.write(output.getvalue())
+
+        return response
+
+
+def info_import(request):
+    code = 200
+    message = []
+    print(request.FILES)
+    if request.method == "POST":
+        # create table object
+        course_list = []
+        # read file
+        # print(request.FILES)  # <MultiValueDict: {}>
+        file = request.FILES.get("ExcelFile")
+        print(file)
+        wb = xlrd.open_workbook(filename=None, file_contents=file.read())
+        st = wb.sheets()[0]
+        for row in range(2, st.rows+1):
+            # read
+            course_id = st.cell(row, 1)
+            course_name = st.cell(row, 2)
+            course_credit = st.cell(row, 3)
+            course_inuse = st.cell(row, 4)
+            if course_inuse == "是":
+                course_inuse = True
+            elif course_inuse == "否":
+                course_inuse = False
+            else:
+                code = 500
+                message.append("导入文件中”当前是否正在使用“取值必须为”是“或者”否“！")
+                break
+            course_nature = st.cell(row, 5)
+            course_school = st.cell(row, 6)
+            # store into table
+            course_list.append(Source_class(
+                class_Id=course_id,
+                class_name=course_name,
+                credit=course_credit,
+                using=course_inuse,
+                character=course_nature,
+                school=course_school,
+            ))
+        # save multiple records
+        print(course_list)
+        Source_class.objects.bulk_create(course_list)
+        if code == 200:
+            message.append("成功导入！")
+    return render(request, "course_import.html",
+                  {"code": code,
+                   "message": message,
+                   })

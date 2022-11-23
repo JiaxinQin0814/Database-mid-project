@@ -10,14 +10,11 @@ function myclose(){
     parent.$.fancybox.close();
 }
 </script>
-<form action="/info_edit/" method="post">
 
-<div class="form-group" id="thumbnailUploadContainer" class="col-sm-10" style="float: left; margin-right: 50px;">
-    <input id="articleImageFile" name="excelFile" type="file" class="form-control" style="width: 300px; display: inline;" />
-    <p><input type="submit" value="提交"/></p>
-    <a  href="javascript:myclose();" >关闭</a>
-
-</div>
+</form>
+<form  action="/info_import/" enctype="multipart/form-data" method="post"> {% csrf_token %}
+<input  type="file" style="height:20px;width:211px;" name="ExcelUpload">
+<input type='submit' value='导入'>
 </form>
 </body>
 </html>
