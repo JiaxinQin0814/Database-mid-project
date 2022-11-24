@@ -305,8 +305,8 @@ def info_update(request):
             course = course_st[0]
             # save new record
             new_course = Source_class()
-            new_course.class_name = class_name if class_name is not None else course.courseName
-            new_course.credit = credit if credit is not None else course.courseCredit
+            new_course.class_name = class_name if class_name is not None else course.class_name
+            new_course.credit = credit if credit is not None else course.credit
             new_course.using = using if using is not None else True  # 考虑业务的话，update的应该都是True
             new_course.character = character if character is not None else course.character
             new_school = School()
