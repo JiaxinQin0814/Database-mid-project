@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 app_name = 'system'
-urlpatterns = [
+urlpatterns = {
     # path('', views.home, name="主页"),
     # path('home/', views.home, name="首页"),
     path("register/", registerview, name="注册"),
@@ -26,4 +26,5 @@ urlpatterns = [
     # path('update/', views.update, name="修改信息"),
     # path('select/', views.select, name="查询信息"),
     # path('info/', views.info, name="所有学生信息"),
-]
+    # path("info_edit/", teaching_class_insert, name="teaching_class_insert")  # 仅用于测试，html要改
+}

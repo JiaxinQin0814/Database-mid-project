@@ -271,7 +271,7 @@ def info_update(request):
     data = {}
     if request.method == "POST":
         class_Id = request.POST.get("class_Id", None)
-        if class_Id == None:
+        if class_Id is None:
             code = 500
             message.append("错误：无法获取课程编号（class_Id）！")
         else:
@@ -320,9 +320,136 @@ def info_update(request):
             history.save()
 
             data = new_course.as_dict()
+    else:
+        code = 500
+        message.append("请传入POST请求！")
     if len(message) == 0:
         message.append("成功修改！")
     return render(request, "course_edit.html",
+                  {"code": code,
+                   "message": message,
+                   "data": data,
+                   }
+                  )
+
+
+def teaching_class_insert(request):
+    """
+    课堂、授课对象生成新的教学班
+
+    传入：
+    （都必填）
+    [POST]
+    {"source_class_name": str,  # 课程名称
+     "student_name": list of str,  # 对应MajorClass.name。可以有多个值
+     "teaching_class_name": str,  # 教学班名称
+     "planned_size": int,  # 计划修读人数
+    }
+
+    后端：
+    根据课程名称找到对应的课程编号（using=True的情况下应该是one-to-one的）
+    根据MajorClass.name找到对应的教学班编号
+    根据教学班计算actual_size
+    insert新教学班
+
+    传出：
+    {code: int,
+     message: list of str,
+     data:{'id': 7,
+         'name': '数据库1班',
+         'source_class_id': 14,
+         'planned_size': 50,
+         'actual_size': 30
+         }
+    }
+
+    已经自己生成数据测试过，功能正常。注意接口的数据获取就没问题。
+    """
+    code = 200
+    message = []
+    data = {}
+    for i in range(1):  # only for break
+        # ----------judge method-----------
+        if request.method != "POST":
+            code = 500
+            message.append("请传入POST请求！")
+            break
+        # ----------get data---------------
+        source_class_name = request.POST.get("source_class_name", None)
+        student_name = request.POST.get("student_name", None)
+        teaching_class_name = request.POST.get("teaching_class_name", None)
+        planned_size = request.POST.get("planned_size", None)
+
+        # # 自己测试数据
+        # source_class_name = "数据库"
+        # student_name = ["信息学院2020级1班"]
+        # teaching_class_name = "数据库1班"
+        # planned_size = 50
+
+        if (source_class_name is None) or (student_name is None) \
+                or (teaching_class_name is None) or (planned_size is None):
+            code = 500
+            message.append("传入数据存在空值！")
+            break
+        elif (not isinstance(source_class_name, str)) or (not isinstance(student_name, list)) \
+                or (not isinstance(teaching_class_name, str)) or (not isinstance(planned_size, int)):
+            code = 500
+            message.append("传入数据类型有误！")
+            break
+        # -------------------insert new teaching class------------
+        tc = TeachingClass()
+        # set course name
+        sc = Source_class.objects.filter(class_name=source_class_name, using=True)
+        if len(sc) > 1:
+            code = 500
+            message.append("课程名称“{}”存在{}个使用中的课程！".format(source_class_name, len(sc)))
+            break
+        elif len(sc) == 0:
+            code = 500
+            message.append("课程名称“{}”无使用中的课程！".format(source_class_name))
+            break
+        sc = sc[0]  # QuerySet -> model
+        tc.source_class = sc
+        # set name
+        tc.name = teaching_class_name
+        # set planned_size
+        tc.planned_size = planned_size
+        # set students and actual_size
+        try:
+            tc.save()  # therefore, tc will have a auto-generated id
+        except Exception as e:
+            # reason: maybe tc.name already exists
+            code = 500
+            message.append("{}:{}".format(e.__class__.__name__, e))
+            break
+        # student_lst = []
+        actual_size = 0
+        for name in student_name:
+            mc = MajorClass.objects.get(name=name)
+            actual_size += mc.size
+            tc.students.add(mc)
+            # student_lst.append(mc)
+        # ts_student = tc.students.bulk_create(student_lst)
+        # tc.students.set(ts_student)
+        tc.actual_size = actual_size
+        # insert this record
+        try:
+            tc.save()  # therefore, tc will have a auto-generated id
+        except Exception as e:
+            # reason: maybe tc.name already exists
+            code = 500
+            message.append("{}:{}".format(e.__class__.__name__, e))
+            break
+        # --------------data--------------
+        data = tc.__dict__
+        del data["_state"]
+    if len(message) == 0:
+        message.append("新增教学班成功！")
+    # print({"code": code,
+    #        "message": message,
+    #        "data": data,
+    #        })
+    return render(request, "course_edit.html",  # 这里的html要改的
                   {"code": code,
                    "message": message,
                    "data": data,

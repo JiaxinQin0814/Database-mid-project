@@ -377,13 +377,14 @@ class MajorClass(models.Model):
 
 class TeachingClass(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="教学班编号")
+    name = models.CharField(verbose_name="名称", max_length=64, unique=True)
     source_class = models.ForeignKey(Source_class, on_delete=models.CASCADE,
                                      related_name="teaching_class_source_class", verbose_name="课程")
+    students = models.ManyToManyField(MajorClass, verbose_name="授课对象", null=True, blank=True)
     planned_size = models.IntegerField(verbose_name="计划修读人数", default=0,
                                        validators=[MaxValueValidator(500), MinValueValidator(0)])  # 计划修读人数由教秘指定
     # true_number = models.IntegerField(verbose_name="开课面向人数（即授课对象的人数之和）", default=0)
     actual_size = models.IntegerField(verbose_name="实际修读人数", default=0)
-    students = models.ManyToManyField(MajorClass, verbose_name="授课对象", null=True, blank=True)
 
     class Meta:
         db_table = "TeachingClass"
