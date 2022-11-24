@@ -354,7 +354,7 @@ class Program(models.Model):
 
 class MajorClass(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="编号")
-    name = models.CharField(verbose_name="名称", max_length=30)
+    name = models.CharField(verbose_name="名称", max_length=30, unique=True)
     # grade = models.PositiveSmallIntegerField(choices=GGrade.choices, default=GGrade.C, blank=False, verbose_name="年级")
     size = models.IntegerField(default=30, validators=[MaxValueValidator(100), MinValueValidator(0)],
                                verbose_name="人数")
