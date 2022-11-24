@@ -129,6 +129,7 @@ class TC(models.Model):
         unique_together = (("Week", "weekday", "jieke"),)
         verbose_name = "上课时间信息"
         verbose_name_plural = verbose_name
+        abstract = True  # 抽象表，给排课表继承的，不需要真的建表
 
     def __str__(self):
         return "第%s周的%s,具体时间%s" % (self.Week, self.weekday, self.jieke)
@@ -334,62 +335,63 @@ class GGrade(models.IntegerChoices):
     E = 5, "2022级"
 
 
-class training_program(models.Model):
-    program_Id = models.AutoField(primary_key=True, verbose_name="培养方案编号")
-    program_name = models.CharField(max_length=30, blank=False, verbose_name="培养方案名称")
-    school = models.ManyToManyField(School, verbose_name="培养方案所属学院")
+class Program(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="编号")
+    name = models.CharField(max_length=30, blank=False, verbose_name="名称")
+    school = models.ManyToManyField(School, verbose_name="学院")
     major = models.ForeignKey(Major, on_delete=models.CASCADE, related_name="major_program_relation",
-                              verbose_name="专业对应培养方案")
+                              verbose_name="专业")
     grade = models.PositiveSmallIntegerField(choices=GGrade.choices, default=GGrade.C, blank=False, verbose_name="年级")
 
     class Meta:
-        db_table = "training_program"
-        verbose_name = "专业培养方案信息"
+        db_table = "program"
+        verbose_name = "培养方案"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.program_name
+        return self.name
 
 
-class major_class(models.Model):  #
-    major_class_id = models.AutoField(primary_key=True, verbose_name="班级编号")
-    class_name = models.CharField(verbose_name="班级名称", max_length=30)
-    grade = models.PositiveSmallIntegerField(choices=GGrade.choices, default=GGrade.C, blank=False, verbose_name="年级")
-    number = models.IntegerField(default=30, validators=[MaxValueValidator(100), MinValueValidator(0)],
-                                 verbose_name="班级人数")
+class MajorClass(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="编号")
+    name = models.CharField(verbose_name="名称", max_length=30)
+    # grade = models.PositiveSmallIntegerField(choices=GGrade.choices, default=GGrade.C, blank=False, verbose_name="年级")
+    size = models.IntegerField(default=30, validators=[MaxValueValidator(100), MinValueValidator(0)],
+                               verbose_name="人数")
     # major = models.ForeignKey(Major,null=True,blank=True,on_delete=models.CASCADE,related_name="class_belong_to_major",verbose_name="班级所属专业")
     # Big_Lei = models.ForeignKey(Major,null=True,blank=True,on_delete=models.CASCADE,related_name="class_belong_dalei",verbose_name="班级所属大类")
-    school = models.ForeignKey(School, null=True, blank=True, on_delete=models.CASCADE,
-                               related_name="class_belong_school", verbose_name="班级所属院系")
-    program = models.ForeignKey(training_program, null=True, blank=True, on_delete=models.CASCADE,
-                                related_name="class_belong_to_programe", verbose_name="班级所属培养方案")
+    # school = models.ForeignKey(School, null=True, blank=True, on_delete=models.CASCADE,
+    #                            related_name="class_belong_school", verbose_name="班级所属院系")
+    program = models.ForeignKey(Program, null=True, blank=True, on_delete=models.CASCADE,
+                                related_name="class_belong_program", verbose_name="所属培养方案")
 
     # belongs_to_a_major = models.BooleanField(blank=False,default=True,verbose_name="是大类还是专业") # 如果是True 就是一个专业，否则是一个大类
     class Meta:
-        db_table = "major_class_Information"
-        verbose_name = "班级信息"
+        db_table = "MajorClass"
+        verbose_name = "专业班级"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.class_name
+        return self.name
 
 
-class teaching_class(models.Model):
-    source_class1 = models.ForeignKey(Source_class, on_delete=models.CASCADE,
-                                      related_name="teaching_class_source_class", verbose_name="教学班对应课程")
-    teaching_class_id = models.AutoField(primary_key=True, verbose_name="教学班id")
-    planned_number = models.IntegerField(verbose_name="计划修读人数", default=0,
-                                         validators=[MaxValueValidator(500), MinValueValidator(0)])  # 计划修读人数由教秘指定
-    true_number = models.IntegerField(verbose_name="开课面向人数（即授课对象的人数之和）", default=0)
-    students = models.ManyToManyField(major_class, verbose_name="授课对象", null=True, blank=True)
+class TeachingClass(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="教学班编号")
+    source_class = models.ForeignKey(Source_class, on_delete=models.CASCADE,
+                                     related_name="teaching_class_source_class", verbose_name="课程")
+    planned_size = models.IntegerField(verbose_name="计划修读人数", default=0,
+                                       validators=[MaxValueValidator(500), MinValueValidator(0)])  # 计划修读人数由教秘指定
+    # true_number = models.IntegerField(verbose_name="开课面向人数（即授课对象的人数之和）", default=0)
+    actual_size = models.IntegerField(verbose_name="实际修读人数", default=0)
+    students = models.ManyToManyField(MajorClass, verbose_name="授课对象", null=True, blank=True)
 
     class Meta:
-        db_table = "teaching_class"
-        verbose_name = "教学班信息"
+        db_table = "TeachingClass"
+        verbose_name = "教学班"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "%s(教学班编号%s)" % (self.source_class1, self.teaching_class_id)
+        return "%s(教学班编号%s)" % (self.source_class, self.id)
 
 
 class Building(models.Model):
@@ -421,33 +423,41 @@ class Classroom(models.Model):
         return "教室编号:%s" % (self.classroom_id)
 
 
-class teaching_class_classroom_time_assignment(TC):
-    relation_id = models.AutoField(primary_key=True, verbose_name="关系编号")
-    teaching_id = models.ForeignKey(teaching_class, on_delete=models.CASCADE, related_name="relation_teachingid",
-                                    verbose_name="教学班", blank=False)
+# class teaching_class_classroom_time_assignment(TC):
+class Scheduling(TC):
+    id = models.AutoField(primary_key=True, verbose_name="排课编号")
+    teaching_class_id = models.ForeignKey(TeachingClass, on_delete=models.CASCADE, related_name="s_teaching_class_id",
+                                          verbose_name="教学班编号", blank=False)
     # time = models.ForeignKey(TC,blank=False,on_delete=models.CASCADE,related_name="relation_time",verbose_name="教学班上课时间")
     classroom_id = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=True,
-                                     related_name="relation_classroomid", verbose_name="教学班使用的教室")
+                                     related_name="s_classroom_id", verbose_name="教室")
 
     class Meta:
-        verbose_name = "教学班-使用教室-时间关系"
+        db_table = "Scheduling"
+        # verbose_name = "教学班-使用教室-时间关系"
+        verbose_name = "排课信息"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "教学班%s,时间:%s,教室:" % (self.teaching_id, self.time, self.classroom_id)
+        # return "教学班%s,时间:%s,教室:" % (self.teaching_id, self.time, self.classroom_id)
+        return "教学班{}-教室{}-时间-{}".format(self.teaching_class_id, self.classroom_id, self.jieke)
 
 
-class teaching_class_teacher_time_assignment(TC):
-    relation_id = models.AutoField(primary_key=True, verbose_name="教学班_教师_时间关系")
-    teaching_class_id = models.ForeignKey(teaching_class, on_delete=models.CASCADE, related_name="relation_teachingid2",
-                                          verbose_name="教学班", blank=False)
+# class teaching_class_teacher_time_assignment(TC):
+class TeacherScheduling(TC):
+    id = models.AutoField(primary_key=True, verbose_name="编号")
+    teaching_class_id = models.ForeignKey(TeachingClass, on_delete=models.CASCADE, related_name="ts_teaching_class_id",
+                                          verbose_name="教学班编号", blank=False)
     # time1 = models.ForeignKey(TC,blank=True,on_delete=models.CASCADE,related_name="relation_time2",verbose_name="教学班上课时间")
     teacher = models.ForeignKey(Teacher_Info, blank=False, on_delete=models.CASCADE,
-                                related_name="teaching_class_teacher_relation", verbose_name="教学班对应老师")
+                                related_name="ts_teacher", verbose_name="授课老师")
 
     class Meta:
-        verbose_name = "教学班-教师-时间关系"
+        db_table = "TeacherScheduling"
+        verbose_name = "教师排课信息"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "教学班%s,时间:%s,教师:" % (self.teaching_class_id, self.time1, self.teacher)
+        # return "教学班%s,时间:%s,教师:" % (self.teaching_class_id, self.time1, self.teacher)
+        return "教学班{}-教师{}-时间-{}".format(self.teaching_class_id, self.teacher, self.jieke)
+
