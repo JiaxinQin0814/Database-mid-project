@@ -1,29 +1,26 @@
-from django.shortcuts import render
-
 # Create your views here.
-from django.shortcuts import render
+# --------------django pkgs----------------
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse
-from .form import RegisterForm, LoginForm
-
-User = get_user_model()  # 获取User模型
-
 from django.shortcuts import render
-from .form import *
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import MyUser
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Source_class
-import system.models as models
-
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
+# -------------other pkgs--------------------
+import xlwt
+import xlrd
+from io import BytesIO
+# -------------import files------------------
+from .form import *
 from .models import *
-import xlrd  # for importing excel
+
+global key_words
+User = get_user_model()  # 获取User模型
 
 
+# ------------------------login, register, logout----------------------
 # 登录视图名称不能起成login，与自带login函数重名
 def loginView(request):
     if request.method == "GET":
@@ -50,7 +47,7 @@ def loginView(request):
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
                 info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
                 # print(info)
-                return render(request, 'nav.html', info)
+                return render(request, 'index.html', info)
                 # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
                 # return render(request, "welcome.html")
 
@@ -64,17 +61,6 @@ def loginView(request):
         else:
             return render(request, "login.html", {'msg': '登录失败,表单错误'})
             # return JsonResponse({"code":406,"message":"用户名或密码格式错误","data":{"error":"用户名或密码错误"}})
-
-
-def menuview(request):
-    if request.method == "GET":
-        uid = request.session.get('identifier')
-        info = MyUser.objects.values("identifier").filter(identifier=uid).values()[0]
-
-        print(info)
-        return render(request, "nav.html", info)
-    # else:
-    #     globals()
 
 
 def registerview(request):
@@ -124,17 +110,11 @@ def logoutView(request):
     return redirect(request.META["HTTP_REFERER"])
 
 
+# -----------------------------basic view------------------------------
 def introduceView(request):
     return render(request, "introduce.html", )
     # else:
     #     globals()
-
-
-def database_show(request):
-    print('1')
-    items = Source_class.objects.all()
-    print(items)
-    return render(request, 'course_list.html', {'items': items})
 
 
 def peiyangfanganView(request):
@@ -149,12 +129,60 @@ def loupanchartView(request):
     return render(request, "loupanchart.html", )
 
 
-def course_edit(request):
-    return render(request, "course_edit.html", )
+# -------------------------课程库构建页面-----------------------------
 
 
+# import excel file into source class
 def course_import(request):
     return render(request, "course_import.html", )
+
+
+def info_import(request):
+    user_dict = {"success": "no"}
+    if request.method == "POST":
+        # create table object
+        course_list = []
+        # read file
+        # print(request.FILES)  # <MultiValueDict: {}>
+        file = request.FILES.get("ExcelFile")
+        print(file)
+        wb = xlrd.open_workbook(filename=None, file_contents=file.read())
+
+        st = wb.sheet_by_index(0)
+        for row in range(1, st.nrows):
+            course_id = st.cell_value(row, 0)
+            course_name = st.cell_value(row, 1)
+            course_credit = st.cell_value(row, 2)
+            course_inuse = st.cell_value(row, 3)
+            print(course_inuse)
+            if course_inuse == "是":
+                course_inuse = True
+            elif course_inuse == "否":
+                course_inuse = False
+            else:
+                break
+            course_nature = st.cell_value(row, 4)
+            course_school = st.cell_value(row, 5)
+            # store into table
+            school = School()
+            school.school_name = course_school
+            course_list.append(Course(
+                id=course_id,
+                name=course_name,
+                credit=course_credit,
+                using=course_inuse,
+                nature=course_nature,
+                school=school,
+            ))
+        # save multiple records
+        Course.objects.bulk_create(course_list)
+        user_dict = {"success": "yes"}
+    return render(request, "course_import.html", user_dict)
+
+
+# insert new record into source class
+def course_edit(request):
+    return render(request, "course_edit.html", )
 
 
 # 功能：获得表单，加入到数据库中去
@@ -164,79 +192,36 @@ def info_edit(req):
     if req.method == "POST":
         form = CourseInsertForm(req.POST)
         if form.is_valid():  # 检查是否符合数据规定
-            apply = models.Source_class()
+            apply = Course()
 
             # 获取表单数据,如果获取不到,则为None
-            apply.class_name = req.POST.get("class_name", None)  # 课程名称
-            apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
+            apply.name = req.POST.get("class_name", None)
+            # apply.class_name = req.POST.get("class_name", None)  # 课程名称
+            # apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
             apply.credit = req.POST.get("credit", None)  # 学分
             apply.using = req.POST.get("using", None)  # 当前是否正在使用
-            apply.school = models.School()
+            apply.school = School()
             apply.school.school_name = req.POST.get("school", None)  # 开课院系
-            apply.character = req.POST.get("character", None)  # 课程性质
+            apply.nature = req.POST.get("character", None)  # 课程性质
 
             # 将表单数据存到数据库中
             apply.save()
 
-            # user = {"课程名称":class_name, "课程编号":class_Id, "学分":credit, "当前是否正在使用":using, "开课院系":school, "课程性质":character}
-            # 追加到
-            user = {"success": "list"}
-
-            user_list.append(user)
-            print(user, user_list)
             # 将列表传给模板index.html
-            return render(req, "course_edit.html", {"user_list": user_list})
+            user_dict = {"success": "yes"}
+            return render(req, "course_edit.html", user_dict)
 
         else:
-            # 取出
-            return JsonResponse({"code": 403, "message": "导入失败", "data": {"class_name": form.errors.get("class_name")}})
+            user_dict = {}
+            user_dict["success"] = "no"
+            for key, value in form.errors.items():
+                user_dict[key] = value[0]
+            return render(req, "course_edit.html", user_dict)
 
 
-def info_import(request):
-    code = 200
-    message = []
-    if request.method == "POST":
-        # create table object
-        course_list = []
-        # read file
-        # print(request.FILES)  # <MultiValueDict: {}>
-        file = request.FILES.get("ExcelFile")
-        wb = xlrd.open_workbook(filename=None, file_contents=file.read())
-        st = wb.sheets()[0]
-        for row in range(2, st.rows+1):
-            # read
-            course_id = st.cell(row, 1)
-            course_name = st.cell(row, 2)
-            course_credit = st.cell(row, 3)
-            course_inuse = st.cell(row, 4)
-            if course_inuse == "是":
-                course_inuse = True
-            elif course_inuse == "否":
-                course_inuse = False
-            else:
-                code = 500
-                message.append("导入文件中”当前是否正在使用“取值必须为”是“或者”否“！")
-                break
-            course_nature = st.cell(row, 5)
-            course_school = st.cell(row, 6)
-            # store into table
-            course_list.append(Source_class(
-                class_Id=course_id,
-                class_name=course_name,
-                credit=course_credit,
-                using=course_inuse,
-                character=course_nature,
-                school=course_school,
-            ))
-        # save multiple records
-        print(course_list)
-        Source_class.objects.bulk_create(course_list)
-        if code == 200:
-            message.append("成功导入！")
-    return render(request, "course_import.html",
-                  {"code": code,
-                   "message": message,
-                   })
+# update course
+def course_update(request):
+    return render(request, "course_update.html", )
 
 
 def info_update(request):
@@ -270,18 +255,32 @@ def info_update(request):
     message = []
     data = {}
     if request.method == "POST":
-        class_Id = request.POST.get("class_Id", None)
-        if class_Id is None:
+        class_id = request.POST.get("class_Id", None)
+        if class_id is None:
             code = 500
             message.append("错误：无法获取课程编号（class_Id）！")
         else:
             class_name = request.POST.get("class_name", None)
             credit = request.POST.get("credit", None)
             using = request.POST.get("using", None)
-            character = request.POST.get("character", None)
+            nature = request.POST.get("character", None)
             school = request.POST.get("school", None)
 
             # 当前数据类型有误
+            if class_name == "":
+                class_name = None
+            if credit == "":
+                credit = None
+            else:
+                credit = int(credit)
+            if using == "":
+                using = None
+            elif using == "True":
+                using = True
+            else:
+                using = False
+            if nature == "":
+                nature = None
             if school == "":
                 school = None
 
@@ -297,29 +296,31 @@ def info_update(request):
             # if school is not None:
             #     Source_class.objects.filter(class_Id=class_Id).update(school=school)
 
-
             # create a new record if update...
             # update old record: using = False
-            course_st = Source_class.objects.filter(class_Id=class_Id)  # primary key. only one record
+            course_st = Course.objects.filter(id=class_id)  # primary key. only one record
             course_st.update(using=False)
             course = course_st[0]
+            print(nature)
+            print(course.__dict__)
             # save new record
-            new_course = Source_class()
-            new_course.class_name = class_name if class_name is not None else course.class_name
+            new_course = Course()
+            new_course.name = class_name if class_name is not None else course.name
             new_course.credit = credit if credit is not None else course.credit
             new_course.using = using if using is not None else True  # 考虑业务的话，update的应该都是True
-            new_course.character = character if character is not None else course.character
+            new_course.nature = nature if nature is not None else course.nature
             new_school = School()
             new_school.school_name = school if school is not None else course.school.school_name
             new_course.school = new_school
             new_course.save()
             # relation: old record ----- new record
-            history = ClassHistory()
+            history = CourseHistory()
             history.old_class_id = course
             history.new_class_id = new_course
             history.save()
 
-            data = new_course.as_dict()
+            data = new_course.__dict__
+            del data["_state"]
     else:
         code = 500
         message.append("请传入POST请求！")
@@ -333,6 +334,121 @@ def info_update(request):
                   )
 
 
+# export source class into excel file
+def course_export(request):  # 数据导出
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="courses.xls"'
+
+    data = Course.objects.values_list('id', 'name', 'credit', 'using', 'nature', 'school')
+    if data:
+        ws = xlwt.Workbook(encoding='utf-8')
+        w = ws.add_sheet("课程")
+        w.write(0, 0, u"课程编号")
+        w.write(0, 1, u"课程名称")
+        w.write(0, 2, u"学分")
+        w.write(0, 3, u"是否正在使用")
+        w.write(0, 4, u"课程性质")
+        w.write(0, 5, u"开课学院")
+
+        # 写入数据
+        excel_row = 1
+        for item in data:
+            print(item[0])
+            class_Id = item[0]
+            class_name = item[1]
+            credit = item[2]
+            using = item[3]
+            character = item[4]
+            school = item[5]
+            w.write(excel_row, 0, class_Id)
+            w.write(excel_row, 1, class_name)
+            w.write(excel_row, 2, credit)
+            w.write(excel_row, 3, using)
+            w.write(excel_row, 4, character)
+            w.write(excel_row, 5, school)
+            excel_row += 1
+        # 写出到IO
+        output = BytesIO()
+        ws.save(output)
+        output.seek(0)
+        response.write(output.getvalue())
+        return response
+
+
+# show source class by pages
+def database_show(request):
+    print("show database")
+    global key_words
+    if request.method == "GET":
+        search = dict()
+        key_words = search
+        items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using',
+                                                          'nature',
+                                                          'school')
+        paginator = Paginator(items, 3)
+        num_p = request.GET.get('page', 1)
+        page = paginator.page(int(num_p))
+        return render(request, 'course_list.html', locals())
+    if request.method == "POST":
+        class_name = request.POST.get("class_name", None)  # 课程名称
+        # class_Id = request.POST.get("class_Id", None)  # 课程编号
+
+        credit = request.POST.get("credit", None)  # 学分
+        using = request.POST.get("using", None)  # 当前是否正在使用
+        school_name = request.POST.get("school", None)  # 开课院系
+        character = request.POST.get("character", None)  # 课程性质
+        search = dict()
+        if class_name:
+            search['name'] = class_name
+        # if class_Id:
+        #     search['class_Id'] = class_Id
+        if credit:
+            search['credit'] = credit
+        if using:
+            search['using'] = using
+        if school_name:
+            search['school'] = school_name
+        if character:
+            search['nature'] = character
+        key_words = search
+    items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using', 'nature',
+                                                      'school')
+
+    paginator = Paginator(items, 3)
+    num_p = request.GET.get('page', 1)
+    page = paginator.page(int(num_p))
+    return render(request, 'course_list.html', locals())
+
+
+# delete a single course
+def course_delete(request):
+    id = request.GET.get('id')
+    Course.objects.filter(id=id).delete()
+    return render(request, "course_list.html")
+
+
+# def course_delete_batch(request):
+#     temp = request.GET.get('tag')
+#     print(temp)
+#     return render(request, "course_list.html")
+
+# delete course by batch
+def course_delete_batch(request):
+    variables = request.POST.getlist("IDCheck")
+    print("variables:", variables)
+    for i in variables:
+        print(i)
+        info = Course.objects.filter(id=i)
+        info.delete()
+    # for item in variables.split(','):
+    #     print(item)
+    # info = (Source_class, class_Id=int(item))
+    # info.delete()
+    return redirect('/course_list/')
+
+
+# --------------------------------课堂生成教学班页面--------------------
+# insert new record into teaching class
 def teaching_class_insert(request):
     """
     课堂、授课对象生成新的教学班
@@ -399,7 +515,7 @@ def teaching_class_insert(request):
         # -------------------insert new teaching class------------
         tc = TeachingClass()
         # set course name
-        sc = Source_class.objects.filter(class_name=source_class_name, using=True)
+        sc = Course.objects.filter(name=source_class_name, using=True)
         if len(sc) > 1:
             code = 500
             message.append("课程名称“{}”存在{}个使用中的课程！".format(source_class_name, len(sc)))

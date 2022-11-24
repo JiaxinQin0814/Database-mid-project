@@ -64,3 +64,49 @@ python manage.py runserver
 2. 数据字典需要补充
 3. 教师界面的所有接口
 4. 管理员界面的所有接口
+
+
+
+## 11.24
+
+根据群里的文件整合了所有代码。由于表有较大的改动，请按照如下步骤restart。
+
+views.py里的函数已经测试过，功能正常。
+
+
+
+#### restart
+
+1. ```
+    删除migrations下除了__init__.py以外的文件
+    ```
+
+2.  mysql里面
+
+    ```
+    drop database acs;
+    ```
+
+3. mysql里面
+
+    ```
+    create database acs;
+    ```
+
+ 4. ```
+    python manage.py makemigrations
+    ```
+
+ 5. ```
+    python manage.py migrate
+    ```
+
+ 6. ```
+    python manage.py createsuperuser
+    # 用户类别填admin
+    ```
+
+ 7. ```
+    python manage.py runserver
+    ```
+

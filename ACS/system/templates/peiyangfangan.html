@@ -92,7 +92,6 @@
 	/** 批量删除 **/
 	function batchDel(){
 		if($("input[name='IDCheck']:checked").size()<=0){
-			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'至少选择一条', ok:true,});
 			return;
 		}
 		// 1）取出用户选中的checkbox放入字符串传给后台,form提交

@@ -1,4 +1,7 @@
 from calendar import FRIDAY, MONDAY, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY
+from secrets import choice
+from tabnanny import verbose
+from tkinter import CASCADE
 # from socketserver import ThreadingUnixDatagramServer
 # from stat import S_IXOTH
 # from tabnanny import verbose
@@ -16,17 +19,7 @@ from django.dispatch import receiver  # 导入receiver监听信号
 
 # Create your models here.
 
-class School(models.Model):
-    school_name = models.CharField(max_length=30, primary_key=True, verbose_name="学院名称")
-
-    class Meta:
-        db_table = "School_Information"
-        verbose_name = "院系信息"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.school_name
-
+# --------------------------------user--------------------------------
 
 class UserManager(BaseUserManager):
     def _create_user(self, username, password, email, **kwargs):
@@ -51,9 +44,21 @@ class UserManager(BaseUserManager):
         return self._create_user(username, password, email, **kwargs)
 
 
+class School(models.Model):
+    school_name = models.CharField(max_length=30, primary_key=True, verbose_name="学院名称")
+
+    class Meta:
+        db_table = "School"
+        verbose_name = "学院"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.school_name
+
+
 class MyUser(AbstractUser):
     objects = UserManager()
-    identifier = models.CharField(max_length=30, primary_key=True, null=False)
+    # identifier = models.CharField(max_length=30, primary_key=True, null=False)
     identifier = models.AutoField(unique=True, verbose_name="职工编号", primary_key=True)
     email = models.EmailField(verbose_name="邮箱")
     school = models.ForeignKey(School, null=True, blank=True, on_delete=models.CASCADE, related_name="teacher_school",
@@ -79,80 +84,16 @@ class MyUser(AbstractUser):
         verbose_name_plural = verbose_name
 
 
-class Major(models.Model):
-    major_name = models.CharField(max_length=30, primary_key=True, verbose_name="专业名称")
-    is_a_big_lei = models.BooleanField(verbose_name="是否大类", default=False)
-
-    class Meta:
-        db_table = "Major_Information"
-        verbose_name = "专业信息"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.major_name
-
-
-class TC(models.Model):
-    # id = models.AutoField(primary_key=True)
-    Week = models.IntegerField(verbose_name="周次", validators=[MaxValueValidator(20), MinValueValidator(1)])
-
-    class Weekday(models.IntegerChoices):
-        MONDAY = 1, "星期一"
-        TUESDAY = 2, "星期二"
-        WEDNESDAY = 3, "星期三"
-        THURSDAY = 4, "星期四"
-        FRIDAY = 5, "星期五"
-        SATURDAY = 6, "星期六"
-        SUNDAY = 7, "星期日"
-
-    weekday = models.PositiveSmallIntegerField(
-        choices=Weekday.choices,
-        default=Weekday.MONDAY
-    )
-
-    class JIEKE(models.IntegerChoices):
-        First_class = 1, "第一大节(8:00-9:30)"
-        Second_class = 2, "第二大节(10:00-11:30)"
-        Third_class = 3, "第三大节(12:00-13:30)"
-        Forth_class = 4, "第四大节(14:00-15:30)"
-        Fifth_class = 5, "第五大节(16:00-17:30)"
-        Six_class = 6, "第六大节(18:00-19:30)"
-        Seventh_class = 7, "第七大节(19:40-21:10)"
-
-    jieke = models.PositiveSmallIntegerField(
-        choices=JIEKE.choices,
-        default=JIEKE.First_class
-    )
-
-    class Meta:
-        db_table = "Time_Information"
-        unique_together = (("Week", "weekday", "jieke"),)
-        verbose_name = "上课时间信息"
-        verbose_name_plural = verbose_name
-        abstract = True  # 抽象表，给排课表继承的，不需要真的建表
-
-    def __str__(self):
-        return "第%s周的%s,具体时间%s" % (self.Week, self.weekday, self.jieke)
-
-
-# class Big_Lei(models.Model):
-#     Big_Lei_name = models.AutoField(primary_key=True,verbose_name="大类名称")
-#     class Meta:
-#         db_table = "Big_Lei_Information"
-#         verbose_name = "大类信息"
-#         verbose_name_plural = verbose_name
-#     def __str__(self):
-#         return self.Big_Lei_name
-class Teacher_Info(models.Model):
+class Teacher(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = "Teacher_Information"
-        verbose_name = "教职工信息"
+        db_table = "Teacher"
+        verbose_name = "教师"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "%s" % (self.user)
+        return "%s" % self.user
 
 
 @receiver(post_save, sender=MyUser)  # 监听到post_save事件且发送者是User则执行create_extension_user函数
@@ -165,22 +106,22 @@ def create_extension_user(sender, instance, created, **kwargs):
     if created:
         # 如果创建对象，ExtensionUser进行绑定
         if instance.kind == "教师":
-            Teacher_Info.objects.create(user=instance)
+            Teacher.objects.create(user=instance)
     # else:
     #     # 如果不是创建对象，同样将改变进行保存
     #     instance.extension.save()
 
 
-class Ad_Info(models.Model):
+class Admin(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = "Admin_Information"
-        verbose_name = "教务处秘书信息"
+        db_table = "Admin"
+        verbose_name = "教务处秘书"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return "%s" % (self.user)
+        return "%s" % self.user
 
 
 @receiver(post_save, sender=MyUser)  # 监听到post_save事件且发送者是User则执行create_extension_user函数
@@ -193,129 +134,132 @@ def create_extension_user(sender, instance, created, **kwargs):
     if created:
         # 如果创建对象，ExtensionUser进行绑定
         if instance.kind == "教秘":
-            Ad_Info.objects.create(user=instance)
+            Admin.objects.create(user=instance)
     # else:
     #     # 如果不是创建对象，同样将改变进行保存
     #     instance.extension.save()
 
 
-class Source_class(models.Model):
-    class module1(models.IntegerChoices):
-        TSJY = 1, "通识教育"
-        ZYJY = 2, "专业教育"
-        CXYJYSJ = 3, "创新研究与实践"
-        SJTZYFZZD = 4, "素质拓展与发展指导"
+# -----------------------------course----------------------------
+class Course(models.Model):
+    # class module1(models.IntegerChoices):
+    #     TSJY = 1, "通识教育"
+    #     ZYJY = 2, "专业教育"
+    #     CXYJYSJ = 3, "创新研究与实践"
+    #     SJTZYFZZD = 4, "素质拓展与发展指导"
+    #
+    # class module2(models.IntegerChoices):
+    #     SXZZLL = 1, "思想政治理论课"
+    #     DXWY = 2, "大学外语（非英语专业）"
+    #     TSHX = 3, "通识核心课"
+    #     GJXXQ = 4, "国际小学期全英文课"
+    #     TSJYDJTXLGKJZ = 5, "通识教育大讲堂系列公开讲座"
+    #     JDLSZZYD = 6, "经典历史著作阅读"
+    #     BLHX = 7, "部类核心课"
+    #     ZYHX = 8, "专业核心课"
+    #     GXHXX = 9, "个性化选修"
+    #     SHYJYCSXL = 10, "社会研究与创新训练"
+    #     SHSJYZHFW = 11, "社会实践与志愿服务"
+    #     ZYSX = 12, "专业实习"
+    #     BYLW = 13, "毕业论文"
+    #     ZYSJHD = 14, "专业实践活动"
+    #     XSYT = 15, "新生研讨课"
+    #     DXTY = 16, "大学体育"
+    #     XLJKJY = 17, "心理健康教育"
+    #     ZYSYGH = 18, "职业生涯规划"
+    #     GFJY = 19, "国防教育"
+    #     GGYSJY = 20, "公共艺术教育"
+    #     FZZD = 21, "发展指导"
 
-    class module2(models.IntegerChoices):
-        SXZZLL = 1, "思想政治理论课"
-        DXWY = 2, "大学外语（非英语专业）"
-        TSHX = 3, "通识核心课"
-        GJXXQ = 4, "国际小学期全英文课"
-        TSJYDJTXLGKJZ = 5, "通识教育大讲堂系列公开讲座"
-        JDLSZZYD = 6, "经典历史著作阅读"
-        BLHX = 7, "部类核心课"
-        ZYHX = 8, "专业核心课"
-        GXHXX = 9, "个性化选修"
-        SHYJYCSXL = 10, "社会研究与创新训练"
-        SHSJYZHFW = 11, "社会实践与志愿服务"
-        ZYSX = 12, "专业实习"
-        BYLW = 13, "毕业论文"
-        ZYSJHD = 14, "专业实践活动"
-        XSYT = 15, "新生研讨课"
-        DXTY = 16, "大学体育"
-        XLJKJY = 17, "心理健康教育"
-        ZYSYGH = 18, "职业生涯规划"
-        GFJY = 19, "国防教育"
-        GGYSJY = 20, "公共艺术教育"
-        FZZD = 21, "发展指导"
+    class Nature(models.TextChoices):
+        BLJC = "部类基础", "部类基础"
+        BLGT = "部类共同", "部类共同"
+        DXTY = "大学体育", "大学体育"
+        DXWY = "大学外语", "大学外语"
+        FZL = "法政类", "法政类"
+        FZZD = "发展指导", "发展指导"
+        GFJY = "国防教育", "国防教育"
+        GGJSJ = "公共计算机", "公共计算机"
+        GGSX = "公共数学", "公共数学"
+        GGYSJY = "公共艺术教育", "公共艺术教育"
+        GLL = "管理类", "管理类"
+        GXHXX = "个性化选修", "个性化选修"
+        HYLKZ = "汉语类课程", "汉语类课程"
+        JBSZ = "基本素质", "基本素质"
+        JDLSZZYD = "经典历史著作阅读", "经典历史著作阅读"
+        JJL = "经济类", "经济类"
+        JZSJHJ = "集中实践环节", "集中实践环节"
+        KXKZYXX = "跨学科专业选修", "跨学科专业选修"
+        GJXXQQYWK = "国际小学期全英文课", "国际小学期全英文课"
+        KYYSJ = "科研与实践环节", "科研与实践环节"
+        LGL = "理工类", "理工类"
+        QXGTK = "全校共同课", "全校共同课"
+        QXXX = "全校选修", "全校选修"
+        RWSJ = "人文素质", "人文素质"
+        RWYSL = "人文艺术类", "人文艺术类"
+        SQXX = "暑期学校", "暑期学校"
+        SXZZLLK = "思想政治理论课", "思想政治理论课"
+        TSHSK = "通识核心课", "通识核心课"
+        ZYHXK = "专业核心课", "专业核心课"
+        ZYSX = "专业实习", "专业实习"
+        LDJY = "劳动教育", "劳动教育"
+        ZYSYGH = "职业生涯规划", "职业生涯规划"
+        ZYJCK = "专业基础课", "专业基础课"
+        ZYXX = "专业选修", "专业选修"
+        DLGT = "大类共同", "大类共同"
+        TSJZ = "通识讲座", "通识讲座"
+        CXYJYSJ = "创新研究与实践", "创新研究与实践"
+        TSJCK = "通识基础课", "通识基础课"
+        XKJC = "学科基础", "学科基础"
+        XKTS = "学科通识", "学科通识"
+        XLJKJY = "心理健康教育", "心理健康教育"
+        XSYTK = "新生研讨课", "新生研讨课"
+        YSJY = "艺术教育", "艺术教育"
+        YYJC = "应用基础", "应用基础"
+        ZJGK = "中国概况", "中国概况"
+        ZRKX = "自然科学", "自然科学"
+        ZYBX = "专业必修", "专业必修"
 
-    class characters(models.IntegerChoices):
-        BLJC = 1, "部类基础"
-        BLGT = 2, "部类共同"
-        DXTY = 3, "大学体育"
-        DXWY = 4, "大学外语"
-        FZL = 5, "法政类"
-        FZZD = 6, "发展指导"
-        GFJY = 7, "国防教育"
-        GGJSJ = 8, "公共计算机"
-        GGSX = 9, "公共数学"
-        GGYSJY = 10, "公共艺术教育"
-        GLL = 11, "管理类"
-        GXHXX = 12, "个性化选修"
-        HYLKZ = 13, "汉语类课程"
-        JBSZ = 14, "基本素质"
-        JDLSZZYD = 15, "经典历史著作阅读"
-        JJL = 16, "经济类"
-        JZSJHJ = 17, "集中实践环节"
-        KXKZYXX = 18, "跨学科专业选修"
-        GJXXQQYWK = 19, "国际小学期全英文课"
-        KYYSJ = 20, "科研与实践环节"
-        LGL = 21, "理工类"
-        QXGTK = 22, "全校共同课"
-        QXXX = 23, "全校选修"
-        RWSJ = 24, "人文素质"
-        RWYSL = 25, "人文艺术类"
-        SQXX = 26, "暑期学校"
-        SXZZLLK = 27, "思想政治理论课"
-        TSHSK = 28, "通识核心课"
-        TSJCK = 29, "通识基础课"
-        XKJC = 30, "学科基础"
-        XKTS = 31, "学科通识"
-        XLJKJY = 32, "心理健康教育"
-        XSYTK = 33, "新生研讨课"
-        YSJY = 34, "艺术教育"
-        YYJC = 35, "应用基础"
-        ZJGK = 36, "中国概况"
-        ZRKX = 37, "自然科学"
-        ZYBX = 38, "专业必修"
-        ZYHXK = 39, "专业核心课"
-        ZYSX = 40, "专业实习"
-        LDJY = 41, "劳动教育"
-        ZYSYGH = 42, "职业生涯规划"
-        ZYJCK = 43, "专业基础课"
-        ZYXX = 44, "专业选修"
-        DLGT = 45, "大类共同"
-        TSJZ = 46, "通识讲座"
-        CXYJYSJ = 47, "创新研究与实践"
-
-    class_Id = models.AutoField(primary_key=True, verbose_name="课程编号", unique=True)
-    class_name = models.CharField(max_length=20, blank=False, verbose_name="课程名称")
+    id = models.AutoField(primary_key=True, verbose_name="课程编号", unique=True)
+    name = models.CharField(max_length=20, blank=False, verbose_name="课程名称")
     credit = models.IntegerField(verbose_name="学分", default=2, validators=[MaxValueValidator(20), MinValueValidator(1)])
     using = models.BooleanField(verbose_name="当前是否正在使用")
     # character1 = models.PositiveSmallIntegerField(blank=True,choices=module1.choices,default=module1.ZYJY,verbose_name="一级模块")
     # character2 = models.PositiveSmallIntegerField(blank=True,choices=module2.choices,default=module2.SXZZLL,verbose_name="二级模块")
-    character = models.PositiveSmallIntegerField(blank=True, choices=characters.choices, default=characters.ZYHXK,
-                                                 verbose_name="课程性质")
+    nature = models.TextField(blank=True, choices=Nature.choices, default=Nature.ZYHXK,
+                              verbose_name="课程性质")
+    # character = models.TextChoices(choices=characters.choices.l,default=characters.ZYHXK,verbose_name="课程性质")
     school = models.ForeignKey(School, null=True, blank=True, on_delete=models.CASCADE,
                                related_name="school_class_relation", verbose_name="开课院系")
 
-    # 是否要加入老师？ 如果加入老师的话 就可以吧后面的 教学班教师时间表改成教师时间表... 算了先这样吧23333 如果这里你们写的时候觉得很丑就在群里说一下我们统一改
-
     def as_dict(self):
         return {
-            "class_name": self.class_name,
-            "class_Id": self.class_Id,
+            "class_name": self.name,
+            "class_id": self.id,
             "credit": self.credit,
             "using": self.using,
-            "character": self.character,
+            "character": self.nature,
             "school": self.school,
         }
+
+    # 是否要加入老师？ 如果加入老师的话 就可以吧后面的 教学班教师时间表改成教师时间表... 算了先这样吧23333 如果这里你们写的时候觉得很丑就在群里说一下我们统一改
 
     class Meta:
         db_table = "Source_class"
         verbose_name = "课程库信息"
         verbose_name_plural = verbose_name
-        unique_together = (("class_Id"),)
+        unique_together = (("id"),)
 
     def __str__(self):
-        return "%s(%s)" % (self.class_name, self.class_Id)
+        return "%s(%s)" % (self.name, self.id)
 
 
-class ClassHistory(models.Model):
+# 当前课程的历史记录对应的表
+class CourseHistory(models.Model):
     history_id = models.AutoField(primary_key=True, verbose_name="修改记录编号", unique=True)
-    old_class_id = models.ForeignKey(Source_class, null=False, blank=False, on_delete=models.CASCADE,
+    old_class_id = models.ForeignKey(Course, null=False, blank=False, on_delete=models.CASCADE,
                                      related_name="old_class_id", verbose_name="修改前的课程编号")
-    new_class_id = models.ForeignKey(Source_class, null=False, blank=False, on_delete=models.CASCADE,
+    new_class_id = models.ForeignKey(Course, null=False, blank=False, on_delete=models.CASCADE,
                                      related_name="new_class_id", verbose_name="修改后的课程编号")
 
     class Meta:
@@ -327,6 +271,21 @@ class ClassHistory(models.Model):
         return "[{}]{}->{}".format(self.history_id, self.old_class_id, self.new_class_id)
 
 
+# ----------------------------major-----------------------------
+class Major(models.Model):
+    name = models.CharField(max_length=30, primary_key=True, verbose_name="专业名称")
+    is_a_big_lei = models.BooleanField(verbose_name="是否大类", default=False)
+
+    class Meta:
+        db_table = "Major"
+        verbose_name = "专业"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
+# ---------------------------program-------------------------
 class GGrade(models.IntegerChoices):
     A = 1, "2018级"
     B = 2, "2019级"
@@ -352,6 +311,7 @@ class Program(models.Model):
         return self.name
 
 
+# ------------------------Teaching Class----------------
 class MajorClass(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="编号")
     name = models.CharField(verbose_name="名称", max_length=30, unique=True)
@@ -378,7 +338,7 @@ class MajorClass(models.Model):
 class TeachingClass(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="教学班编号")
     name = models.CharField(verbose_name="名称", max_length=64, unique=True)
-    source_class = models.ForeignKey(Source_class, on_delete=models.CASCADE,
+    source_class = models.ForeignKey(Course, on_delete=models.CASCADE,
                                      related_name="teaching_class_source_class", verbose_name="课程")
     students = models.ManyToManyField(MajorClass, verbose_name="授课对象", null=True, blank=True)
     planned_size = models.IntegerField(verbose_name="计划修读人数", default=0,
@@ -393,6 +353,51 @@ class TeachingClass(models.Model):
 
     def __str__(self):
         return "%s(教学班编号%s)" % (self.source_class, self.id)
+
+
+# --------------------------------scheduling----------------------
+
+class TC(models.Model):
+    # id = models.AutoField(primary_key=True)
+    Week = models.IntegerField(verbose_name="周次", validators=[MaxValueValidator(20), MinValueValidator(1)])
+
+    class Weekday(models.IntegerChoices):
+        MONDAY = 1, "星期一"
+        TUESDAY = 2, "星期二"
+        WEDNESDAY = 3, "星期三"
+        THURSDAY = 4, "星期四"
+        FRIDAY = 5, "星期五"
+        SATURDAY = 6, "星期六"
+        SUNDAY = 7, "星期日"
+
+    weekday = models.PositiveSmallIntegerField(
+        choices=Weekday.choices,
+        default=Weekday.MONDAY
+    )
+
+    # 节次
+    class JieCi(models.IntegerChoices):
+        First_class = 1, "第一大节(8:00-9:30)"
+        Second_class = 2, "第二大节(10:00-11:30)"
+        Third_class = 3, "第三大节(12:00-13:30)"
+        Forth_class = 4, "第四大节(14:00-15:30)"
+        Fifth_class = 5, "第五大节(16:00-17:30)"
+        Six_class = 6, "第六大节(18:00-19:30)"
+        Seventh_class = 7, "第七大节(19:40-21:10)"
+
+    jie_ci = models.PositiveSmallIntegerField(
+        choices=JieCi.choices,
+        default=JieCi.First_class
+    )
+
+    class Meta:
+        db_table = "Time_Information"
+        unique_together = (("Week", "weekday", "jie_ci"),)
+        verbose_name = "上课时间信息"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "第%s周的%s,具体时间%s" % (self.Week, self.weekday, self.jie_ci)
 
 
 class Building(models.Model):
@@ -426,7 +431,7 @@ class Classroom(models.Model):
 
 # class teaching_class_classroom_time_assignment(TC):
 class Scheduling(TC):
-    id = models.AutoField(primary_key=True, verbose_name="排课编号")
+    s_id = models.AutoField(primary_key=True, verbose_name="排课编号")
     teaching_class_id = models.ForeignKey(TeachingClass, on_delete=models.CASCADE, related_name="s_teaching_class_id",
                                           verbose_name="教学班编号", blank=False)
     # time = models.ForeignKey(TC,blank=False,on_delete=models.CASCADE,related_name="relation_time",verbose_name="教学班上课时间")
@@ -441,16 +446,16 @@ class Scheduling(TC):
 
     def __str__(self):
         # return "教学班%s,时间:%s,教室:" % (self.teaching_id, self.time, self.classroom_id)
-        return "教学班{}-教室{}-时间-{}".format(self.teaching_class_id, self.classroom_id, self.jieke)
+        return "教学班{}-教室{}-时间-{}".format(self.teaching_class_id, self.classroom_id, self.jie_ci)
 
 
 # class teaching_class_teacher_time_assignment(TC):
 class TeacherScheduling(TC):
-    id = models.AutoField(primary_key=True, verbose_name="编号")
+    ts_id = models.AutoField(primary_key=True, verbose_name="编号")
     teaching_class_id = models.ForeignKey(TeachingClass, on_delete=models.CASCADE, related_name="ts_teaching_class_id",
                                           verbose_name="教学班编号", blank=False)
     # time1 = models.ForeignKey(TC,blank=True,on_delete=models.CASCADE,related_name="relation_time2",verbose_name="教学班上课时间")
-    teacher = models.ForeignKey(Teacher_Info, blank=False, on_delete=models.CASCADE,
+    teacher = models.ForeignKey(Teacher, blank=False, on_delete=models.CASCADE,
                                 related_name="ts_teacher", verbose_name="授课老师")
 
     class Meta:
@@ -460,5 +465,20 @@ class TeacherScheduling(TC):
 
     def __str__(self):
         # return "教学班%s,时间:%s,教师:" % (self.teaching_class_id, self.time1, self.teacher)
-        return "教学班{}-教师{}-时间-{}".format(self.teaching_class_id, self.teacher, self.jieke)
+        return "教学班{}-教师{}-时间-{}".format(self.teaching_class_id, self.teacher, self.jie_ci)
 
+
+# -----------------------TeacherMessage------------------
+class TeacherMessage(models.Model):
+    teacher_id = models.ForeignKey(Teacher, blank=False, on_delete=models.CASCADE,
+                                   related_name="teacher_message_connect", verbose_name="反馈信息的教师")
+    feedback_message = models.TextField(verbose_name="反馈的信息", blank=False, max_length=300)
+    feedback_time = models.TimeField(auto_now_add=True, verbose_name="反馈时间")
+    status = models.BooleanField(verbose_name="已处理", default=False)
+
+    class Meta:
+        verbose_name = "教师信息反馈表"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "编号为%s的教师提交了信息:%s" % (self.teacher_id, self.feedback_message)

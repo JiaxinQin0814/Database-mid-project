@@ -71,28 +71,28 @@ WSGI_APPLICATION = 'ACS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'asc_data',
-        'USER': 'root',
-        'PASSWORD': '22450438',
-        'HOST': '127.0.0.1',
-        'POST': '3306'
-    }
-}
-
-# dmj
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'acs',  # database name
-#         'USER': 'deng',
-#         'PASSWORD': 'mysql666',
+#         'NAME': 'asc_data',
+#         'USER': 'root',
+#         'PASSWORD': '22450438',
 #         'HOST': '127.0.0.1',
-#         'PORT': '3306',
+#         'POST': '3306'
 #     }
 # }
+
+# dmj
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'acs',  # database name
+        'USER': 'deng',
+        'PASSWORD': 'mysql666',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
