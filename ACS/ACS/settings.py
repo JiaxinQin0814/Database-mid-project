@@ -26,6 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -68,21 +69,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ACS.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'asc_data',
-#         'USER': 'root',
-#         'PASSWORD': '22450438',
-#         'HOST': '127.0.0.1',
-#         'POST': '3306'
-#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME':'asc_data',
+#        'USER': 'root',
+#        'PASSWORD': 'Yj2wsx3edc',
+#        'HOST': '127.0.0.1',
+#        'POST': '3306'
+#   }
 # }
-
-# dmj
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -112,12 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE =  'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -125,14 +126,17 @@ USE_L10N = True
 
 USE_TZ = False
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+   os.path.join(BASE_DIR, 'static'),
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'system.MyUser'
+AUTH_USER_MODEL='system.MyUser'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

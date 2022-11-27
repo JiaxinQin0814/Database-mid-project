@@ -114,7 +114,7 @@ class CourseInsertForm(Form):
 #                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
 #                 info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
 #                 # print(info)
-#                 return render(request, 'index.html', info)
+#                 return render(request, 'admin_index.html', info)
 #                 # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
 #                 # return render(request, "welcome.html")
 #

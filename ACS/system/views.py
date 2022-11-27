@@ -47,7 +47,8 @@ def loginView(request):
                 #     request.session.set_expiry(0) # 0代表关闭浏览器session失效
                 info = MyUser.objects.values("identifier").filter(identifier=identifier)[0]
                 # print(info)
-                return render(request, 'index.html', info)
+                # 这里需要加一个用户身份鉴别
+                return render(request, 'admin_index.html', info)
                 # return JsonResponse({"code": 200,"message":"验证通过","data":{ "error":""}})
                 # return render(request, "welcome.html")
 
@@ -111,33 +112,50 @@ def logoutView(request):
 
 
 # -----------------------------basic view------------------------------
-def introduceView(request):
+# 介绍页
+def introduce(request):
     return render(request, "introduce.html", )
-    # else:
-    #     globals()
 
 
-def peiyangfanganView(request):
-    return render(request, "peiyangfangan.html", )
+# 培养方案附页
+def training_program(request):
+    return render(request, "training_program.html", )
 
 
-def course_listView(request):
+# 课程库创建附页
+def course_list(request):
     return render(request, "course_list.html", )
 
 
-def loupanchartView(request):
-    return render(request, "loupanchart.html", )
+# 非学院课程导入附页
+def non_academy_course(request):
+    return render(request, "non_academy_course.html", )
+
+
+# 课程生成教学班附页
+def course_class_create(request):
+    return render(request, "course_class_create.html", )
+
+
+# 学院课程排课附页
+def academy_course(request):
+    return render(request, "academy_course.html", )
+
+
+# 教师意见沟通附页
+def teacher_comment(request):
+    return render(request, "teacher_comment.html", )
 
 
 # -------------------------课程库构建页面-----------------------------
 
-
+# 课程导入 没有form
 # import excel file into source class
-def course_import(request):
+def course_import_view(request):
     return render(request, "course_import.html", )
 
 
-def info_import(request):
+def course_import(request):
     user_dict = {"success": "no"}
     if request.method == "POST":
         # create table object
@@ -180,51 +198,52 @@ def info_import(request):
     return render(request, "course_import.html", user_dict)
 
 
+# 课程新增 有form
 # insert new record into source class
-def course_edit(request):
-    return render(request, "course_edit.html", )
+def course_insert_view(request):
+    return render(request, "course_insert.html", )
 
 
 # 功能：获得表单，加入到数据库中去
-def info_edit(req):
-    # 判断请求类型
-    user_list = []
-    if req.method == "POST":
-        form = CourseInsertForm(req.POST)
+def course_insert(request):
+    if request.method == "POST":
+        form = CourseInsertForm(request.POST)
         if form.is_valid():  # 检查是否符合数据规定
             apply = Course()
 
             # 获取表单数据,如果获取不到,则为None
-            apply.name = req.POST.get("class_name", None)
+            apply.name = request.POST.get("class_name", None)
             # apply.class_name = req.POST.get("class_name", None)  # 课程名称
             # apply.class_Id = req.POST.get("class_Id", None)  # 课程编号
-            apply.credit = req.POST.get("credit", None)  # 学分
-            apply.using = req.POST.get("using", None)  # 当前是否正在使用
+            apply.credit = request.POST.get("credit", None)  # 学分
+            apply.using = request.POST.get("using", None)  # 当前是否正在使用
             apply.school = School()
-            apply.school.school_name = req.POST.get("school", None)  # 开课院系
-            apply.nature = req.POST.get("character", None)  # 课程性质
+            apply.school.school_name = request.POST.get("school", None)  # 开课院系
+            apply.nature = request.POST.get("nature", None)  # 课程性质
+            print(apply.nature)
 
             # 将表单数据存到数据库中
             apply.save()
 
             # 将列表传给模板index.html
             user_dict = {"success": "yes"}
-            return render(req, "course_edit.html", user_dict)
+            return render(request, "course_insert.html", user_dict)
 
         else:
             user_dict = {}
             user_dict["success"] = "no"
             for key, value in form.errors.items():
                 user_dict[key] = value[0]
-            return render(req, "course_edit.html", user_dict)
+            return render(request, "course_insert.html", user_dict)
 
 
+# 课程修改 无form 建议改成insert和import的形式或者统一
 # update course
-def course_update(request):
+def course_update_view(request):
     return render(request, "course_update.html", )
 
 
-def info_update(request):
+def course_update(request):
     """
     参照Source_class表，class_ID是不能修改的，其它都可以。
 
@@ -255,7 +274,7 @@ def info_update(request):
     message = []
     data = {}
     if request.method == "POST":
-        class_id = request.POST.get("class_Id", None)
+        class_id = request.POST.get("id", None)
         if class_id is None:
             code = 500
             message.append("错误：无法获取课程编号（class_Id）！")
@@ -263,7 +282,7 @@ def info_update(request):
             class_name = request.POST.get("class_name", None)
             credit = request.POST.get("credit", None)
             using = request.POST.get("using", None)
-            nature = request.POST.get("character", None)
+            nature = request.POST.get("nature", None)
             school = request.POST.get("school", None)
 
             # 当前数据类型有误
@@ -302,7 +321,7 @@ def info_update(request):
             course_st.update(using=False)
             course = course_st[0]
             print(nature)
-            print(course.__dict__)
+            print(course)
             # save new record
             new_course = Course()
             new_course.name = class_name if class_name is not None else course.name
@@ -326,7 +345,7 @@ def info_update(request):
         message.append("请传入POST请求！")
     if len(message) == 0:
         message.append("成功修改！")
-    return render(request, "course_edit.html",
+    return render(request, "course_update.html",
                   {"code": code,
                    "message": message,
                    "data": data,
@@ -334,6 +353,7 @@ def info_update(request):
                   )
 
 
+# 课程导出
 # export source class into excel file
 def course_export(request):  # 数据导出
     response = HttpResponse(content_type='application/vnd.ms-excel')
@@ -354,13 +374,13 @@ def course_export(request):  # 数据导出
         excel_row = 1
         for item in data:
             print(item[0])
-            class_Id = item[0]
+            class_id = item[0]
             class_name = item[1]
             credit = item[2]
             using = item[3]
             character = item[4]
             school = item[5]
-            w.write(excel_row, 0, class_Id)
+            w.write(excel_row, 0, class_id)
             w.write(excel_row, 1, class_name)
             w.write(excel_row, 2, credit)
             w.write(excel_row, 3, using)
@@ -375,44 +395,45 @@ def course_export(request):  # 数据导出
         return response
 
 
+# 查询数据（分页） 无form
 # show source class by pages
-def database_show(request):
+def course_query(request):
     print("show database")
     global key_words
     if request.method == "GET":
         search = dict()
         key_words = search
-        items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using',
-                                                          'nature',
-                                                          'school')
+        items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using', 'school', 'nature').order_by(
+            'id')
         paginator = Paginator(items, 3)
         num_p = request.GET.get('page', 1)
         page = paginator.page(int(num_p))
         return render(request, 'course_list.html', locals())
     if request.method == "POST":
         class_name = request.POST.get("class_name", None)  # 课程名称
-        # class_Id = request.POST.get("class_Id", None)  # 课程编号
+        class_id = request.POST.get("id", None)  # 课程编号
 
         credit = request.POST.get("credit", None)  # 学分
         using = request.POST.get("using", None)  # 当前是否正在使用
         school_name = request.POST.get("school", None)  # 开课院系
-        character = request.POST.get("character", None)  # 课程性质
+        nature = request.POST.get("nature", None)  # 课程性质
         search = dict()
         if class_name:
             search['name'] = class_name
-        # if class_Id:
-        #     search['class_Id'] = class_Id
+        if class_id:
+            search['id'] = class_id
         if credit:
             search['credit'] = credit
         if using:
             search['using'] = using
         if school_name:
             search['school'] = school_name
-        if character:
-            search['nature'] = character
+        if nature:
+            search['nature'] = nature
         key_words = search
-    items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using', 'nature',
-                                                      'school')
+        print(key_words)
+    items = Course.objects.filter(**key_words).values('name', 'id', 'credit', 'using', 'school', 'nature').order_by(
+        'id')
 
     paginator = Paginator(items, 3)
     num_p = request.GET.get('page', 1)
@@ -420,6 +441,7 @@ def database_show(request):
     return render(request, 'course_list.html', locals())
 
 
+# 删除单条课程信息
 # delete a single course
 def course_delete(request):
     id = request.GET.get('id')
@@ -432,6 +454,8 @@ def course_delete(request):
 #     print(temp)
 #     return render(request, "course_list.html")
 
+
+# 批量删除课程信息
 # delete course by batch
 def course_delete_batch(request):
     variables = request.POST.getlist("IDCheck")
@@ -448,6 +472,8 @@ def course_delete_batch(request):
 
 
 # --------------------------------课堂生成教学班页面--------------------
+
+
 # insert new record into teaching class
 def teaching_class_insert(request):
     """
@@ -565,7 +591,7 @@ def teaching_class_insert(request):
     #        "message": message,
     #        "data": data,
     #        })
-    return render(request, "course_edit.html",  # 这里的html要改的
+    return render(request, "course_insert.html",  # 这里的html要改的
                   {"code": code,
                    "message": message,
                    "data": data,

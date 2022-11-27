@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+/*下拉菜单按钮ie8,9下用默认样式*/
+.t-select1 {
+    width: 150px;
+    height: 28px;
+    line-height: 28px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #d5d5d5;
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background:none;
+    padding-right: 0px;
+}
+
+.t-select1:hover {
+    border: 1px solid #badbff;
+}
+.t-page-select {
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #3793c9;
+}
+

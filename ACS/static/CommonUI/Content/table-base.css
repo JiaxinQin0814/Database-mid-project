@@ -1,0 +1,517 @@
+﻿
+
+@charset "utf-8";
+.aero-table-title{
+    margin-top:20px;
+    margin-bottom: 7px;
+
+}
+.aero-table-title span i{
+    padding-right: 10px;
+}
+.aero-table-title span{
+    text-align: left;
+    font-size: 14px;
+    padding: 8px;
+    border-radius:5px 5px 0px 0px;
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+}
+
+.dataTable .row-details {
+    margin-top: 3px;
+    display: inline-block;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+.dataTable .row-details.row-details-open {
+    background: url("../../images/datatable-row-openclose.png") no-repeat 0 -23px !important;
+}
+.dataTable .row-details.row-details-close {
+    background: url("../../images/datatable-row-openclose.png") no-repeat 0 0;
+}
+/*******************************************默认表格*********************************************/
+.aero-table{
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+.aero-table caption{
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+    color: #444444;
+}
+
+.aero-table-caption{
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.aero-table thead tr {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    padding: 0;
+}
+.aero-table thead tr th {
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    cursor: pointer;
+    padding:8px 0;
+    /*padding: 0;*/
+    /*height: 35px;*/
+    /*line-height: 35px;*/
+    /* white-space: nowrap; */
+    /*padding-right: 0px !important;/!*datatable默认给表格单元格加了一个padding right 30px*!/*/
+    /*white-space: nowrap;*/
+}
+
+/*表格内容td*/
+.aero-table tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px dashed #d2d2d2;
+    border-top: none;
+    padding:0;
+    height: 35px;
+    line-height: 35px;
+}
+
+/*表格内容第一列复选框*/
+.aero-table tbody tr td:first-child ,.t-tables thead tr th:first-child{
+    min-width: 30px; padding-right:0;
+}
+
+/*表格内图标*/
+.aero-table tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+
+}
+/*表格内图标*/
+.aero-table tbody tr td a {
+    font-size: 12px;
+    color: #3793c9;
+    /*text-decoration: underline;*/
+
+}
+
+.aero-table-striped{
+
+}
+/*表格内容奇数偶数行变色*/
+.aero-table-striped tbody tr:nth-child(odd) {
+    background: #f8f8f8;
+}
+
+.aero-table-striped tbody tr:nth-child(even) {
+    background: #efefef;
+}
+/*表格奇数偶数列变色*/
+.aero-table-striped-col{
+
+}
+.aero-table-striped-col tbody tr td:nth-child(odd) {
+    background: #efefef;
+}
+
+.aero-table-striped-col tbody tr td:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.aero-table-hover tbody tr:hover {
+    background: #badbff;
+    cursor: pointer;
+}
+
+.table tbody tr.active >td{background-color:#badbff}
+.table tbody tr.success > td{background-color:#dff0d8}
+.table tbody tr.error > td{background-color:#f2dede}
+.table tbody tr.warning > td{background-color:#fcf8e3}
+.table tbody tr.info > td{background-color:#d9edf7}
+.table tbody tr td .bgGray{background-color:#efefef}
+.table tbody tr td .bgWhite> td{background-color:#ffffff}
+.table tbody tr td .fontBlue> td{background-color:#3192cb}
+
+
+/*********************************************实线表格****************************************************/
+.aero-table-simple{
+    border: 1px solid #c9c9c9;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    margin: 0 auto;
+    background: #f5f5f5;
+}
+.aero-table-simple caption{
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #bebebe;
+    border-bottom: none;
+    font-size: 14px;
+    height: 35px;
+    text-align: center;
+}
+
+.aero-table-simple thead  tr th {
+    font-size: 14px;
+    color: #444444;
+    background: #cddbed;
+    border: 1px solid #c9c9c9;
+    text-align: center;
+    padding: 8px;
+
+}
+/*表格内容td*/
+.aero-table-simple tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    border-top: none;
+    border-left: none;
+    padding:0;
+    height: 35px;
+    line-height: 35px;
+
+
+}
+/*/!*表格内容奇数偶数行变色*!/*/
+/*.aero-table-simple-striped tbody tr:nth-child(odd) {*/
+/*background: #f8f8f8;*/
+/*}*/
+
+/*.aero-table-simple-striped tbody tr:nth-child(even) {*/
+/*background: #f3f3f3;*/
+/*}*/
+
+.aero-table-simple-hover tbody tr:hover {
+    background: #badbff;
+    cursor: pointer;
+}
+.aero-table-simple tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+}
+
+/*********************************************报表表格****************************************************/
+.aero-table-report{
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    border-top: 3px solid #0088CC;
+}
+.aero-table-report caption{
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    background-color: #fefefe;
+    border: 1px solid #bebebe;
+    border-bottom: none;
+    font-size: 14px;
+    text-align: center;
+    height: 35px;
+    position: relative;
+}
+.aero-table-report thead tr th {
+    background: #eaeaea;
+    font-size: 14px;
+    color: #3192cb;
+    text-align: center;
+    border-right: 1px solid #d2d2d2 ;
+    border-bottom: 1px solid #a0a0a0 !important;
+    cursor: pointer;
+}
+.aero-table-report tr th {
+    background: #eaeaea;
+    font-size: 14px;
+    color: #3192cb;
+    text-align: center;
+    border-right: 1px solid #d2d2d2 ;
+    border-bottom: 1px solid #a0a0a0 !important;
+    cursor: pointer;
+}
+.aero-table-report tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-top: none;
+    height: 35px;
+    line-height: 35px;
+    padding:0;
+}
+.aero-table-report tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-top: none;
+}
+.aero-table-report tfoot tr td {
+    background: #eaeaea;
+    font-size: 12px;
+    color: #3192cb;
+    font-weight: bold;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+    cursor: pointer;
+    padding:0;
+    height: 35px;
+    line-height: 35px;
+}
+.aero-table-report-firstcol tr td:first-child{
+}
+.aero-table-report-firstcol tr td:last-child{
+    color: #3192cb;
+}
+
+.aero-table-report-hover{
+
+}
+/*.aero-table-report-striped tbody tr:nth-child(odd) {*/
+/*background: #efefef;*/
+/*}*/
+
+/*.aero-table-report-striped tbody tr:nth-child(even) {*/
+/*background: #f8f8f8;*/
+/*}*/
+
+/*********************************修改默认datatables样式 jquery.dataTables.js 14184行**************************************/
+.dataTables-info-t{
+    float: left ; /*修改浮动 2015.12.8 by cxy*/
+}
+.dataTables-length-t{
+    float: left; /*修改浮动 2015.12.8 by cxy*/
+    margin-right: 10px;
+    padding-top: 4px;
+}
+.dataTables-length-select{
+    width: 40px !important;
+    border: 1px solid #3793c9;
+    /*  height: 20px;
+      line-height: 20px;
+      */
+}
+.dataTables-tfilter-t{
+    float: left;
+    height: 40px;
+    line-height: 28px;
+    padding-top: 8px;
+}
+.t-page-spliter{
+    font-style:normal;
+    display: block;/*加了才能正常显示图标*/
+    width: 20px;
+    height: 32px;
+    margin-top: 3px;
+    background: url("../../images/pageLine.png") no-repeat center;
+}
+
+/**********************************************查询面板表格****************************************************/
+.aero-sPannel-table{
+    width: 100%;
+    border: 1px solid #bebebe;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+.aero-sPannel-table tr td{
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #bebebe;
+    border-top: 1px solid #bebebe;
+    padding: 5px;
+    height: 35px;
+}
+.aero-sPannel-table tr td label{
+    font-weight: normal;
+    /*vertical-align: top;*/
+}
+.aero-sPannel-table caption{ background-color: #eaeaea;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #bebebe;
+    border-bottom: none;
+    font-size: 14px;
+    color: #444444;
+    height: 35px;
+    position: relative;
+}
+
+.aero-sPannel-caption-left{
+    color: #3192cb;
+    position: absolute;
+    left: 10px;
+    top: 8px;
+}
+.aero-sPannel-caption-right{
+    color: #3192cb;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+    cursor: pointer;
+}
+
+
+
+/*******************************************默认表格*********************************************/
+.t-tables{
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+.t-tables thead tr {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+}
+.t-tables thead tr th {
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+    padding: 8px 5px;
+    /*padding-right: 0px !important;/!*datatable默认给表格单元格加了一个padding right 30px*!/*/
+    /*white-space: nowrap;*/
+}
+
+/*表格内容td*/
+.t-tables tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px dashed #d2d2d2;
+
+    border-top: none;
+    padding:7px 5px ;
+}
+
+/*表格内容第一列复选框*/
+.t-tables tbody tr td:first-child ,.t-tables thead tr th:first-child{
+    min-width: 30px; padding-right:0;
+}
+
+/*表格内容奇数偶数行变色*/
+.t-tables tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-tables tbody tr:nth-child(even) {
+    background: #ececec;
+}
+
+.t-tables tbody tr:hover {
+    background: #badbff;
+}
+.t-tablesNoHover tbody tr:hover {
+    background: none;
+}
+/*表格内图标*/
+.t-tables tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+    cursor: pointer;
+
+}
+/*表格内图标*/
+.t-tables tbody tr td a {
+    font-size: 12px;
+    color: #3793c9;
+    cursor: pointer;
+    /*text-decoration: underline;*/
+
+}
+
+.t-tables-a tbody tr td:nth-child(odd){
+    background: #eeeeee;
+}
+
+.t-tables-a tbody tr td:nth-child(even){
+    background: #f5f5f5;
+}
+.t-tables caption{
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+    color: #444444;
+}
+/*班级课程设定*/
+.classTable{
+border: 1px solid #d5d5d5;
+}
+.classTable thead tr th{
+    height: 34px;
+line-height: 34px;
+    padding: 0;
+ }
+.classTable tbody tr td{
+    height: 34px;
+    line-height: 34px;
+    padding: 0;
+}
+.borderLeftNone{
+    border-left: none;
+}
+
+/**********************************************无边框表格****************************************************/
+.t-table-noborder{
+    width: 100%;
+    border: none;
+}
+.t-table-noborder tr td{
+    border: none;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #444444;
+}
+.t-table-noborder tr td label{
+    font-weight: normal;
+    vertical-align: top;
+}

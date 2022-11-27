@@ -1,0 +1,818 @@
+﻿@charset "utf-8";
+
+
+/**************************************************************原表格样式****************************************************************************/
+
+.t-table-title{
+    margin-top:20px;
+    margin-bottom: 7px;
+
+}
+.t-table-title span i{
+    padding-right: 10px;
+}
+.t-table-title span{
+    text-align: left;
+    font-size: 14px;
+    padding: 8px;
+    border-radius:5px 5px 0px 0px;
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+}
+
+.t-table-title2{
+    text-align: left;
+    height: 40px;
+    background: url("../../images/icon_line_07.png") repeat-x center 35px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.t-table-title2 span{
+    color:#3192cb;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    background: #f5f5f5;
+    padding-right: 10px;
+}
+.t-table-title2 span i{
+    padding-right: 10px;
+}
+
+
+.t-table-align-l{
+    text-align: left;
+}
+.t-table-align-c{
+    text-align: center;
+}
+.dataTable .row-details {
+    margin-top: 3px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+}
+.dataTable .row-details.row-details-open {
+    background: url("../../images/datatable-row-openclose.png") no-repeat 0 -23px !important;
+}
+.dataTable .row-details.row-details-close {
+    background: url("../../images/datatable-row-openclose.png") no-repeat 0 0;
+}
+/*******************************************默认表格*********************************************/
+.t-tables{
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+.t-tables thead tr {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+}
+.t-tables thead tr th {
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+    padding: 8px 5px;
+    /*padding-right: 0px !important;/!*datatable默认给表格单元格加了一个padding right 30px*!/*/
+    /*white-space: nowrap;*/
+}
+
+/*表格内容td*/
+.t-tables tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px dashed #d2d2d2;
+
+    border-top: none;
+    padding:7px 5px ;
+}
+
+/*表格内容第一列复选框*/
+.t-tables tbody tr td:first-child ,.t-tables thead tr th:first-child{
+    min-width: 30px; padding-right:0;
+}
+
+/*表格内容奇数偶数行变色*/
+.t-tables tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-tables tbody tr:nth-child(even) {
+    background: #ececec;
+}
+
+.t-tables tbody tr:hover {
+    background: #badbff;
+}
+.t-tablesNoHover tbody tr:hover {
+    background: none;
+}
+/*表格内图标*/
+.t-tables tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+    cursor: pointer;
+
+}
+/*表格内图标*/
+.t-tables tbody tr td a {
+    font-size: 12px;
+    color: #3793c9;
+    cursor: pointer;
+    /*text-decoration: underline;*/
+
+}
+
+.t-tables-a tbody tr td:nth-child(odd){
+    background: #eeeeee;
+}
+
+.t-tables-a tbody tr td:nth-child(even){
+    background: #f5f5f5;
+}
+.t-tables caption{
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+    color: #444444;
+}
+/**********************************************默认表格，无滑动颜色，隔行变色颜色****************************************************/
+
+/*表格头渐变色*/
+.t-tableb{
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+.t-tableb thead tr {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+}
+.t-tableb thead tr th {
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+    padding:7px 5px ;
+}
+
+/**********************************************默认表格，滑动颜色，隔行变色颜色（初始）****************************************************/
+/*表格内容td*/
+.t-tableb tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px dashed #d2d2d2;
+
+    border-top: none;
+    padding:7px 5px ;
+}
+/*表格内容奇数偶数行变色*/
+.t-tableb tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-tableb tbody tr:nth-child(even) {
+    background: #ececec;
+}
+
+
+/*表格*/
+.t-table1 {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+}
+
+/*表格头渐变色*/
+.t-table1 thead tr {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+}
+
+.t-table1 thead tr th {
+    height:40px ;
+    line-height: 40px;
+    font-size: 14px;
+    color: #000000;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+    /*padding-right: 0px !important;/!*datatable默认给表格单元格加了一个padding right 30px*!/*/
+}
+
+.t-table1 thead tr th h4{
+    color: #3192cb;
+    font-size: 14px;
+    padding-top:10px ;
+    /*padding-right: 0px !important;/!*datatable默认给表格单元格加了一个padding right 30px*!/*/
+}
+.t-table1 thead tr th i{
+    width: 20px;
+    font-size: 14px;
+    color: #aaaaaa;
+    cursor: pointer;
+}
+/*表格内容td*/
+.t-table1 tbody tr td {
+    height: 35px;
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #d2d2d2;
+    border-bottom: 1px dashed #d2d2d2;
+    padding-right: 0px;
+
+}
+
+/*表格内容第一列复选框*/
+.t-table1 tbody tr td:first-child ,.t-table1 thead tr th:first-child{
+    min-width: 30px; padding-right:0;
+}
+
+/*表格内容奇数偶数行变色*/
+.t-table1 tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-table1 tbody tr:nth-child(even) {
+    background: #ececec;
+}
+
+.t-table1 tbody tr:hover {
+    background: #badbff;
+}
+/*表格内图标*/
+.t-table1 tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+
+}
+
+
+/*********************************************表格内foot 分页（用了datatable分页，这个分页暂时没用）*******************************************/
+.t-table1 tfoot tr td {
+    height: 35px;
+    line-height: 35px;
+}
+.dataTables_infos{
+    font-size: 20px;
+    color: red;
+
+}
+.page_buttons{
+    border: none;
+    background: #0000f1;
+    color: red;
+
+}
+.page-left {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    margin-left: 15px;
+    font-size: 12px;
+    color: #444444;
+}
+.page-left ul li {
+    float: left;
+}
+.page-right {
+    float: right;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 15px;
+    font-size: 12px;
+    color: #444444;
+}
+.page-input {
+    width: 25px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #3793c9;
+    font-size: 12px;
+    padding-left: 5px;
+    color: #444444;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.t-page-select {
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #3793c9;
+}
+.page-icon{
+    font-style:normal;
+    display: block;/*加了才能正常显示图标*/
+    width: 20px;
+    height: 35px;
+}
+.page-icon-ls {
+    background: url("../../images/pageIconls.png") no-repeat center;
+}
+.page-icon-l {
+    background: url("../../images/pageIconl.png") no-repeat center;
+}
+
+.page-icon-rs {
+    background: url("../../images/pageIconrs.png") no-repeat center;
+}
+
+.page-icon-r {
+    background: url("../../images/pageIconr.png") no-repeat center;
+}
+
+
+
+/*********************************分页样式样式 end**************************************/
+/*********************************修改默认datatables样式 jquery.dataTables.js 14184行**************************************/
+.dataTables-info-t{
+    float: left ; /*修改浮动 2015.12.8 by cxy*/
+}
+.dataTables-length-t{
+    float: left; /*修改浮动 2015.12.8 by cxy*/
+    margin-right: 10px;
+    padding-top: 4px;
+}
+.dataTables-length-select{
+    width: 40px !important;
+    border: 1px solid #3793c9;
+    /*  height: 20px;
+      line-height: 20px;
+      */
+}
+.dataTables-tfilter-t{
+    float: left;
+    height: 40px;
+    line-height: 28px;
+    padding-top: 8px;
+}
+.t-page-spliter{
+    font-style:normal;
+    display: block;/*加了才能正常显示图标*/
+    width: 20px;
+    height: 32px;
+    margin-top: 3px;
+    background: url("../../images/pageLine.png") no-repeat center;
+}
+/*重写jqueryDatable样式*/
+/*排序默认按钮 没有引进默认的datables样式*/
+/*.t-table1 thead .sorting{
+background: url("../../images/sort_both.png") no-repeat center right 5px;
+}
+.t-table1 thead .sorting_asc{
+    background: url("../../images/sort_asc.png") no-repeat center right 5px;
+}
+.t-table1 thead .sorting_desc{
+    background: url("../../images/sort_desc.png") no-repeat center right 5px;
+}
+
+.t-table1  thead .sorting_asc_disabled {
+    background-image: url("../../images/sort_asc_disabled.png");
+}
+.t-table1  thead .sorting_desc_disabled {
+    background-image: url("../../images/sort_desc_disabled.png");
+}*/
+
+/*background-image: url("../images/sort_both.png");*/
+/*table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    top: 10px;
+}*/
+/*********************************修改默认datatables样式结束**************************************/
+
+
+/**********************************************无边框表格****************************************************/
+.t-table2{
+    width: 100%;
+    border: none;
+}
+.t-table2 tr td{
+    border: none;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #444444;
+}
+.t-table2 tr td label{
+    font-weight: normal;
+    vertical-align: top;
+}
+
+/*排课页面分组用表格*/
+.t-table-planCourse1{
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
+    max-width: 100%;
+    border: 1px solid #dddddd;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    border-radius:5px;
+}
+.t-table-planCourse1 tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.t-table-planCourse1 tbody tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.t-table-planCourse1 tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-table-planCourse1 tbody tr:nth-child(even) {
+    background: #ffffff;
+}
+.t-table-planCourse1 tbody tr:hover{
+    background: #f5f5f5;
+}
+.t-table-planCourse1 tbody tr td {
+    display: table-cell;
+    padding: 8px 5px 8px 5px;
+    line-height: 1.428571429;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    min-width: 60px;
+}
+.t-table-planCourse1 tbody tr td:first-child{
+    text-align: center;
+}
+
+/*********************************************技术档案表格，奇数偶数列变色****************************************************/
+/*技术档案表格*/
+.t-table3{
+    width: 100%;
+    min-width: 340px;
+    border: 1px solid #c9c9c9;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    margin-top: 10px;
+}
+.t-table3 thead tr th {
+    background: #cddbec;
+    font-size: 16px;
+    color: #444444;
+    text-align: center;
+    height: 36px;
+
+}
+.t-table3 tbody tr th {
+    font-size: 12px;
+    color: #444444;
+    background: #eeeeee;
+    border: 1px solid #c9c9c9;
+    text-align: center;
+    padding: 6px;
+
+}
+.t-table3 tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    border: 1px solid #c9c9c9;
+    padding: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+
+}
+
+.t-table3-b tbody tr td:nth-child(odd) {
+    background: #eeeeee;
+}
+
+.t-table3-b tbody tr td:nth-child(even) {
+
+    background: #f5f5f5;
+}
+
+.t-table3-hbg{
+    background: #eeeeee;
+}
+
+
+/*/!*表格内容奇数偶数行变色*!/
+.t-table3 tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.t-table3 tbody tr:nth-child(even) {
+    background: #ececec;
+}
+.t-table3 tbody tr:hover {
+    background: #edf3fa;
+    cursor: pointer;
+}
+*/
+/*表格内图标*/
+.t-table3 tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+}
+.t-table3 caption{
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #c9c9c9;
+    border-bottom: none;
+    font-size: 16px;
+    color: #444444;
+    text-align: center;
+}
+/*********************************************人员选择用表格 审批流程 tab页 表格实线 奇数偶数行变色****************************************************/
+.t-table4{
+    border: 1px solid #e6e6e6;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    margin: 0 auto;
+}
+.t-table4 thead  tr th {
+    font-size: 12px;
+    color: #444444;
+    background: #f6f6f6;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    padding: 6px;
+
+}
+/*表格内容td*/
+.t-table4 tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    border-top: none;
+    border-left: none;
+    padding:5px;
+}
+/*表格内容奇数偶数行变色*/
+.t-table4 tbody tr:nth-child(odd) {
+    background: #ffffff;
+}
+
+.t-table4 tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.t-table4 tbody tr:hover {
+    background: #badbff;
+}
+.t-table4 tbody tr td i {
+    width: 20px;
+    font-size: 14px;
+    color: #3793c9;
+}
+.t-table4 caption{
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #e6e6e6;
+    border-bottom: none;
+    font-size: 16px;
+    color: #444444;
+    text-align: center;
+}
+
+/*********************************************简历用表格 表格内虚线****************************************************/
+
+.t-table5{
+    border: 1px solid #959595;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.t-table5 thead  tr th {
+    font-size: 12px;
+    color: #444444;
+    background: #f6f6f6;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    padding: 6px;
+
+}
+.t-table5 tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px dashed #959595;
+    border-bottom: 1px dashed #959595;
+    border-top: none;
+    border-left: none;
+    padding:5px;
+}
+
+/*********************************************审批流程 表格内虚线****************************************************/
+.t-table6 {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #D4D4D4;
+    text-align: center;
+    background: #f5f5f5;
+    margin: 0 auto;
+}
+
+/*表格内容奇数偶数列变色*/
+.t-table6 tbody tr td:nth-child(odd) {
+    background: #efefef;
+}
+
+.t-table6 tbody tr td:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/*********************************************审批流程 表格内实线****************************************************/
+.t-table7 {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #d5d5d5;
+    border-left:3px solid #acacac;
+    text-align: center;
+    background: #f5f5f5;
+    margin: 0 auto;
+}
+
+
+.t-table7 tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+    border-top: none;
+    border-left: none;
+    padding:5px;
+}
+/*********************************************审批流程 表格内实线****************************************************/
+.t-table-report{
+
+    border: 1px solid #a0a0a0;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    border-top: 3px solid #0088CC;
+}
+.t-table-report thead tr th {
+    background: #eaeaea;
+    font-size: 14px;
+    color: #3192cb;
+    text-align: center;
+    border-right: 1px solid #d2d2d2 ;
+    border-bottom: 1px solid #a0a0a0 !important;
+
+}
+.t-table-report tr th {
+    background: #eaeaea;
+    font-size: 14px;
+    color: #3192cb;
+    text-align: center;
+    border-right: 1px solid #d2d2d2 ;
+    border-bottom: 1px solid #a0a0a0 !important;
+
+}
+.t-table-report tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-top: none;
+    padding:7px 5px ;
+}
+.t-table-report tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-top: none;
+    padding:7px 5px ;
+}
+.t-table-report tfoot tr td {
+    background: #eaeaea;
+    font-size: 12px;
+    color: #3192cb;
+    font-weight: bold;
+    text-align: center;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #a0a0a0;
+
+}
+.t-table-report-firstcol tr td:first-child{
+    /*background: #9ccce8;*/
+}
+.t-table-report-firstcol tr td:last-child{
+    color: #3192cb;
+
+    /*background: #53afcb;*/
+}
+.t-table-report caption{
+    text-align: center;
+    font-size: 20px;
+    color: #444444;
+}
+.t-table-report-hover{
+
+}
+.t-table-report-row-color tbody tr:nth-child(odd) {
+    background: #efefef;
+}
+
+.t-table-report-row-color tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.t-table-report-col-color tbody tr td:nth-child(odd) {
+    background: #efefef;
+}
+
+.t-table-report-col-color tbody tr td:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/*********************************************互评表格，行高40，表格实线****************************************************/
+.t-table8{
+    border: 1px solid #e6e6e6;
+    border-collapse:collapse ;
+    border-spacing:0 ;
+    margin: 0 auto;
+}
+.t-table8 thead  tr th {
+    font-size: 12px;
+    color: #444444;
+    background: #f6f6f6;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    padding: 6px;
+
+}
+/*表格内容td*/
+.t-table8 tbody tr td {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    border-top: none;
+    border-left: none;
+    line-height: 35px;
+    padding: 0px;
+}
+/*表格内容奇数偶数行变色*/
+.t-table8 tbody tr:nth-child(odd) {
+    background: #ffffff;
+}
+
+.t-table8 tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.t-table-nopointer {
+
+}
+
+.t-table-nopointer tbody tr td {
+
+}
+
+
+

@@ -1,0 +1,30 @@
+@charset "utf-8";
+/*首页时间轴滑块*/
+#index-ztbox {
+    width: 100%;
+    margin: 0 auto;
+    position: relative
+}
+
+#index-ztbox #index-scroll {
+    width: 100%;
+    height: 6px;
+    left: 0px;
+    top: 408px;
+    cursor: pointer;
+    position: absolute;
+    background: #d5d5d5;
+    z-index: 100;
+    border-radius: 3px
+}
+
+#index-ztbox #index-scroll span {
+    width: 20px;
+    height: 12px;
+    left: 0px;
+    top: -3px;
+    cursor: pointer;
+    position: absolute;
+    background: #3192cb;
+    border-radius: 5px
+}

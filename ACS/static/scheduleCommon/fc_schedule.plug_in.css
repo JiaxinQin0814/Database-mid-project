@@ -1,0 +1,171 @@
+﻿
+.fc-top {
+    margin-top: 5px;
+    width: 100%;
+
+}
+.fc-top-title{
+    line-height: 18px;
+    margin:2px 0;
+    font-size: 14px;
+}
+.fc-top-detail{
+    line-height: 18px;
+    margin:5px;
+    padding: 8px;
+    background: #f8f8f8;
+    border-left: 7px solid #3192cb;
+    /*border-radius: 3px;*/
+}
+
+.external-events {
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+}
+
+.external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+}
+
+.external-events .fc-event {
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+/*.external-events p {*/
+    /*margin: 1.5em 0;*/
+    /*font-size: 11px;*/
+    /*color: #666;*/
+/*}*/
+
+/*.external-events p input {*/
+    /*margin: 0;*/
+    /*vertical-align: middle;*/
+/*}*/
+
+.external-events-box{
+
+}
+.external-events-box>li>h5{
+    background: #f8f8f8;
+    border: 1px solid #d5d5d5;
+    /*border-radius:5px ;*/
+    padding: 6px;
+    cursor: pointer;
+}
+.external-events-box .hbg{
+    background:#3192cb ;
+    color: #fff;
+
+}
+.external-events-box>li>ul{
+ display: none;
+}
+/*.external-events-box>li:first-child h5{*/
+    /*background:#3192cb ;*/
+    /*color: #fff;*/
+/*}*/
+
+/*.external-events-box>li:first-child ul{*/
+    /*display: block;*/
+/*}*/
+
+
+.fc-view .tooltip.right .tooltip-arrow {
+    border-right-color: #3192cb;
+}
+
+.fc-view .tooltip-inner {
+    background-color: #3192cb;
+}
+
+.fc-view .tooltip-inner h5 {
+    font-size: 12px;
+    color: #fff;
+    white-space: nowrap;
+    padding: 10px 10px 0 10px;
+}
+
+.fc-view .tooltip.in {
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.fc-schedule-td-p{
+    margin: 3px 0;
+    padding: 0;
+    display:block;/*内联对象需加*/
+    width:120px;
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.fc-schedule-td-p-title{
+    margin: 3px 0;
+    padding: 0;
+    text-align: left;
+}
+.fc-event{
+    margin: 1px 0;
+}
+.fc-toolbar h2{
+    font-size: 20px;
+}
+
+.fc-axis{
+    text-align: center!important;
+}
+
+
+/******************************************对应颜色**********************************************/
+/*ffeff4   粉   f7fff2  绿   f2fffe  青      fffaf2黄    f2f6ff紫    fcf2ff*/
+/*课前准备 颜色无*/
+/*补考类 颜色无*/
+/*毕业类 颜色无*/
+.bg-crew{
+    background: #ffffff!important;
+    border: none!important;
+    color: #444!important;
+}
+/*服务类 颜色蓝*/
+.bg-crew-service{
+    background: #d6e7ff !important;
+    border: none!important;
+    color: #444!important;
+}
+/*应急类 颜色橙*/
+.bg-crew-yingji{
+    background: #fff3cb !important;
+    border: none!important;
+    color: #444!important;
+}
+/*医疗类 颜色绿*/
+.bg-crew-yiliao{
+    background: #edffe1 !important;
+    border: none!important;
+    color: #444!important;
+}
+/*保安类 颜色黄*/
+.bg-crew-baoan{
+    background: #f9ffca !important;
+    border: none!important;
+    color: #444!important;
+}
+
+/*其他类 颜色紫*/
+.bg-crew-other{
+    background: #ffe8e8 !important;
+    border: none!important;
+    color: #444!important;
+
+}
+.event-item{
+    color: #777!important;
+    padding: 5px 3px;
+}
+

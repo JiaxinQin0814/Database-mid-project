@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/static/scripts/jquery/jquery-1.7.1.js"></script>
+<link href="/static/style/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<link href="/static/style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="/static/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="/static/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
+<script type="text/javascript" src="/static/scripts/artDialog/artDialog.js?skin=default"></script>
+<meta charset='utf-8'/>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0"/>
+<link rel="icon" href="../../images/shico.ico" mce_href="../../images/shico.ico" type="image/x-icon">
+
+<!--css-->
+<!--引用css-->
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/Content/common-base.css"/>
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/font4.4/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/Content/common/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/Content/common/dataTables.bootstrap.min.css"/>
+
+<!--引用js-->
+<script type="text/javascript" src="/static/CommonUI/Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="/static/CommonUI/Scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/CommonUI/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/CommonUI/Scripts/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="/static/CommonUI/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="/static/CommonUI/layer/layer.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/static/scheduleCommon/fc_schedule.plug_in.css"/>
+<script type="text/javascript" src="/static/scheduleCommon/fc_schedule.plug_in.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/static/CommonUI/fullcalendar2.9/fullcalendar.css"/>
+<script src='/static/CommonUI/fullcalendar2.9/moment.min.js'></script>
+<script type="text/javascript" src="/static/CommonUI/fullcalendar2.9/fullcalendar.js"></script>
+<script type="text/javascript" src="/static/CommonUI/fullcalendar2.9/zh-cn.js"></script>
+<script type="text/javascript" src="/static/CommonUI/fullcalendar2.9/jquery-ui.custom.min.js"></script>
+
+
+<style>
+
+
+</style>
+<script>
+	$(function(){
+		$('.form_date').datetimepicker({
+			language: 'zh-CN',
+			weekStart: 1,
+			todayBtn: 1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+
+		$(".external-events-box>li>h5").click(function(){
+			$(this).parent().siblings().find("h5").removeClass("hbg");
+			$(this).parent().siblings().find("ul").hide();
+			$(this).next().toggle();
+			$(this).toggleClass("hbg");
+		});
+	})
+</script>
+<title>信息管理系统</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/** 新增   **/
+	    $("#addBtn").fancybox({
+	    	'href'  : 'house_edit.html',
+	    	'width' : 733,
+	        'height' : 530,
+	        'type' : 'iframe',
+	        'hideOnOverlayClick' : false,
+	        'showCloseButton' : false,
+	        'onClosed' : function() { 
+	        	window.location.href = 'house_list.html';
+	        }
+	    });
+		
+	    /** 导入  **/
+	    $("#importBtn").fancybox({
+	    	'href'  : '/xngzf/archives/importFangyuan.action',
+	    	'width' : 633,
+	        'height' : 260,
+	        'type' : 'iframe',
+	        'hideOnOverlayClick' : false,
+	        'showCloseButton' : false,
+	        'onClosed' : function() { 
+	        	window.location.href = 'house_list.html';
+	        }
+	    });
+		
+	    /**编辑   **/
+	    $("a.edit").fancybox({
+	    	'width' : 733,
+	        'height' : 530,
+	        'type' : 'iframe',
+	        'hideOnOverlayClick' : false,
+	        'showCloseButton' : false,
+	        'onClosed' : function() { 
+	        	window.location.href = 'house_list.html';
+	        }
+	    });
+	});
+	/** 用户角色   **/
+	var userRole = '';
+
+	/** 模糊查询来电用户  **/
+	function search(){
+		$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
+	}
+
+	/** 新增   **/
+	function add(){
+		$("#submitForm").attr("action", "/xngzf/archives/luruFangyuan.action").submit();	
+	}
+	 
+	/** Excel导出  **/
+	function exportExcel(){
+		if( confirm('您确定要导出吗？') ){
+			var fyXqCode = $("#fyXq").val();
+			var fyXqName = $('#fyXq option:selected').text();
+//	 		alert(fyXqCode);
+			if(fyXqCode=="" || fyXqCode==null){
+				$("#fyXqName").val("");
+			}else{
+//	 			alert(fyXqCode);
+				$("#fyXqName").val(fyXqName);
+			}
+			$("#submitForm").attr("action", "/xngzf/archives/exportExcelFangyuan.action").submit();	
+		}
+	}
+	
+	/** 删除 **/
+	function del(fyID){
+		// 非空判断
+		if(fyID == '') return;
+		if(confirm("您确定要删除吗？")){
+			$("#submitForm").attr("action", "/xngzf/archives/delFangyuan.action?fyID=" + fyID).submit();			
+		}
+	}
+	
+	/** 批量删除 **/
+	function batchDel(){
+		if($("input[name='IDCheck']:checked").size()<=0){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'至少选择一条', ok:true,});
+			return;
+		}
+		// 1）取出用户选中的checkbox放入字符串传给后台,form提交
+		var allIDCheck = "";
+		$("input[name='IDCheck']:checked").each(function(index, domEle){
+			bjText = $(domEle).parent("td").parent("tr").last().children("td").last().prev().text();
+// 			alert(bjText);
+			// 用户选择的checkbox, 过滤掉“已审核”的，记住哦
+			if($.trim(bjText)=="已审核"){
+// 				$(domEle).removeAttr("checked");
+				$(domEle).parent("td").parent("tr").css({color:"red"});
+				$("#resultInfo").html("已审核的是不允许您删除的，请联系管理员删除！！！");
+// 				return;
+			}else{
+				allIDCheck += $(domEle).val() + ",";
+			}
+		});
+		// 截掉最后一个","
+		if(allIDCheck.length>0) {
+			allIDCheck = allIDCheck.substring(0, allIDCheck.length-1);
+			// 赋给隐藏域
+			$("#allIDCheck").val(allIDCheck);
+			if(confirm("您确定要批量删除这些记录吗？")){
+				// 提交form
+				$("#submitForm").attr("action", "/xngzf/archives/batchDelFangyuan.action").submit();
+			}
+		}
+	}
+
+	/** 普通跳转 **/
+	function jumpNormalPage(page){
+		$("#submitForm").attr("action", "house_list.html?page=" + page).submit();
+	}
+	
+	/** 输入页跳转 **/
+	function jumpInputPage(totalPage){
+		// 如果“跳转页数”不为空
+		if($("#jumpNumTxt").val() != ''){
+			var pageNum = parseInt($("#jumpNumTxt").val());
+			// 如果跳转页数在不合理范围内，则置为1
+			if(pageNum<1 | pageNum>totalPage){
+				art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
+				pageNum = 1;
+			}
+			$("#submitForm").attr("action", "house_list.html?page=" + pageNum).submit();
+		}else{
+			// “跳转页数”为空
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
+			$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
+		}
+	}
+</script>
+<style>
+	.alt td{ background:black !important;}
+</style>
+</head>
+<body>
+	<form id="submitForm" name="submitForm" action="" method="post">
+		<input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
+		<input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
+		<div id="container">
+			<div class="ui_content">
+				<div class="ui_text_indent">
+					<div id="box_border">
+						<div id="box_top">搜索</div>
+						<div id="box_center">
+							学院
+							<select name="fangyuanEntity.fyXqCode" id="fyXq" class="ui_select01" onchange="getFyDhListByFyXqCode();">
+                                <option value=""
+                                >--请选择--</option>
+                                <option value="6">数据库</option>
+
+                            </select>
+
+							专业
+							<select name="fangyuanEntity.fyDhCode" id="fyDh" class="ui_select01">
+                                <option value="">--请选择--</option>
+								<option value="6">2022春季</option>
+                            </select>
+							年级
+							<select name="fangyuanEntity.fyHxCode" id="fyHx" class="ui_select01">
+                                <option value="">--请选择--</option>
+                                <option value="76">XXX</option>
+                            </select>
+						</div>
+						<div id="box_bottom">
+							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
+							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" /> 
+							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
+							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
+							<input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui_content">
+				<div class="ui_tb">
+					<div class="b-container" id="b_container">
+					
+						<div class="col-sm-12 clearfix margin0 ">
+							<!--<div id='selectdate'>-->
+							<!--初始化年份工作日：<input id="initDateInput" type="text" class="t-input" value="2016-07-29">-->
+							<!--<input id="initDateBtn" type="button" class="t-button ml10" value="初始化">-->
+							<!--</div>-->
+							<div class="col-sm-2 margin0 padding0">
+								<div id='external-events' class="external-events" >
+									<h4>选择课程</h4>
+									<ul class="external-events-box">
+										<li>
+											<h5 ><i class="fa fa-hand-o-right mr5"></i>专业必修<i class="fa fa-angle-double-down fr"></i></h5>
+											<ul>
+												<li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+													数据库
+												</li>
+												<li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+													深度学习
+												</li>
+												<li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+													ml
+												</li>
+												<li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+													数据结构
+												</li>
+											</ul>
+										</li>
+										<li>
+											<h5><i class="fa fa-hand-o-right mr5"></i>部类基础<i class="fa fa-angle-double-down fr"></i></h5>
+											<ul>
+												<li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">c
+												</li>
+												<li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+													python
+												</li>
+												<li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+													物理
+												</li>
+												<li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+													化学
+												</li>
+												<li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+													心理
+												</li>
+											</ul>
+										</li>
+										<li>
+											<h5><i class="fa fa-hand-o-right mr5"></i>部类共同<i class="fa fa-angle-double-down fr"></i></h5>
+											<ul>
+												<li class='fc-event event-item bg-crew-yiliao' data-class="fc-event bg-crew-yiliao">
+                                                    淑芬
+												</li>
+											</ul>
+										</li>
+										<li>
+											<h5><i class="fa fa-hand-o-right mr5"></i>专业选修<i class="fa fa-angle-double-down fr"></i></h5>
+											<ul>
+												<li class='fc-event event-item bg-crew-baoan' data-class="fc-event bg-crew-baoan">
+                                                    知识表示
+                                                </li>
+											</ul>
+										</li>
+										<li>
+											<h5><i class="fa fa-hand-o-right mr5"></i>其他<i class="fa fa-angle-double-down fr"></i></h5>
+											<ul>
+												<li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">
+                                                    1
+												</li>
+												<li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">
+                                                    2
+												</li>
+												<li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">
+                                                    3
+                                                </li>
+											</ul>
+										</li>
+									</ul>
+									<p>
+										<input type='checkbox' id='drop-remove'/>
+										<label for='drop-remove'>从列表中删除</label>
+									</p>
+								</div>
+							</div>
+							<div class="col-sm-10 margin0 padding0">
+								<div id='calendar' class="ml5 padding5" ></div>
+							</div>
+						</div>
+					
+					</div>
+					<!-- 模态框（Modal） -->
+					<div class="modal fade t-modal" id="addModal" tabindex="-1" role="dialog"
+						 aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header t-modal-header">
+									<button type="button" class="close t-modal-close"
+											data-dismiss="modal" aria-hidden="true">
+										&times;
+									</button>
+									<h4 class="modal-title t-modal-title" id="myModalLabel">
+										课程编辑
+									</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">选择教员</label>
+					
+										<div class="col-sm-4"><input type="text" class="form-control t-input " value="test"/></div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">选择教室</label>
+					
+										<div class="col-sm-4"><input type="text" class="form-control t-input " value="test"/></div>
+									</div>
+					
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="t-button"
+											data-dismiss="modal">删除
+									</button>
+									<button type="button" class="t-button"
+											data-dismiss="modal">关闭
+									</button>
+									<button type="button" class="t-button">
+										保存
+									</button>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+					</div>
+					<!-- /.modal -->
+					
+					
+					<div id="WarningBox"></div>
+				</div>
+				<div class="ui_tb_h30">
+					<div class="ui_flt" style="height: 30px; line-height: 30px;">
+						共有
+						<span class="ui_txt_bold04">90</span>
+						条记录，当前第
+						<span class="ui_txt_bold04">1
+						/
+						9</span>
+						页
+					</div>
+					<div class="ui_frt">
+						<!--    如果是第一页，则只显示下一页、尾页 -->
+						
+							<input type="button" value="首页" class="ui_input_btn01" />
+							<input type="button" value="上一页" class="ui_input_btn01" />
+							<input type="button" value="下一页" class="ui_input_btn01"
+								onclick="jumpNormalPage(2);" />
+							<input type="button" value="尾页" class="ui_input_btn01"
+								onclick="jumpNormalPage(9);" />
+						
+						
+						
+						<!--     如果是最后一页，则只显示首页、上一页 -->
+						
+						转到第<input type="text" id="jumpNumTxt" class="ui_input_txt01" />页
+							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage(9);" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+@charset "utf-8";
+*{ margin:0; padding:0; list-style:none;}
+img{ border:0;}
+#ztbox {width:100%; height:30px; margin:0 auto; position: relative}
+#ztbox #left { width:35px; height:30px; float:left; cursor:pointer;margin-left: 20px}
+#ztbox #right{ width:35px; height:30px; float:right; cursor:pointer; }
+
+#ztbox #conter { width:90%; height:50px; float:left; display:inline; overflow:hidden; position:relative; margin:0 auto; }
+#ztbox #conter ul { width:auto; height:30px; top:0px; left:0px; position:absolute; overflow:hidden;}
+#ztbox #conter li {  height:30px; float:left;padding:0 20px; position:relative; cursor: pointer;text-align: center}
+.tr-tabFocus{background: #0e7add;
+}
+/*#ztbox #conter li img { width:167px; height:30px;}*/
+#ztbox #scroll { width:100%; height:6px; left:0px; top:35px; cursor:pointer; position:absolute; background: #d5d5d5; z-index: 100; border-radius: 5px}
+#ztbox #scroll span { width:15px; height:12px; left:0px; top:-3px;  cursor:pointer; position:absolute; background: #1478ec;border-radius: 5px }
+.tr-tab-content {
+    width: 100%;
+    clear: left;
+    position: relative;
+    top: 5px
+}
+
+.tr-tab-content li {
+    display: none
+}
+
+.tr-tab-content li.tr-tab-conFocus {
+    display: block
+}
+.tr-c-title{
+    width:90%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.tr-c-title span{
+    text-align: left;
+    font-size: 14px;
+    padding: 10px;
+    border-radius:5px 5px 0px 0px;
+    background-color: #fefefe;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+}
+.tr-c-title span i{
+    padding-right: 10px;
+}

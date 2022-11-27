@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>乘务 首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0"/>
+    <link rel="icon" href="../../images/shico.ico" mce_href="../../images/shico.ico" type="image/x-icon">
+
+    <!--css-->
+    <!--引用css-->
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common-base.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/font4.4/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>
+
+    <!--引用js-->
+    <script type="text/javascript" src="CommonUI/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript" src="CommonUI/Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="CommonUI/layer/layer.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="scheduleCommon/fc_schedule.plug_in.css"/>
+    <script type="text/javascript" src="scheduleCommon/fc_schedule.plug_in.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="CommonUI/fullcalendar2.9/fullcalendar.css"/>
+    <script src='CommonUI/fullcalendar2.9/moment.min.js'></script>
+    <script type="text/javascript" src="CommonUI/fullcalendar2.9/fullcalendar.js"></script>
+    <script type="text/javascript" src="CommonUI/fullcalendar2.9/zh-cn.js"></script>
+    <script type="text/javascript" src="CommonUI/fullcalendar2.9/jquery-ui.custom.min.js"></script>
+
+
+    <style>
+
+
+    </style>
+    <script>
+        $(function(){
+            $('.form_date').datetimepicker({
+                language: 'zh-CN',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
+
+            $(".external-events-box>li>h5").click(function(){
+                $(this).parent().siblings().find("h5").removeClass("hbg");
+                $(this).parent().siblings().find("ul").hide();
+                $(this).next().toggle();
+                $(this).toggleClass("hbg");
+            });
+        })
+    </script>
+</head>
+<body style="background: #efefef">
+
+<div class="b-container" id="b_container">
+    <p class="mt10 text-left"><i class="fa fa-home font-blue mr10 font16"></i> 首页 > 排课</p>
+
+    <div class="col-sm-12 clearfix margin0 ">
+        <!--<div id='selectdate'>-->
+        <!--初始化年份工作日：<input id="initDateInput" type="text" class="t-input" value="2016-07-29">-->
+        <!--<input id="initDateBtn" type="button" class="t-button ml10" value="初始化">-->
+        <!--</div>-->
+        <div class="col-sm-2 margin0 padding0">
+            <div id='external-events' class="external-events" >
+                <h4>选择课程</h4>
+                <ul class="external-events-box">
+                    <li>
+                        <h5 ><i class="fa fa-hand-o-right mr5"></i>应急类<i class="fa fa-angle-double-down fr"></i></h5>
+                        <ul>
+                            <li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+                                行规范-客舱安全管理(1/4)
+                            </li>
+                            <li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+                                运行规范-安全规则和指导方针
+                            </li>
+                            <li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+                                运行规范-乘务员工作指导和要求
+                            </li>
+                            <li class='fc-event event-item bg-crew-yingji' data-class="fc-event bg-crew-yingji">
+                                运行规范-旅客管理
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h5><i class="fa fa-hand-o-right mr5"></i>服务类<i class="fa fa-angle-double-down fr"></i></h5>
+                        <ul>
+                            <li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">法律法规
+                            </li>
+                            <li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+                                职业形象-化妆
+                            </li>
+                            <li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+                                职业形象-礼仪
+                            </li>
+                            <li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+                                职业形象-形体
+                            </li>
+                            <li class='fc-event event-item bg-crew-service' data-class="fc-event bg-crew-service">
+                                职业形象-实操考核
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h5><i class="fa fa-hand-o-right mr5"></i>医疗类<i class="fa fa-angle-double-down fr"></i></h5>
+                        <ul>
+                            <li class='fc-event event-item bg-crew-yiliao' data-class="fc-event bg-crew-yiliao">应急医疗
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h5><i class="fa fa-hand-o-right mr5"></i>保安<i class="fa fa-angle-double-down fr"></i></h5>
+                        <ul>
+                            <li class='fc-event event-item bg-crew-baoan' data-class="fc-event bg-crew-baoan">保安</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h5><i class="fa fa-hand-o-right mr5"></i>补考类<i class="fa fa-angle-double-down fr"></i></h5>
+                        <ul>
+                            <li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">应急实操补考
+                            </li>
+                            <li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">服务实操补考
+                            </li>
+                            <li class='fc-event event-item bg-crew-other' data-class="fc-event bg-crew-other">理论补考</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>
+                    <input type='checkbox' id='drop-remove'/>
+                    <label for='drop-remove'>从列表中删除</label>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-10 margin0 padding0">
+            <div id='calendar' class="ml5 padding5" ></div>
+        </div>
+    </div>
+
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade t-modal" id="addModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header t-modal-header">
+                <button type="button" class="close t-modal-close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title t-modal-title" id="myModalLabel">
+                    课程编辑
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择教员</label>
+
+                    <div class="col-sm-4"><input type="text" class="form-control t-input " value="test"/></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">选择教室</label>
+
+                    <div class="col-sm-4"><input type="text" class="form-control t-input " value="test"/></div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="t-button"
+                        data-dismiss="modal">删除
+                </button>
+                <button type="button" class="t-button"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="t-button">
+                    保存
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+<!-- /.modal -->
+
+
+<div id="WarningBox"></div>
+
+</body>
+</html>
+

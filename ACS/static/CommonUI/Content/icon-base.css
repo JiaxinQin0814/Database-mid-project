@@ -1,0 +1,36 @@
+﻿.icon-classRoom{
+    display: block;
+    content: '';
+    width: 64px;
+    height: 64px;
+    background: url('../../images/icon_classRoom.png');
+}
+.icon-classRoom32{
+    display: block;
+    content: '';
+    width: 32px;
+    height:32px;
+    background: url('../../images/icon_classroom32.png');
+}
+.icon-teacher32{
+    display: block;
+    content: ' ';
+    width: 32px;
+    height:32px;
+    background: url('../../images/icon_teacher32.png');
+}
+.icon-date{
+    display: block;
+    content: ' ';
+    width: 24px;
+    height: 24px;
+    background: url("../../images/icon_date.png");
+}
+
+.icon-print{
+    display: block;
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: url("../../images/icon_print.png");
+}

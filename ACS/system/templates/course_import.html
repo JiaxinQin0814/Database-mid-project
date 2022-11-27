@@ -12,7 +12,7 @@ function myclose(){
 </script>
 
 </form>
-<form  action="/info_import/" enctype="multipart/form-data" method="post"> {% csrf_token %}
+<form  action="/course_import/" enctype="multipart/form-data" method="post"> {% csrf_token %}
 <input  type="file" style="height:20px;width:211px;" name="ExcelFile">
 <input type='submit' value='导入'>
         <a  href="javascript:myclose();" >关闭</a>

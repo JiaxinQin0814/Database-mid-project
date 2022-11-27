@@ -12,20 +12,30 @@ urlpatterns = [
     # path("course/", loginView, name="登录"),
     path("teacher-course/", TeacherCourseView, name="教师课程库"),
     path("teacher-all-course/", TeacherAllCourseView, name="教师所有课程库"),
-    path("introduce/", introduceView, name="introduce"),
-    path("peiyangfangan/", peiyangfanganView, name="peiyangfangan"),
-    path("course_list/", course_listView, name="course_list"),
-    path("loupanchart/", loupanchartView, name="loupanchart"),
-    path("course_edit/", course_edit, name="course_edit"),
+
+    path("introduce/", introduce, name="introduce"),
+    path("training_program/", training_program, name="training_program"),
+    path("course_list/", course_list, name="course_list"),
+    path("non_academy_course/", non_academy_course, name="non_academy_course"),
+    path("course_class_create/", course_class_create, name="course_class_create"),
+    path("academy_course/", academy_course, name="academy_course"),
+    path("teacher_comment/", teacher_comment, name="teacher_comment"),
+
+    path("course_insert_view/", course_insert_view, name="course_insert_view"),
+    path("course_insert/", course_insert, name="course_insert"),
+
+    path("course_import_view/", course_import_view, name="course_import_view"),
     path("course_import/", course_import, name="course_import"),
-    path("info_edit/", info_edit, name="info_edit"),
-    path("database_show/", database_show, name="database_show"),
-    path("course_export/", course_export, name="course_export"),
-    path("info_import/", info_import, name="info_import"),
+
+    path("course_update_view/", course_update_view, name="course_update_view"),
     path("course_update/", course_update, name="course_update"),
+
+    path("course_query/", course_query, name="course_query"),
+
     path("course_export/", course_export, name="course_export"),
-    path("info_update/", info_update, name="info_update"),
+
     path("course_delete/", course_delete, name="course_delete"),
+
     path("course_delete_batch/", course_delete_batch, name="course_delete_batch"),
     # path('welcome/', views.welcome, name="系统主界面"),
     # path('add/', views.add, name="添加信息"),

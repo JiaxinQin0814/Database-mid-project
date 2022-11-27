@@ -1,0 +1,1201 @@
+﻿@charset "utf-8";
+
+.b-container {
+    width: 98%;
+    min-width: 1000px;
+    margin-left: 1%;
+    float: left;
+}
+
+.is-show-header {
+    background: #ffa800;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+    color: #ffffff;
+    font-size: 16px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.form-group {
+    min-height: 30px;
+}
+
+/******************************************************************************搜索面板*****************************************************************/
+.t-searchPannel {
+    /*width: 100%;*/
+    margin: 0 auto;
+    min-height: 5px;
+    float: right;
+}
+
+.t_searchPannel_box_hide {
+    display: none;
+}
+
+/*搜索面板每个li元素*/
+.t-searchPannel-box > li {
+    float: left;
+    height: 40px;
+    line-height: 28px;
+    padding: 10px;
+    min-width: 270px;
+}
+
+/*搜索面板每个文字元素*/
+.t-searchPannel-box > li label {
+    color: #444444;
+    font-size: 12px;
+    font-weight: normal;
+    margin-right: 5px;
+    text-align: right;
+    min-width: 82px;
+    float: left;
+}
+
+/******************************************************************************搜索面板操作项*****************************************************************/
+.t-oper-div {
+    float: right;
+    margin-right: 0px;
+    height: 40px;
+    line-height: 28px;
+    margin-top: 13px;
+}
+
+.t-oper-div input {
+    float: left;
+    margin-right: 20px;
+}
+
+.t-oper-div div {
+    float: left;
+    margin-right: 0px;
+}
+
+.t-input-group .t-input:last-child, .t-input-group-addon:last-child, .t-input-group-btn:first-child > .t-button:not(:first-child), .t-input-group-btn:last-child > .btn, .t-input-group-btn:last-child > .t-btn-group > .btn, .t-input-group-btn:last-child > .t-dropdown-toggle {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.t-input-group .t-input, .t-input-group-addon, .t-input-group-btn {
+    display: table-cell;
+}
+
+.t-input-group {
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.t-input-group-addon {
+
+    width: 30px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 4px;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.t-btn-group {
+    display: inline-block;
+    vertical-align: middle;
+    height: 28px;
+
+}
+
+.t-btn-group input {
+    margin-right: 10px;
+}
+
+.t-btn-group input:last-child {
+    margin-right: 0px;
+}
+
+/******************************************************************************文本框*****************************************************************/
+.t-input {
+    font-size: 12px;
+    width: 150px;
+    height: 28px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    border: 1px solid #d5d5d5;
+    /*outline: none;*/
+    box-sizing: border-box;
+    padding: 2px 12px;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-input:hover {
+    border: 1px solid #badbff;
+    -moz-box-shadow: #badbff 0px 0px 5px;
+    -webkit-box-shadow: #badbff 0px 0px 5px;
+    box-shadow: #badbff 0px 0px 5px;
+}
+
+/*文本框*/
+.t-input2 {
+    /*width: 150px;*/
+    height: 28px;
+    background: #f8f8f8;
+    font-size: 12px;
+    padding: 2px 12px;
+}
+
+.t-input:hover {
+    border: 1px solid #badbff;
+    -moz-box-shadow: #badbff 0px 0px 5px;
+    -webkit-box-shadow: #badbff 0px 0px 5px;
+    box-shadow: #badbff 0px 0px 5px;
+}
+
+.t-input-left {
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 10px;
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+    background: #f8f8f8;
+    border: 1px solid #d5d5d5;
+    border-right: none;
+    /*outline: none;*/
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-input-left:hover {
+    border: 1px solid #badbff;
+    -moz-box-shadow: #badbff 0 0 5px 0;
+    -webkit-box-shadow: #badbff 0 0 5px 0;
+    box-shadow: #badbff 0 0 5px 0;
+}
+
+.t-input-search {
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    color: #444444;
+    background: #f8f8f8 url("../../images/icon_search.png") no-repeat right 6px;
+    border: 1px solid #d5d5d5;
+    /*outline: none;*/
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-input-search:hover {
+    border: 1px solid #badbff;
+    -moz-box-shadow: #badbff 0px 0px 5px;
+    -webkit-box-shadow: #badbff 0px 0px 5px;
+    box-shadow: #badbff 0px 0px 5px;
+}
+
+
+/*日期文本框*/
+.t-input-date {
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
+    background: #f8f8f8;
+    border: 1px solid #d5d5d5;
+    /*behavior: url(../css/ie-css3.htc);*/
+    padding:0 12px;
+}
+
+/*日期文本框*/
+.t-input-date2 {
+    height: 30px;
+    line-height: 30px;
+    background: #f8f8f8;
+    font-size: 12px;
+    padding:0 12px;
+}
+
+.t-input-date3 {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #d5d5d5;
+    background: url(../../images/date.png) no-repeat right center #f8f8f8;
+    padding: 5px 25px 5px 5px;
+    cursor: pointer;
+}
+
+.t-select-in2 {
+    position: absolute;
+    border: 1px solid #5cafea;
+    z-index: 999;
+    background-color: white;
+
+}
+
+.t-select-in2 ul {
+    list-style: none;
+    margin: 0px;
+    padding: 10px;
+    cursor: default
+}
+
+.t-select-in2 ul li {
+    line-height: 20px
+}
+
+.input-date-box {
+    width: 150px;
+}
+
+/***************************************************************************下拉菜单****************************************************************/
+.t-select1 {
+    min-width: 150px;
+    height: 28px;
+    line-height: 18px;
+    font-size: 12px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #d5d5d5;
+    /*将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: #f8f8f8 url("../../images/arraw.png") no-repeat scroll right center;
+    /*background:none\0;*/
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+
+    padding: 3px 12px;
+    /*padding-right: 0px\0;*/
+}
+
+/*:root .t-select1 {
+    background: #f8f8f8 url("../images/arraw.png") no-repeat scroll right center;
+    padding-right: 14px;
+}*/
+.t-select1:hover {
+    border: 1px solid #badbff;
+    -moz-box-shadow: #badbff 0px 0px 5px;
+    -webkit-box-shadow: #badbff 0px 0px 5px;
+    box-shadow: #badbff 0px 0px 5px;
+}
+
+/* 禁用select默认下拉箭头 仅ie10以上有效 */
+.t-select1::-ms-expand {
+    display: none;
+}
+
+
+.t-select2 {
+    border: solid 1px #d5d5d5;
+    background: #f8f8f8;
+    width: 150px;
+    height: 28px;
+    line-height: 28px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    padding: 0;
+    font-size: 12px;
+}
+
+.t-select2:hover {
+    border: 1px solid #badbff;
+}
+
+
+/******************************************************************************按钮*****************************************************************/
+.t-button {
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #ffffff;
+    background: #3192cb;
+    border: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-button:hover {
+    background: #2c84b9;
+}
+
+.t-button2 {
+    width: 90px;
+    height: 24px;
+    line-height: 20px;
+    font-size: 12px;
+    background: #ffffff;
+    border: 1px solid #3192cb;
+    color: #000000;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-button2:hover {
+    color: #ffffff;
+    background: #3192cb;
+    border: 1px solid #3192cb;
+
+}
+
+.t-button2-Focus {
+    color: #ffffff;
+    background: #3192cb;
+    border: 1px solid #3192cb;
+}
+
+.t-button3 {
+    width: 82px;
+    height: 34px;
+    line-height: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #3192cb;
+    font-family: '黑体';
+    background: url("../../images/p_r_btn_01.png");
+    border: none;
+    /*outline: none;*/
+    cursor: pointer;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-button3-on {
+    width: 82px;
+    height: 34px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #3192cb;
+    font-family: '黑体';
+    text-align: center;
+    padding-left: 30px;
+    background: url("../../images/p_r_btn_02.png");
+    border: none;
+    /*outline: none;*/
+    cursor: pointer;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+.t-button4 {
+    width: 82px;
+    height: 28px;
+    font-size: 12px;
+    text-align: center;
+    color: #3192cb;
+    font-family: '黑体';
+    background: url("../../images/p_btn_a.png");
+    border: none;
+    /*outline: none;*/
+    cursor: pointer;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+/*按钮*/
+.t-button5 {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #444444;
+    background: #f5f5f5;
+    border: 1px solid #c9c9c9;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.t-button5-on {
+
+    color: #ffffff;
+    background: #3192cb;
+    border: 1px solid #3192cb;
+}
+
+.t-button5 i {
+    padding-right: 10px;
+}
+
+.t-button5-i1 {
+    color: #ffa800;
+}
+
+.t-button5-i2 {
+    color: #0173ff;
+}
+
+.t-button4-on {
+    background: url("../../images/p_btn_b.png");
+}
+
+.t-button4-visited {
+    width: 82px;
+    height: 28px;
+    font-size: 12px;
+    text-align: center;
+    color: #3192cb;
+    font-family: '黑体';
+    background: url("../../images/p_btn_b.png");
+    border: none;
+    /*outline: none;*/
+    cursor: pointer;
+}
+
+.t-btn-gray{
+    color: #444444;
+    background: #bebebe;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    border: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*outline: none;*/
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/******************************************************************************文本域****************************************************************/
+/*文本域*/
+.t_textarea {
+    width: 95%;
+    max-width: 467px;
+    border: 1px solid #d5d5d5;
+    height: 100px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    /*outline: none;*/
+    cursor: pointer;
+    font-size: 12px;
+    resize: none;
+}
+
+.t_textarea:hover {
+    border: 1px solid #3192cb;
+}
+
+/****************************************************************************上传按钮***************************************************************/
+.input-file {
+    position: relative;
+    display: inline-block;
+    background: #f8f8f8;
+    border: 1px solid #3192cb;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #555555;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.input-file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.input-file:hover {
+    background: #f5f5f5;
+    border-color: #3192cb;
+    color: #444444;
+    text-decoration: none;
+}
+
+/****************************************************************************单选框，复选框*****************************************************************/
+.t-check {
+    width: 15px;
+    height: 15px;
+    float: left;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: center;
+    background-image: url(../../images/checkbox_01.png);
+    background-repeat: no-repeat;
+    background-position: 0 -29px;
+}
+
+.t-check-on {
+    background-position: 0 0;
+}
+
+.t-check-all {
+    width: 15px;
+    height: 15px;
+    float: left;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 10px;
+    text-align: center;
+    background-image: url(../../images/checkbox_all.png);
+    background-repeat: no-repeat;
+    background-position: 0 -29px;
+}
+
+.t-check-all-on {
+    background-position: 0 0;
+}
+
+/*单选*/
+.radioclass {
+    opacity: 0;
+    cursor: pointer;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+}
+
+.t-radio {
+    width: 24px;
+    height: 18px;
+    float: left;
+    padding-top: 3px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px;
+    background-image: url(../../images/inputradio.gif);
+    background-repeat: no-repeat;
+    background-position: -25px 0;
+}
+
+.radioclass {
+    opacity: 0;
+    cursor: pointer;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+}
+
+.t-radio-on {
+    background-position: 0 0;
+}
+
+/*搜索面板更多按钮*/
+.t-more {
+    width: 24px;
+    height: 24px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 18px;
+    color: #3192cb;
+    background: #ffffff;
+    border: 1px solid #3192cb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    /*outline: none;*/
+    cursor: pointer;
+    /*behavior: url(../css/ie-css3.htc);*/
+}
+
+/*表格样式在 table-public-v1.css*/
+
+/************************************************模态框样式********************************************************** */
+
+.t-modal-title {
+    color: #ffffff;
+    font-size: 16px;
+
+}
+
+.t-modal-header {
+    background: #3192cb;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    height: 45px;
+    line-height: 45px;
+
+    padding-top: 10px;
+}
+
+.t-modal-close {
+    font-size: 24px;
+    color: #ffffff;
+    opacity: 1;
+}
+
+.t-modal-close:hover {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.t-modal-warn-icon {
+    font-size: 30px !important;
+    color: #eec20f;
+    padding-right: 10px;
+}
+
+.t-modal-warn-content {
+    font-size: 14px;
+}
+
+/************************************************选项卡样式********************************************************** */
+.tab-div {
+    width: 600px;
+    height: 400px;
+    background: #f0f0f0;
+}
+
+.tab-menu {
+    text-align: center;
+    float: left;
+    list-style: none;
+}
+
+.tab-menu li {
+    width: 80px;
+    text-align: center;
+    float: left;
+    margin-right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #d5d5d5;
+    border-top: 3px solid #3192cb;
+    /*color: #ffffff;*/
+    height: 40px;
+    line-height: 30px;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-menu li.tabFocus {
+    width: 80px;
+    font-weight: bold;
+    color: #444444;
+    background-color: #ffffff;
+    border: 1px solid #d5d5d5;
+    border-top: 3px solid #3192cb;
+    border-bottom: 0;
+    z-index: 100;
+    position: relative
+}
+
+.tab-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 0 5px 0 0;
+    clear: left;
+    border: 1px solid #d5d5d5;
+    position: relative;
+    top: -1px
+}
+
+.tab-content li {
+    display: none
+}
+
+.tab-content li.tab-conFocus {
+    display: block
+}
+
+/******************************************************************************标题*****************************************************************/
+.t-sub-title {
+    background: #cddbec;
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+    height: 40px;
+    line-height: 40px;
+}
+
+.t-sub-title span {
+    font-size: 14px;
+    padding-left: 10px;
+    font-family: '微软雅黑';
+}
+
+.t-sub-title i {
+    padding-right: 5px;
+    padding-left: 5px
+}
+
+.t-sub-title a {
+    float: right;
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+/*标题2*/
+.t-sub-title2 {
+    background: #cde2ff;
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.t-sub-title2 span {
+    font-size: 16px;
+    padding-left: 10px;
+    font-family: '微软雅黑';
+}
+
+.t-sub-title2 i {
+    padding-right: 5px;
+    padding-left: 5px
+}
+
+/*标题3*/
+.t-sub-title3 {
+    background: #e0e0e0;
+    border: 1px solid #d1d1d1;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.t-sub-title3 span {
+    font-size: 12px;
+    padding-left: 10px;
+    font-family: '微软雅黑';
+}
+
+.t-sub-title3 i {
+    color: #ffa800;
+    padding-right: 10px;
+    padding-left: 5px
+}
+
+.t-sub-title4 {
+    text-align: left;
+    height: 30px;
+    background: url("../../images/icon_line_07.png") repeat-x center 15px;
+
+}
+
+.t-sub-title4 span {
+    color: #3192cb;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    background: #f5f5f5;
+    padding-right: 10px;
+}
+
+.t-sub-title4 span i {
+    padding-right: 10px;
+}
+
+.t-sub-title5 {
+    background: #cddbec;
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+    height: 40px;
+    font-size: 16px;
+    color: #444444;
+    text-align: center;
+}
+
+.t-sub-title6 {
+    background: -webkit-linear-gradient(#ffffff, #ececec); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #ececec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #ececec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #ececec); /* 标准的语法 渐变 */
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+    color: #444444;
+    height: 40px;
+    line-height: 40px;
+}
+
+.t-sub-line {
+    border: 1px solid #a0a0a0;
+    border-bottom: none;
+    text-align: center;
+    font-size: 14px;
+    color: #444444;
+    line-height: 40px;
+    height: 65px;
+}
+
+/*提示1*/
+.t-prompt1 {
+    background: #ffc8c8;
+
+}
+
+.t-prompt2 {
+    background: #e9ffe1;
+}
+
+.t-prompt3 {
+    background: #ffe7c8;
+}
+
+.t-prompt1, .t-prompt2, .t-prompt3 {
+    border: 1px solid #d1d1d1;
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    overflow: hidden;
+}
+
+/************************************************选项卡样式********************************************************** */
+.t-tab-div {
+    width: 100%;
+    min-width: 340px;
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+    height: 40px;
+    background: #f0f0f0;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#ececec);
+}
+
+.t-tab-menu {
+    text-align: center;
+    float: left;
+    list-style: none;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    margin-top: 8px;
+    margin-left: 5px;
+    background: none;
+    display: inline;
+
+}
+
+.t-tab-menu > li {
+    text-align: center;
+    float: left;
+    margin-right: 5px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    background: -webkit-linear-gradient(#ffffff, #eaeaea); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ffffff, #eaeaea); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ffffff, #eaeaea); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ffffff, #eaeaea); /* 标准的语法 */
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#ececec);
+    border: 1px solid #d1d1d1;
+    /*color: #ffffff;*/
+    border-radius: 5px 5px 0 0;
+}
+
+.t-tab-menu > li.t-tabFocus {
+    color: #2c71c7;
+    background-color: #ffffff;
+    /*  -moz-box-shadow:2px 2px  8px #999 inset;
+      -webkit-box-shadow:2px 2px 8px #999 inset;
+      box-shadow:2px 2px  8px #999 inset;*/
+    background: -webkit-linear-gradient(top, #cccccc, #eee, #f5f5f5 20%); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top, #cccccc, #eee, #f5f5f5 20%); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top, #cccccc, #eee, #f5f5f5 20%); /* Firefox 3.6 - 15 */
+    background: linear-gradient(top, #cccccc, #eee, #f5f5f5 20%); /* 标准的语法 */
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#ececec);
+    border: 1px solid #a0a0a0;
+    border-bottom: 0;
+    z-index: 1;
+    position: relative
+}
+
+.t-tab-content {
+    width: 100%;
+    padding: 5px 10px 20px 10px;
+    background-color: #f5f5f5;
+    clear: left;
+    border: 1px solid #d1d1d1;
+    position: relative;
+    top: -2px
+}
+
+.t-tab-content > li {
+    display: none
+}
+
+.t-tab-content > li.t-tab-conFocus {
+    display: block
+}
+
+/************************************************************************重写boostrap下拉菜单*************************************************************************/
+.t-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    max-width: 300px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-shadow: none;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.t-dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 2.02857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.t-dropdown-menu > li > a:focus, .t-dropdown-menu > li > a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f8f8f8;
+}
+
+.t-dropdown-menu-title {
+    /*background: #383e4b; */
+    background: #f1f1f1;
+    color: #444444;
+    padding: 8px 10px;
+    display: block;
+    font-weight: 700;
+    margin: -1px;
+    border: 1px solid #c4c4c4;
+    border-bottom: none;
+}
+
+.t-dropdown-menu li:last-child {
+    border-bottom: 0 !important;
+}
+
+.t-dropdown-menu-sub-footer {
+    text-align: center;
+    background: #f1f1f1;
+    cursor: pointer;
+}
+
+.t-dropdown-menu:before, .t-dropdown-menu:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -14px;
+    left: 10px;
+    border-bottom: 7px solid #c4c4c4;
+    border-top: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+.t-dropdown-menu:after {
+    top: -13px;
+    border-bottom: 7px solid #f1f1f1;
+    border-top: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+/************************************************悬浮框样式********************************************************** */
+.overFlowDiv {
+    position: relative;
+    height: 30px;
+    width: 100%
+}
+
+.overFlowDropdown {
+    width: 500px;
+}
+
+.c-tips {
+    min-width: 200px;
+    border: 1px solid #3192cb;
+    position: relative;
+    background-color: #ffffff;
+    padding: 0px 6px;
+    top: 10px;
+    z-index: 99;
+    max-height: 500px;
+    overflow-y:auto;
+}
+
+.c-tips:before, .c-tips:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -13px;
+    left: 50px;
+    border-bottom: 6px solid #3192cb;
+    border-top: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+.c-tips:after {
+    top: -12px;
+    border-bottom: 6px solid #ffffff;
+    border-top: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+
+/************************************************三角指向左侧悬浮框样式********************************************************** */
+/*.overFlowDivleft {*/
+/*position: relative;*/
+/*height: 30px;*/
+/*width: 100%;*/
+/*}*/
+
+.overFlowDropdownleft {
+    width: 5px;
+    height: 30px;
+    float: left;
+    margin-left: 10px;
+    margin-top: -12px;
+}
+
+.c-tips-left {
+    min-width: 200px;
+    border: 1px solid #3192cb;
+    position: relative;
+    background-color: #ffffff;
+    padding: 10px 10px;
+    -moz-box-shadow: #2d98f1 0px 0px 5px;
+    -webkit-box-shadow: #2d98f1 0px 0px 5px;
+    box-shadow: #2d98f1 0px 0px 5px;
+    z-index: 9;
+}
+
+.c-tips-left:before, .c-tips-left:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -13px;
+    top: 15px;
+    border-bottom: 6px solid transparent;
+    border-top: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid #3192cb;
+    font-size: 0;
+    line-height: 0;
+}
+
+.c-tips-left:after {
+    left: -12px;
+    border-bottom: 6px solid transparent;
+    border-top: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid #ffffff;
+}
+
+/************************************************时间轴样式********************************************************** */
+
+.time-axis {
+    height: 150px;
+    background: url(../../images/icon_t_line.gif) repeat-x center 55px;
+    margin: 0px auto;
+    width: 95%;
+    min-width: 1000px;
+}
+
+.time-axis li {
+    float: left;
+    background: url(../../images/icon_t_dian.png) no-repeat center top;
+    /*background: #ebebeb;*/
+    /*padding-top: 30px;*/
+    padding: 5px 10px;
+    width: 10%;
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+.time-axis-active1 {
+    color: #5dc26e
+}
+
+.time-axis-active2 {
+    color: #2bb0ed
+}
+
+.time-axis li .t-p {
+    padding-top:30px;
+    text-align: center;
+    position: relative;
+}
+
+.time-axis-point {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: -20px;
+    display: none;
+}
+
+.time-axis-point h1 {
+    height: 67px;
+    line-height: 67px;
+    /*color: #518dbb;*/
+    font-size: 12px;
+    font-weight: bold;
+    background: url(../../images/icon_t_quan.gif) no-repeat center top;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.time-axis-point p {
+    line-height: 14px;
+    /*color: #999;*/
+    text-align: center;
+    padding-top: 2px;
+}

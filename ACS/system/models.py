@@ -245,7 +245,7 @@ class Course(models.Model):
     # 是否要加入老师？ 如果加入老师的话 就可以吧后面的 教学班教师时间表改成教师时间表... 算了先这样吧23333 如果这里你们写的时候觉得很丑就在群里说一下我们统一改
 
     class Meta:
-        db_table = "Source_class"
+        db_table = "Course"
         verbose_name = "课程库信息"
         verbose_name_plural = verbose_name
         unique_together = (("id"),)

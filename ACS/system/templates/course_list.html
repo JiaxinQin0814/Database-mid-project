@@ -17,7 +17,7 @@
 
 		/** 新增   **/
 	    $("#addBtn").fancybox({
-	    	'href'  : '{% url 'system:course_edit' %}',
+	    	'href'  : '{% url 'system:course_insert_view' %}',
 	    	'width' : 733,
 	        'height' : 530,
 	        'type' : 'iframe',
@@ -30,7 +30,7 @@
 
 	    /** 导入  **/
 	    $("#importBtn").fancybox({
-	    	'href'  : '{% url 'system:course_import' %}',
+	    	'href'  : '{% url 'system:course_import_view' %}',
 	    	'width' : 633,
 	        'height' : 260,
 	        'type' : 'iframe',
@@ -43,7 +43,7 @@
 
 	    /**编辑   **/
 	    $("#editBtn").fancybox({
-	    	'href'  : '{% url 'system:course_update' %}',
+	    	'href'  : '{% url 'system:course_update_view' %}',
 	    	'width' : 733,
 	        'height' : 530,
 	        'type' : 'iframe',
@@ -101,30 +101,7 @@
 			}
 		}
 	}
-       
 
-	/** 普通跳转 **/
-	function jumpNormalPage(page){
-		$("#submitForm").attr("action", "house_list.html?page=" + page).submit();
-	}
-
-	/** 输入页跳转 **/
-	function jumpInputPage(totalPage){
-		// 如果“跳转页数”不为空
-		if($("#jumpNumTxt").val() != ''){
-			var pageNum = parseInt($("#jumpNumTxt").val());
-			// 如果跳转页数在不合理范围内，则置为1
-			if(pageNum<1 | pageNum>totalPage){
-				art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
-				pageNum = 1;
-			}
-			$("#submitForm").attr("action", "house_list.html?page=" + pageNum).submit();
-		}else{
-			// “跳转页数”为空
-			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
-			$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
-		}
-	}
 
 
     </script>
@@ -136,7 +113,7 @@
 </head>
 <body>
 
-<form id="submitForm" name="submitForm" action="/database_show/" method="post">
+<form id="submitForm" name="submitForm" action="/course_query/" method="post">
     <div id="container">
         <div class="ui_content">
             <div class="ui_text_indent">
@@ -151,7 +128,7 @@
 
                             <td class="ui_text_rt">课程编号</td>
                             <td class="ui_text_lt">
-                                <input type="text" id="1" name="class_Id" class="ui_input_txt01"/>
+                                <input type="text" id="1" name="id" class="ui_input_txt01"/>
                             </td>
 
                             <td class="ui_text_rt">学分</td>
@@ -170,11 +147,14 @@
 
                             <td class="ui_text_rt">开课院系</td>
                             <td class="ui_text_lt">
-                                <input type="text" id="6" name="school" class="ui_input_txt01"/>
+                                <select name="school" id="6" class="ui_">
+                                    <option value="" selected="selected">--请选择--</option>
+                                    <option value="人工智能">人工智能</option>
+                                </select>
                             </td>
                             <td class="ui_text_rt">课程性质</td>
                             <td class="ui_text_lt">
-                                <select name="character" id="7" class="ui_">
+                                <select name="nature" id="7" class="ui_">
                                     <option value="" selected="selected">--请选择--</option>
                                     <option value="部类基础">部类基础</option>
                                     <option value="部类基础">部类共同</option>
@@ -188,7 +168,8 @@
                     <p><input type="submit" value="查询" class="ui_input_btn01"/></p>
                     <div id="box_bottom">
                         <input type="button" value="新增" class="ui_input_btn01" id="addBtn"/>
-                        <input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();"/>
+                        <input type="button" value="编辑" class="ui_input_btn01" id="editBtn"/>
+                        <input type="button" value="批量删除" class="ui_input_btn01" onclick="batchDel();"/>
                         <input type="button" value="导入" class="ui_input_btn01" id="importBtn"/>
                         <a type="button" href="{% url 'system:course_export' %}" class="ui_input_btn01" >导出</a>
                     </div>
@@ -197,19 +178,22 @@
         </div>
         <div class="ui_content">
             <div class="ui_tb">
-                <table class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
-                    <tr>
-                        <th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);"/>
-                        </th>
-                        <th>课程名称</th>
-                        <th>课程编号</th>
-                        <th>学分</th>
-                        <th>使用中</th>
-                        <th>历史课程</th>
-                        <th>开课院系</th>
-                        <th>课程性质</th>
-                        <th>操作</th>
-                    </tr>
+                <table id="sortMe" class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+                    <thead>
+                        <tr>
+                            <th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);"/>
+                            </th>
+                            <th>课程名称</th>
+                            <th>课程编号</th>
+                            <th>学分</th>
+                            <th>使用中</th>
+                            <th>开课院系</th>
+                            <th>历史课程</th>
+                            <th>课程性质</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for p in page %}
                     <tr>
                         <td><input type="checkbox" name="IDCheck" value={{p.id}} class="acb"/></td>
@@ -217,20 +201,92 @@
                         <td>{{p.id}}</td>
                         <td>{{p.credit}}</td>
                         <td>{{p.using}}</td>
-                        <td>NULL</td>
                         <td>{{p.school}}</td>
+                        <td>NULL</td>
                         <td>{{p.nature}}</td>
                         <td>
-                            <input type="button" value="编辑"  id="editBtn"/>
                             <a href="/course_delete?id={{ p.id }}">删除</a>
                         </td>
                     </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
+                <script>
+						document.addEventListener('DOMContentLoaded', function () {
+							const table = document.getElementById('sortMe');
+							const headers = table.querySelectorAll('th');
+							const tableBody = table.querySelector('tbody');
+							const rows = tableBody.querySelectorAll('tr');
+
+							// Track sort directions
+							const directions = Array.from(headers).map(function (header) {
+								return '';
+							});
+
+							// Transform the content of given cell in given column
+							const transform = function (index, content) {
+								// Get the data type of column
+								const type = headers[index].getAttribute('data-type');
+								switch (type) {
+									case 'number':
+										return parseFloat(content);
+									case 'string':
+									default:
+										return content;
+								}
+							};
+
+							const sortColumn = function (index) {
+								// Get the current direction
+								const direction = directions[index] || 'asc';
+
+								// A factor based on the direction
+								const multiplier = direction === 'asc' ? 1 : -1;
+
+								const newRows = Array.from(rows);
+
+								newRows.sort(function (rowA, rowB) {
+									const cellA = rowA.querySelectorAll('td')[index].innerHTML;
+									const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+
+									const a = transform(index, cellA);
+									const b = transform(index, cellB);
+
+									switch (true) {
+										case a > b:
+											return 1 * multiplier;
+										case a < b:
+											return -1 * multiplier;
+										case a === b:
+											return 0;
+									}
+								});
+
+								// Remove old rows
+								[].forEach.call(rows, function (row) {
+									tableBody.removeChild(row);
+								});
+
+								// Reverse the direction
+								directions[index] = direction === 'asc' ? 'desc' : 'asc';
+
+								// Append new row
+								newRows.forEach(function (newRow) {
+									tableBody.appendChild(newRow);
+								});
+							};
+
+							[].forEach.call(headers, function (header, index) {
+								header.addEventListener('click', function () {
+									sortColumn(index);
+								});
+							});
+						});
+					</script>
             </div>
             {% if page.has_previous %}
             {# 得到上一页的页码编号 #}
-            <a href="/database_show?page={{ page.previous_page_number }}">上一页</a>
+            <a href="/course_query?page={{ page.previous_page_number }}">上一页</a>
             {% else %}
             上一页
             {% endif %}
@@ -241,11 +297,11 @@
             {{ p }}
             {% else %}
             {# 否则跳转到页码相对应的页面 #}
-            <a href="/database_show?page={{ p }}">{{ p }}</a>
+            <a href="/course_query?page={{ p }}">{{ p }}</a>
             {% endif %}
             {% endfor %}
             {% if page.has_next %}
-            <a href="/database_show?page={{ page.next_page_number }}">下一页</a>
+            <a href="/course_query?page={{ page.next_page_number }}">下一页</a>
             {% else %}
             下一页
             {% endif %}

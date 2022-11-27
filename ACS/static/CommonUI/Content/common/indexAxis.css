@@ -1,0 +1,211 @@
+@charset "utf-8";
+/* 首页时间轴*/
+.timesheet {
+    height: 418px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.timesheet.color-scheme-default .bubble-default {
+    /*background-color: RGBA(204, 40, 45, 1)*/
+    background-color: #cc282d;
+}
+
+.timesheet.color-scheme-default .bubble-lorem {
+    /*background-color: RGBA(122, 157, 42, 1)*/
+    background-color: #7a9d2a
+}
+
+.timesheet.color-scheme-default .bubble-ipsum {
+    /*background-color: RGBA(46, 164, 204, 1)*/
+    background-color: #2ea3cc
+}
+
+.timesheet.color-scheme-default .bubble-dolor {
+    /*background-color: RGBA(204, 173, 43, 1)*/
+    background-color: #ccad2b
+}
+
+.timesheet.color-scheme-default .bubble-sit {
+    /*background-color: RGBA(133, 88, 157, 1)*/
+    background-color:#85589d
+}
+
+.timesheet.color-scheme-alternative .bubble-default {
+    background-color: #cc282d
+}
+
+.timesheet.color-scheme-alternative .bubble-lorem {
+    background-color: #7a9d2a
+}
+
+.timesheet.color-scheme-alternative .bubble-ipsum {
+    background-color: #2ea3cc
+}
+
+.timesheet.color-scheme-alternative .bubble-dolor {
+    background-color: #ccad2b
+}
+
+.timesheet.color-scheme-alternative .bubble-set {
+    background-color: #85589d
+}
+
+.timesheet .scale {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    float: left;
+    display: inline;
+}
+
+.timesheet .scale section {
+    float: left;
+    width: 70px;
+    text-align: center;
+    color: #444444;
+    font-family: "Signika Negative";
+    font-size: 13px;
+    line-height: 45px;
+    font-weight: lighter;
+
+    /*border-left: 1px dashed rgba(221, 221,221, 0.5);*/
+
+    border-left: 1px dashed #d2d2d2;
+    height: 100%
+}
+
+.timesheet .scale section p {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #ebebeb;
+    background: -webkit-linear-gradient(#ffffff, #ebebeb);
+    background: -o-linear-gradient(#ffffff, #ebebeb);
+    background: -moz-linear-gradient(#ffffff, #ebebeb);
+    background: linear-gradient(#ffffff, #ebebeb);
+    border-bottom: 1px solid #d1d1d1;
+
+}
+
+.timesheet .scale section:first-child {
+    border-left: none;
+}
+
+.timesheet .data {
+    margin: 36px 0 0 0;
+    padding: 0;
+    text-align: left;
+    list-style-type: none;
+    color: #444444;
+    font-family: "Signika Negative";
+    font-size: 13px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.timesheet .data li {
+    line-height: 32px;
+    height: 32px;
+    display: block;
+    cursor: pointer;
+    clear: both;
+    position: relative;
+    white-space: nowrap;
+    /*border-bottom: 1px dashed #d2d2d2;*/
+}
+
+/*.timesheet .data li:nth-child(odd) {*/
+/*background: #f9f9f9;*/
+/*}*/
+/*.timesheet .data li:nth-child(even) {*/
+/*background: #ececec;*/
+/*}*/
+
+.timesheet .data li:hover .bubble {
+    opacity: 1
+}
+
+.timesheet .data li .date {
+    color: #999999;
+    font-size: 12px
+}
+
+.timesheet .data li .label {
+    font-weight: lighter;
+    font-size: 12px;
+    padding-left: 5px;
+    line-height: 21px;
+    color: #646464;
+    white-space: nowrap
+}
+
+.timesheet .data li .bubble {
+    width: 24px;
+    height: 7px;
+    display: block;
+    float: left;
+    position: relative;
+    top: 12px;
+    border-radius: 4px;
+    margin: 0 10px 0 0;
+    opacity: 0.8
+}
+
+#timesheet-alternative {
+    background-color: RGBA(247, 247, 247, 1);
+    border-radius: 5px
+}
+
+#timesheet-alternative section {
+    color: RGBA(63, 68, 72, 1);
+    border-left: 1px dashed RGBA(63, 68, 72, 0.2)
+}
+
+#timesheet-alternative section:first-child {
+    border-left: 1px dashed transparent
+}
+
+#timesheet-alternative .date {
+    display: none
+}
+
+#timesheet-alternative .bubble {
+    margin-right: 7px
+}
+
+#timesheet-alternative .label {
+    padding-left: 0px;
+    color: RGBA(48, 48, 48, 1)
+}
+
+#ztbox {
+    width: 100%;
+    margin: 0 auto;
+    position: relative
+}
+
+#ztbox #scroll {
+    width: 100%;
+    height: 6px;
+    left: 0px;
+    top: 390px;
+    cursor: pointer;
+    position: absolute;
+    background: #d5d5d5;
+    z-index: 100;
+    border-radius: 3px
+}
+
+#ztbox #scroll span {
+    width: 15px;
+    height: 12px;
+    left: 0px;
+    top: -3px;
+    cursor: pointer;
+    position: absolute;
+    background: #1478ec;
+    border-radius: 5px
+}

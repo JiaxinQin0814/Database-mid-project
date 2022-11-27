@@ -1,29 +1,195 @@
-//表格代码
-<div id="demo3">
-<tbody>
-		<tr th:each="item1:${list1}" >
-					<td th:text="${item1.unit}" style="text-align: left"></td>
-					<td th:text="${item1.regin}" style="text-align: left"></td>
-					<td th:text="${item1.linkman}" style="text-align: left"></td>
-					<td th:text="${item1.contactNumber}" style="text-align: left"></td>			
-		</tr>
-        
-	</tbody>
-<div>
-//弹窗div
-<div class="diceng" id='diceng' style="display:none">
-			<div class="tankuang">
-				<div id="header">
-					<span>弹窗标题</span>
-					<!-- //点击关闭按钮 -->
-					<div id="header-right"><input type="button" value="x"/></div> 
-				</div>
-				<div id="tksj">
-				<div id="tkunit"></div>
-				    <div id="tkregin"></div>
-					<div id="tklinkman"></div>
-					<div id="tkcontactNumber"></div>
-					</div>
-			</div>
-		</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <link href='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet'/>
+    <link href='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet'
+          media='print'/>
+    <link rel="stylesheet" href="${siteurl}/templates/skin2/plugins/layui/css/layui.css" media="all">
+    <script src='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/lib/moment.min.js'></script>
+    <script src='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/lib/jquery.min.js'></script>
+    <script src='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/lib/jquery-ui.min.js'></script>
+    <script src='${siteurl}/templates/default/media/js/fullcalendar-3.9.0/fullcalendar.min.js'></script>
+    <script src="${siteurl}/templates/default/media/js/layer/layer.js"></script>
+    <script src="${siteurl}/templates/skin2/plugins/layui/layui.js"></script>
+    <style>
+        body {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+        }
+
+        #wrap {
+            width: 1500px;
+            margin: 0 auto;
+        }
+
+        #external-events {
+            float: left;
+            width: 150px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            background: #eee;
+            text-align: left;
+        }
+
+        #external-events h4 {
+            font-size: 16px;
+            margin-top: 0;
+            padding-top: 1em;
+        }
+
+        #external-events .fc-event {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        #external-events p {
+            margin: 1.5em 0;
+            font-size: 11px;
+            color: #666;
+        }
+
+        #external-events p input {
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        #calendar {
+            float: left;
+            margin-left: 20px;
+            width: 1100px;
+        }
+
+        .layui-laydate-content > .layui-laydate-list {
+            padding-bottom: 0px;
+            overflow: hidden;
+        }
+
+        .layui-laydate-content > .layui-laydate-list > li {
+            width: 50%
+        }
+
+        .merge-box .scrollbox .merge-list {
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div id='wrap'>
+    <div id='external-events'>
+        <h4>方案</h4>
+        <div class='fc-event' style="color:#000000;background-color: #FFFFCC;border-color:#FFFFCC">加班</div>
+    </div>
+    <div id='calendar'></div>
+    <div id="jump" style="display: none">
+        <form class="layui-form" action="" id="main">
+            <div class="layui-form-item" style="margin-top: 40px">
+                <label class="layui-form-label">方案名</label>
+                <div class="layui-input-inline" style="width: 200px">
+                    <input type="text" id="planname" name="planname" readonly placeholder="请输入" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作用范围</label>
+                <div class="layui-input-inline" style="width: 50%">
+                    <select id="repeattype" name="repeattype" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="每周一">每周一</option>
+                        <option value="每周二">每周二</option>
+                        <option value="每周三">每周三</option>
+                        <option value="每周四">每周四</option>
+                        <option value="每周五">每周五</option>
+                        <option value="每周六">每周六</option>
+                        <option value="每周日">每周日</option>
+                        <option value="每工作日">每工作日</option>
+                        <option value="单次">单次</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" type="submit" lay-submit="" lay-filter="save">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </form>
+    </div>
+    <div id="overtime" style="display: none">
+        <form class="layui-form" action="" id="main2" style="margin-top: 40px">
+            <div class="layui-form-item">
+                <span class="layui-form-label">事件名称</span>
+                <div class="layui-input-inline">
+                    <input type="text" id="eventname" name="eventname" value="加班" readonly autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="display: none">
+                <span class="layui-form-label">事件类型</span>
+                <div class="layui-input-inline">
+                    <input type="text" id="eventtype" name="eventtype" value="加班" readonly autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <span class="layui-form-label">班组名称</span>
+                <div class="layui-input-inline">
+                    <input type="text" id="team" name="team" lay-verify="notNull"
+                           placeholder="请输入班组名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <span class="layui-form-label">开始时间</span>
+                <div class="layui-input-inline">
+                    <input type="text" id="startTime" name="starttime" value="" class="layui-input" placeholder="">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <span class="layui-form-label">结束时间</span>
+                <div class="layui-input-inline">
+                    <input type="text" id="endTime" name="endtime" value="" class="layui-input" placeholder="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" type="submit" lay-submit="" lay-filter="save">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </form>
+    </div>
+    <div class="data-table" id="info"
+         style="display: none;width: 100%;height: 80%">
+        <table id="bug-table" class="layui-hide" lay-filter="bug-table"></table>
+        <div id="tools">
+            <%
+            if(has(token_10125))
+            {
+            println("<button class='layui-btn' type='submit' lay-submit lay-filter='del'><i class='layui-icon'></i>删除此方案</button>");
+            }
+            %>
+        </div>
+        <br/>
+    </div>
+    <!--<div class="noneBlock" style="display: none">
+        <div id="tools">
+            <%
+            if(has(token_10125))
+            {
+            println("<a class='layui-btn layui-btn-danger layui-btn-xs' lay-event='del'>删除</a>");
+            }
+            %>
+        </div>
+    </div>
+-->
+    <div style='clear:both'></div>
+</div>
+<script src="${siteurl}/public/libs/vue.min.js"></script>
+<!--业务逻辑JS-->
+<script type="text/javascript" src="${siteurl}/templates/skin2/media/js/biz/baseData/calendar/fullcalendar.js"></script>
+</body>
+<script type="text/javascript">
+    var siteurl = '${siteurl}';
+</script>
+</html>
 
